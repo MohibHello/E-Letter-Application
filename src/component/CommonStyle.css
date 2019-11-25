@@ -1,0 +1,55 @@
+p , td,strong,span,li{
+    font-size: 20px;
+  
+}
+
+#pageA4{
+    background: white;
+    display: block;
+    margin: 0 auto;
+    width:31cm;
+    height: 43.85cm;
+    padding-left: 35mm;
+    padding-right:35mm;
+    padding-top:25mm;
+    padding-bottom:25mm;
+    font-family: calibri !important;
+  
+}
+#AFourPage{
+    background: white;
+    display: block;
+    margin: 0 auto;
+    width:31cm;
+    height: 40.85cm;
+    padding-left: 35mm;
+    padding-right:35mm;
+    padding-top:25mm;
+    padding-bottom:15mm;
+    font-family: Calibri !important;
+  
+}
+
+body {
+    margin-top: 0px;margin-left: 0px;
+}
+
+@Page {
+    size:auto;
+    margin: 0mm;
+    font-family: Calibri !important;
+}
+
+#errordiv {
+    
+    color: red;
+    font-size: 11px;
+    margin-top: -19px;
+    text-align: left;
+    
+}
+
+
+strong {
+    font-weight: bold !important;
+}
