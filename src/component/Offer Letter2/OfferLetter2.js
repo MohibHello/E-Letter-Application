@@ -315,7 +315,7 @@ export class Offer2 extends Component {
                             <br />
                             <p style={{ textAlign: 'justify' }}>AND:</p>
                             <br />
-                            <p style={{ textAlign: 'justify' }}><strong>{this.state.employee.name}&nbsp; ,</strong> aged about {this.state.employee.age}&nbsp;years, S/O &nbsp;{this.state.employee.fatherName},<strong> Residing at &nbsp;{this.state.employee.address}</strong>. Here in after referred to as the “Employee” or the “Second Party”, of the OTHER PART.</p>
+                            <p style={{ textAlign: 'justify' }}><strong>{this.state.employee.name}&nbsp; ,</strong> aged about {this.state.employee.age}&nbsp;years, {this.state.employee.salute}&nbsp;{this.state.employee.fatherName},<strong> Residing at &nbsp;{this.state.employee.address}</strong>. Here in after referred to as the “Employee” or the “Second Party”, of the OTHER PART.</p>
                             <br />
                             <p style={{ textAlign: 'justify' }}>The Company and the Employee shall hereinafter, wherever the context may so require, be individually referred to as ‘Party’ or collectively as ‘Parties’, as the case may be.</p>
                             <br />

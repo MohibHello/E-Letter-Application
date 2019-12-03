@@ -21,6 +21,7 @@ export class InputOffer2Letter extends Component {
             companyLocation: '',
             salary: '',
             date: '',
+            salute:'S/o',
 
             // validation variable
             showName: '',
@@ -205,7 +206,19 @@ export class InputOffer2Letter extends Component {
                                         <form onSubmit={this.pass}>
 
                                             <div class="row">
-                                                <div class="col-6">
+
+                                            <div className="col-md-2" style={{ paddingTop: '25px' }}>
+                                                    <select style={{width: '70px'}} class="browser-default custom-select" autocomplete="off"  name="salutation" title="salutation" id="salutation" onChange={(event) => {
+                                                        this.setState({
+                                                            salute: event.target.value
+                                                        })
+                                                    }}>
+                                                        <option selected value="S/o">Mr.</option>
+                                                        <option value="D/o">Ms.</option>
+                                                        <option value="D/o">Mrs.</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-5">
                                                     <MDBInput autocomplete="off" label="Name" type="text" name="name" id="name" title="name" onChange={(event) => {
                                                         this.setState({
                                                             name: event.target.value
@@ -213,7 +226,7 @@ export class InputOffer2Letter extends Component {
                                                         this.hideEmployeeName()
                                                     }} />
                                                 </div>
-                                                <div className="col-6">
+                                                <div className="col-5">
                                                     <MDBInput autocomplete="off" label="Father Name" type="text" name="fatherName" id="fatherName" title="Company Location" onChange={(event) => {
                                                         this.setState({
                                                             fatherName: event.target.value

@@ -17,6 +17,7 @@ export class InputDepuationLetter extends Component {
             reportingDate: '',
             reportingTime: '',
             date: '',
+            employeeId: '',
 
             // validation variable
             showEmployeeName: '',
@@ -25,8 +26,8 @@ export class InputDepuationLetter extends Component {
             showClientLocation: '',
             showReportingDate: '',
             showReportingTime: '',
-            showInvalidDate:''
-
+            showInvalidDate: '',
+            showEmployeeId: ''
 
         }
     }
@@ -35,6 +36,11 @@ export class InputDepuationLetter extends Component {
     hideEmployeeName = () => {
         this.setState({
             showEmployeeName: false
+        })
+    }
+    hideEmployeeId = () => {
+        this.setState({
+            showEmployeeId: false
         })
     }
     hideContactPerson = () => {
@@ -73,41 +79,42 @@ export class InputDepuationLetter extends Component {
 
     componentDidMount() {
 
-            const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ];
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
 
 
-      const nth = (d)=> {
-        if (d > 3 && d < 21) return 'th';
-        switch (d % 10) {
-          case 1:  return "st";
-          case 2:  return "nd";
-          case 3:  return "rd";
-          default: return "th";
+        const nth = (d) => {
+            if (d > 3 && d < 21) return 'th';
+            switch (d % 10) {
+                case 1: return "st";
+                case 2: return "nd";
+                case 3: return "rd";
+                default: return "th";
+            }
         }
-      }
 
         let today = new Date();
-        let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
+        let currentdate = today.getDate() + nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
-            date:  currentdate
+            date: currentdate
         })
 
         var that = this;
         $(document).ready(function () {
             $('#generate').click(function (e) {
                 let employeeName = (document.getElementById("employeeName").value).trim();
+                let employeeId = (document.getElementById("employeeId").value).trim();
                 let clientName = (document.getElementById("clientName").value).trim();
                 let clientLocation = (document.getElementById("clientLocation").value).trim();
                 let contactPerson = (document.getElementById("contactPerson").value).trim();
                 let reportingDate = (document.getElementById("reportingDate").value)
                 let reportingTime = (document.getElementById("reportingTime").value).trim();
-                let selectedDate =new Date(reportingDate).setHours(23);
+                let selectedDate = new Date(reportingDate).setHours(23);
                 let TodaysDate = new Date();
-      
-                 console.log("selected date =",selectedDate)
-                 console.log("TodaysDate date =",TodaysDate)
+
+                console.log("selected date =", selectedDate)
+                console.log("TodaysDate date =", TodaysDate)
 
                 if (reportingTime === "") {
                     that.setState({ showReportingTime: true })
@@ -125,20 +132,23 @@ export class InputDepuationLetter extends Component {
                 if (clientName === "") {
                     that.setState({ showClientName: true })
                 }
+                if (employeeId === "") {
+                    that.setState({ showEmployeeId: true })
+                }
                 if (employeeName === "") {
                     that.setState({ showEmployeeName: true })
                 }
 
-                console.log("dateeeeeeeeeeeee",)
-                
-                 let diff=selectedDate-TodaysDate
-                 if(diff<0){
+                console.log("dateeeeeeeeeeeee")
+
+                let diff = selectedDate - TodaysDate
+                if (diff < 0) {
                     that.setState({
-                        showInvalidDate:"true"
+                        showInvalidDate: "true"
                     })
 
-                   return false;
-              }     
+                    return false;
+                }
 
                 if (reportingTime != "" && reportingDate != "" && contactPerson != "" && clientLocation !== "" && clientName != "" && employeeName != '') {
                     console.log("True return")
@@ -174,15 +184,28 @@ export class InputDepuationLetter extends Component {
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
                                             <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-6">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
                                                         this.setState({
                                                             employeeName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
+                                                <div class="col-6">
+                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeId} label="Employee Id" className="w-100" name="employeeId" title="Employee Id" id="employeeId" onChange={(event) => {
+                                                        this.setState({
+                                                            employeeId: event.target.value
+                                                        });this.hideEmployeeId();
+                                                    }} />
+                                                </div>
+
                                             </div>
-                                            {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid p-0">Please fill Employee Name field * </div> : null}
+                                            <div className="row">
+                                                <div className="col-6 p-0">     {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Employee Name field * </div> : null}</div>
+                                                <div className="col-6 p-0">     {this.state.showEmployeeId ? <div id="errordiv" className="container-fluid">Please fill out Employee Id field * </div> : null}</div>
+                                            </div>
+
+                                       
                                             <div class="row">
                                                 <div class="col-12">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideClientName} type="text" label="Client Name" title="Client Name" name="clientName" id="clientName" onChange={(event) => {
@@ -221,17 +244,17 @@ export class InputDepuationLetter extends Component {
 
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={()=>{this.hideReportingDate();this.hideInvalidDate()}} onClick={()=>{this.hideReportingDate();this.hideInvalidDate()}} type="date" label="Reporting Date" title="Reporting Date" name="reportingDate" id="reportingDate" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" onKeyPress={() => { this.hideReportingDate(); this.hideInvalidDate() }} onClick={() => { this.hideReportingDate(); this.hideInvalidDate() }} type="date" label="Reporting Date" title="Reporting Date" name="reportingDate" id="reportingDate" onChange={(event) => {
                                                         this.setState({
                                                             reportingDate: event.target.value
-                                                        });this.hideReportingDate();this.hideInvalidDate();
+                                                        }); this.hideReportingDate(); this.hideInvalidDate();
                                                     }} />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideReportingTime} onClick={this.hideReportingTime} type="time" label="Reporting Time" title="Reporting Time" name="reportingTime" id="reportingTime" onChange={(event) => {
                                                         this.setState({
                                                             reportingTime: event.target.value
-                                                        });this.hideReportingTime();
+                                                        }); this.hideReportingTime();
                                                     }} />
                                                 </div>
                                             </div>

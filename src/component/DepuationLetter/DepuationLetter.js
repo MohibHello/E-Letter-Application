@@ -53,7 +53,8 @@ export class DepuationLetter extends Component {
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}><strong>Date:&nbsp; {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>To, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 10 }}><strong> {this.state.employee.employeeName},</strong></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 10,margin:0 }}><strong> {this.state.employee.employeeName},</strong></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 20,margin:0 }}><strong>{this.state.employee.employeeId},</strong></p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 20 }}>Dear <strong>{this.state.employee.employeeName}</strong><strong>,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>As a part of our services to client, please be informed that you are deputed to work at <strong>{this.state.employee.clientName}, </strong>
