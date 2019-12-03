@@ -1,4 +1,4 @@
-p , td,strong,span,li{
+p , td,span,li{
     font-size: 20px;
   
 }
@@ -38,6 +38,7 @@ body {
     size:auto;
     margin: 0mm;
     font-family: Calibri !important;
+    font-size: 13;
 }
 
 #errordiv {
@@ -52,4 +53,5 @@ body {
 
 strong {
     font-weight: bold !important;
+    font-size: 18px;
 }

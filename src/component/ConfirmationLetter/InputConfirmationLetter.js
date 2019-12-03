@@ -4,6 +4,7 @@ import { MDBBtn } from "mdbreact";
 import Home from '../home';
 import { withRouter } from 'react-router-dom';
 import $ from 'jquery'
+import moment from 'moment'
 
 export class InputConfirmationLetter extends Component {
 
@@ -16,7 +17,6 @@ export class InputConfirmationLetter extends Component {
             joiningDate: '',
             probationEndDate: '',
             date: '',
-            CIN: '',
             //validation variable
 
             showEmployeeName: '',
@@ -24,7 +24,7 @@ export class InputConfirmationLetter extends Component {
             showDesignation: '',
             showJoiningDate: '',
             showProbationEndDate: '',
-            showCIN: '',
+            showInvalidDate:''
 
         }
     }
@@ -47,7 +47,7 @@ export class InputConfirmationLetter extends Component {
         }
 
         let today = new Date();
-        let currentdate = today.getDate() + nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+        let currentdate = today.getDate() + nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
             date: currentdate
         })
@@ -55,25 +55,27 @@ export class InputConfirmationLetter extends Component {
         var that = this;
         $(document).ready(function () {
             $('#generate').click(function (e) {
-                let CIN = (document.getElementById("CIN").value).trim();
                 let joiningDate = (document.getElementById("joiningDate").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
                 let employeeId = (document.getElementById("employeeId").value).trim();
                 let employeeName = (document.getElementById("employeeName").value).trim();
-                let ProbationEndDate = (document.getElementById("probationEndDate").value).trim();
+               // let ProbationEndDate = (document.getElementById("probationEndDate").value).trim()
 
-                console.log("Inside Validation", CIN, joiningDate, employeeName, designation, employeeId);
+                 that.setState({
+                      probationEndDate:joiningDate
+                 })
 
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
+                console.log('probation date ===',that.state.probationEndDate)
+
+                console.log("Inside Validation", joiningDate, employeeName, designation, employeeId);
+
                 if (joiningDate === "") {
                     that.setState({ showJoiningDate: true })
                 }
 
-                if (ProbationEndDate === "") {
+                /* if (ProbationEndDate === "") {
                     that.setState({ showProbationEndDate: true })
-                }
+                } */
                 if (designation === "") {
                     that.setState({ showDesignation: true })
                 }
@@ -85,7 +87,15 @@ export class InputConfirmationLetter extends Component {
                     that.setState({ showEmployeeName: true })
                 }
 
-                if (CIN != "" && joiningDate != "" && designation != "" && employeeId != "" && employeeName !== "" && ProbationEndDate !== '') {
+               /*  if(selectedProbationEndDate<selectedJoiningDate){
+                    that.setState({
+                        showInvalidDate:"true"
+                    })
+
+                   return false;
+              }      
+ */
+                if (joiningDate != "" && designation != "" && employeeId != "" && employeeName !== "") {
                     console.log("True return")
                     return true;
 
@@ -121,11 +131,6 @@ export class InputConfirmationLetter extends Component {
             showJoiningDate: false
         })
     }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
-        })
-    }
     hideDesignation = () => {
         this.setState({
             showDesignation: false
@@ -138,6 +143,11 @@ export class InputConfirmationLetter extends Component {
         })
     }
 
+    hideInvalidDate = () => {
+        this.setState({
+            showInvalidDate: false
+        })
+    }
 
 
 
@@ -174,28 +184,20 @@ export class InputConfirmationLetter extends Component {
                                             <div className="row" style={{ padding: 0 }}>
                                                 <div className="col-6 p-0" >
                                                     {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
-
-
                                                 </div>
                                                 <div className="col-6 p-0" style={{ width: 0 }}>
                                                     {this.state.showEmployeeId ? <div id="errordiv" className="container-fluid">Please fill out ID field * </div> : null}
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideJoiningDate} onClick={this.hideJoiningDate} type="date" label="Joining Date" title="Joining Date" name="joiningDate" id="joiningDate" onChange={(event) => {
+                                                <div class="col-md-12">
+                                                    <MDBInput autocomplete="off" onKeyPress={this.hideJoiningDate} onClick={this.hideJoiningDate} type="date" label="Joined Date" title="Joining Date" name="joiningDate" id="joiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
                                                         }); this.hideJoiningDate();
                                                     }} />
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideProbationEndDate} onClick={this.hideProbationEndDate} type="date" label="Probation End Date" title="Probation End Date" name="probationEndDate" id="probationEndDate" onChange={(event) => {
-                                                        this.setState({
-                                                            probationEndDate: event.target.value
-                                                        }); this.hideProbationEndDate();
-                                                    }} />
-                                                </div>
+                                               
                                             </div>
                                             <div className="row" style={{ padding: 0 }}>
                                                 <div className="col-6 p-0" >
@@ -204,7 +206,8 @@ export class InputConfirmationLetter extends Component {
 
                                                 </div>
                                                 <div className="col-6 p-0" style={{ width: 0 }}>
-                                                    {this.state.showProbationEndDate ? <div id="errordiv" className="container-fluid">Please fill out ProbationEndDate field * </div> : null}
+                                                  {/*   {this.state.showProbationEndDate ? <div id="errordiv" className="container-fluid">Please fill out ProbationEndDate field * </div> : null}
+                                                    {this.state.showInvalidDate ? <div id="errordiv" className="container-fluid">ProbationEndDate equal or greater than Today's date * </div> : null} */}
                                                 </div>
                                             </div>
 
@@ -218,17 +221,7 @@ export class InputConfirmationLetter extends Component {
 
                                                 </div>
                                             </div>
-                                            {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Designation field * </div> : null}
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
+                                            {this.state.showDesignation ? <div id="errordiv" className="container-fluid p-0">Please fill out Designation field * </div> : null}
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>

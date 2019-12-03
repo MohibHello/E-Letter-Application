@@ -20,7 +20,6 @@ export class InputTrainingCommitLetter extends Component {
             branchName: '',
             branchLocation: '',
             date: '',
-            CIN: '',
 
 
               // validation variable
@@ -32,7 +31,6 @@ export class InputTrainingCommitLetter extends Component {
               showTrainingEndDate: '',
               showBranchName: '',
               showBranchLocation: '',
-              showCIN: '',
               showInvalidDate:''
   
 
@@ -63,7 +61,7 @@ export class InputTrainingCommitLetter extends Component {
               }
         
                 let today = new Date();
-                let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+                let currentdate = today.getDate()+nth(today.getDate()) + ' '  + monthNames[today.getMonth()] + ' ' + today.getFullYear();
                 this.setState({
                     date:  currentdate
                 })
@@ -72,21 +70,16 @@ export class InputTrainingCommitLetter extends Component {
 
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
                 let joiningDate = (document.getElementById("joiningDate").value).trim();
                 let courseName = (document.getElementById("courseName").value).trim();
                 let branchName = (document.getElementById("branchName").value).trim();
                 let branchLocation=(document.getElementById("branchLocation").value).trim();
                 let trainingStartDate= (document.getElementById("trainingStartDate").value).trim();
                 let trainingEndDate= (document.getElementById("trainingEndDate").value).trim();
-                let trainingStartDateSelected =moment(new Date(trainingStartDate)).format('DD-MM-YYYY');
-                let trainingEndDateSelected = moment(new Date(trainingEndDate)).format('DD-MM-YYYY');
+                let trainingStartDateSelected =new Date(trainingStartDate)
+                let trainingEndDateSelected = new Date(trainingEndDate)
 
                
-
-                if (CIN === "") {
-                    this.setState({ showCIN: true })
-                }
                 if (designation === "") {
                     this.setState({ showDesignation: true })
                 }
@@ -123,7 +116,7 @@ export class InputTrainingCommitLetter extends Component {
                
               
 
-                if (CIN != "" && designation != "" && employeeName != "" &&  joiningDate!="" && branchName!='' && branchLocation!="" && courseName!="" && trainingStartDate!="" && trainingEndDate!="" ) {
+                if (designation != "" && employeeName != "" &&  joiningDate!="" && branchName!='' && branchLocation!="" && courseName!="" && trainingStartDate!="" && trainingEndDate!="" ) {
                     console.log("True return")
                     return true;
                 }
@@ -143,11 +136,6 @@ export class InputTrainingCommitLetter extends Component {
     hideEmployeeName = () => {
         this.setState({
             showEmployeeName: false
-        })
-    }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
         })
     }
     hideDesignation = () => {
@@ -247,11 +235,6 @@ export class InputTrainingCommitLetter extends Component {
                                                {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out Joining Date field * </div> : null}
                                                </div>
                                            </div>
-
-
-
-
-
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="designation" onChange={(event) => {
@@ -289,16 +272,12 @@ export class InputTrainingCommitLetter extends Component {
                                             <div className="row" style={{padding:0}}>
                                                <div className="col-6 p-0" >
                                                {this.state.showTrainingStartDate ? <div id="errordiv" className="container-fluid">Please fill out Training Start Date field * </div> : null}
-                                           
-                                           
                                                </div>
                                                <div className="col-6 p-0" style={{width:0}}>
                                                {this.state.showTrainingEndDate ? <div id="errordiv" className="container-fluid">Please fill out Training End Date field * </div> : null}
                                                {this.state.showInvalidDate ? <div id="errordiv" className="container-fluid"> Training End Date greater than Start Date * </div> : null}
                                                </div>
                                            </div>
-
-
                                             <div class="row">
                                             <div class="col-md-4">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideCourseName} label="Course Name" name="courseName" id="courseName" title="Course Name" onChange={(event) => {
@@ -338,16 +317,6 @@ export class InputTrainingCommitLetter extends Component {
                                                </div>
                                            </div>
 
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN}  type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            {this.state.showCIN ? <div id="errordiv" className="container-fluid p-0">Please fill out CIN field * </div> : null}
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>

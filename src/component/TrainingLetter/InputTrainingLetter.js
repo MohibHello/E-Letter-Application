@@ -12,7 +12,6 @@ export class InputTrainingLetter extends Component {
         super(props);
         this.state = {
             salute: 'Mr.',
-            CIN: '',
             employeeName: '',
             companyLocation: '',
             designaton: '',
@@ -26,8 +25,9 @@ export class InputTrainingLetter extends Component {
                 gender2: 'his',
                 gender3: 'him'
             },
+
             // variable validation 
-            showCIN: '',
+            
             showEmployeeName: '',
             showCompanyLocation: '',
             showDesignation: '',
@@ -61,7 +61,7 @@ export class InputTrainingLetter extends Component {
               }
         
                 let today = new Date();
-                let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+                let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
                 that.setState({
                     date:  currentdate
                 })
@@ -80,15 +80,11 @@ export class InputTrainingLetter extends Component {
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("Designaton").value).trim();
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
                 let joiningDate = (document.getElementById("JoiningDate").value).trim();
                 let courseName = (document.getElementById("CourseName").value).trim();
                 let branchName = (document.getElementById("BranchName").value).trim();
                 let branchLocation = (document.getElementById("BranchLocation").value).trim();
 
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
                 if (designation === "") {
                     that.setState({ showDesignation: true })
                 }
@@ -112,7 +108,7 @@ export class InputTrainingLetter extends Component {
                     that.setState({ showBranchLocation: true })
                 }
 
-                if (CIN != "" && designation != "" && companyLocation != "" && employeeName != "" && joiningDate != "" && branchName != '' && branchLocation != "" && courseName != "") {
+                if (designation != "" && companyLocation != "" && employeeName != "" && joiningDate != "" && branchName != '' && branchLocation != "" && courseName != "") {
                     console.log("True return")
                     return true;
                 }
@@ -127,11 +123,6 @@ export class InputTrainingLetter extends Component {
     hideEmployeeName = () => {
         this.setState({
             showEmployeeName: false
-        })
-    }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
         })
     }
     hideDesignation = () => {
@@ -288,27 +279,17 @@ export class InputTrainingLetter extends Component {
                                             </div>
 
                                             <div className="row">
-                                                <div className="col-6">
+                                                <div className="col-12">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideJoiningDate} onClick={this.hideJoiningDate} type="date" label="Joining Date" title="Joining Date" name="Joining Date" id="JoiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
                                                         });this.hideJoiningDate();
                                                     }} />
                                                 </div>
-                                                <div className="col-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
                                             </div>
                                             <div className="row">
-                                                <div className="col-6 p-0">
+                                                <div className="col-12 p-0">
                                                 {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out Joining Date field * </div> : null}
-                                                </div>
-                                                <div className="col-6 p-0">
-                                                    {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
                                                 </div>
                                             </div>
 

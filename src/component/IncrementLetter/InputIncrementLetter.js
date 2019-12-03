@@ -17,7 +17,6 @@ export class InputIncrementLetter extends Component {
             companyLocation:'',
             designation:'',
             date: '',
-            CIN: '',
 
             // validation variable
             showEmployeeName: '',
@@ -27,7 +26,6 @@ export class InputIncrementLetter extends Component {
             showIncrementInEffectDate: '',
             showCompanyLocation:'',
             showDesignation:'',
-            showCIN: '',
 
         }
     }
@@ -50,7 +48,7 @@ export class InputIncrementLetter extends Component {
       }
 
         let today = new Date();
-        let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+        let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
             date:  currentdate
         })
@@ -66,13 +64,9 @@ export class InputIncrementLetter extends Component {
                 let incrementInEffectDate = (document.getElementById("incrementInEffectDate").value).trim();
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
                 let salaryIncrement = (document.getElementById("salaryIncrement").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
 
                
 
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
                 if (salaryIncrement === "") {
                     that.setState({ showSalaryIncremented: true })
                 }
@@ -96,7 +90,7 @@ export class InputIncrementLetter extends Component {
                     that.setState({ showEmployeeId: true })
                 }
 
-                if (CIN != "" && salaryIncrement != "" && companyLocation != "" && employeeName != "" && incrementInEffectDate !== "" &&  annualCompensationYear!="" && employeeId!='' && designation!="" ) {
+                if (salaryIncrement != "" && companyLocation != "" && employeeName != "" && incrementInEffectDate !== "" &&  annualCompensationYear!="" && employeeId!='' && designation!="" ) {
                     console.log("True return")
                     return true;
 
@@ -134,11 +128,6 @@ export class InputIncrementLetter extends Component {
     hideAnnualCompensationYear = () => {
         this.setState({
             showAnnualCompensationYear: false
-        })
-    }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
         })
     }
     hideSalaryIncremented = () => {
@@ -262,7 +251,7 @@ export class InputIncrementLetter extends Component {
                                                </div>
                                            </div>
                                             <div className="row">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <MDBInput autocomplete="off" onKeyPress={this.hideAnnualCompensationYear}   type="number" label="Annual Compensation Year" title="Annual Compensation Year" name="annualCompensationYear" id="annualCompensationYear" onChange={(event) => {
                                                         this.setState({
                                                             annualCompensationYear: event.target.value
@@ -270,15 +259,7 @@ export class InputIncrementLetter extends Component {
                                                     }} />
 
                                                 </div>
-                                                <div className="col-6">
-
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-
-                                                </div>
+                                               
                                                
                                             </div>
                                             <div className="row" style={{padding:0}}>
@@ -286,7 +267,6 @@ export class InputIncrementLetter extends Component {
                                                {this.state.showAnnualCompensationYear ? <div id="errordiv" className="container-fluid">Please fill out Compensation Year field * </div> : null}
                                                </div>
                                                <div className="col-6 p-0" style={{width:0}}>
-                                               {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
                                                </div>
                                            </div>
                                             <div className=" input-group w-50 container-fluid">

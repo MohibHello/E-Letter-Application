@@ -17,7 +17,6 @@ export class InputOfferLetter extends Component {
             salaryOnBench: '',
             salaryAfterDeployment: '',
             date: '',
-            CIN: '',
 
             // validation variable
             showEmployeeName: '',
@@ -26,10 +25,7 @@ export class InputOfferLetter extends Component {
             showReportingDate: '',
             showSalaryOnBench: '',
             showSalaryAfterDeployment: '',
-            showCIN: '',
             showInvalidDate:''
-
-
 
         }
     }
@@ -52,7 +48,7 @@ export class InputOfferLetter extends Component {
         }
 
         let today = new Date();
-        let currentdate = today.getDate() + nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+        let currentdate = today.getDate() + nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
             date: currentdate
         })
@@ -64,17 +60,13 @@ export class InputOfferLetter extends Component {
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
                 let reportingDate = (document.getElementById("reportingDate").value).trim();
                 let salaryOnBench = (document.getElementById("salaryOnBench").value).trim();
                 let salaryAfterDeployment = (document.getElementById("salaryAfterDeployment").value).trim();
-                let selectedDate =moment(new Date(reportingDate)).format('DD-MM-YYYY');
-                let TodaysDate = moment(new Date()).format('DD-MM-YYYY');
+                let selectedDate =new Date(reportingDate).setHours(23);
+                let TodaysDate = new Date()
 
 
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
                 if (designation === "") {
                     that.setState({ showDesignation: true })
                 }
@@ -103,7 +95,7 @@ export class InputOfferLetter extends Component {
                    return false;
               }       
 
-                if (CIN != "" && designation != "" && companyLocation != "" && employeeName != "" && reportingDate !== "" && salaryOnBench != "" && salaryAfterDeployment != '' && designation != "") {
+                if (designation != "" && companyLocation != "" && employeeName != "" && reportingDate !== "" && salaryOnBench != "" && salaryAfterDeployment != '' && designation != "") {
                     console.log("True return")
                     return true;
 
@@ -137,11 +129,6 @@ export class InputOfferLetter extends Component {
     hideReportingDate = () => {
         this.setState({
             showReportingDate: false
-        })
-    }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
         })
     }
     hideSalaryOnBench = () => {
@@ -262,16 +249,6 @@ export class InputOfferLetter extends Component {
                                                     {this.state.showSalaryAfterDeployment ? <div id="errordiv" className="container-fluid">Please fill out Salary After Deployment field* </div> : null}
                                                 </div>
                                             </div>
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn type="submit" id="genrate" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>

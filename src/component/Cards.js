@@ -13,8 +13,10 @@ import HR from './Assests/HR.png'
 import increment from './Assests/Increment.png'
 import offer from './Assests/Offer.png'
 import relieve from './Assests/relieve.png'
+import intern from './Assests/intern.png'
 import training from './Assests/training.png'
 import TrainingCommit from './Assests/TrainingCommit.png'
+import offerletter2 from './Assests/offerLetter2.png'
 
 export default class Cards extends Component {
 
@@ -71,11 +73,11 @@ export default class Cards extends Component {
                             <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Increment Letter</h6></div>
                         </div></Link>
 
-                    <Link to='/InputOfferLetter'>
+                    <Link to='/InputIntentLetter'>
 
                         <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
                             <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto' }} src={offer} className="card-img-top" alt="..." />
-                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Offer Letter</h6></div>
+                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Intent Letter</h6></div>
                         </div></Link>
 
 
@@ -108,6 +110,26 @@ export default class Cards extends Component {
                         </div></Link>
 
 
+                    <Link to='/InputInternship'>
+
+                        <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
+                            <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto', }} src={intern} className="card-img-top" alt="..." />
+                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Internship Letter</h6></div>
+                        </div></Link>
+
+                    <Link to='/InputOfferLetter2'>
+
+                        <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
+                            <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto', }} src={offerletter2} className="card-img-top" alt="..." />
+                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Offer Letter</h6></div>
+                        </div></Link>
+
+                    {/* <Link to='/InputIntentLetter'>
+
+                        <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
+                            <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto', }} src={offerletter2} className="card-img-top" alt="..." />
+                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Intent Letter</h6></div>
+                        </div></Link> */}
 
                 </div>
             </div>

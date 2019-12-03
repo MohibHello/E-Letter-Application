@@ -25,11 +25,25 @@ export class ExitLetter extends Component {
     
       }
     
-    
+       nth = (d) => {
+        if (d > 3 && d < 21)
+          return 'th';
+        switch (d % 10) {
+          case 1: return "st";
+          case 2: return "nd";
+          case 3: return "rd";
+          default: return "th";
+        }
+      }
    
    
    
     render() {
+
+        let toDate=new Date();
+        let toJoiningDate=new Date(this.state.employee.joiningDate);
+        let toExitDate=new Date(this.state.employee.exitDate);
+
         if (this.props.empData == 0) {
             this.props.history.push("/cards")
         }
@@ -40,13 +54,12 @@ export class ExitLetter extends Component {
                 <div className="card" id="AFourPage">
                     <div className="card-body">
                         <div>
-                        <p style={{float:'right'}}>CIN:  {this.state.employee.CIN}</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><u>EXIT AGREEMENT</u></strong></p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-                            <p style={{ paddingLeft: 20, paddingRight: 20, textAlign: 'justify' }}>This Exit Agreement (<strong><em>“Agreement”</em></strong>) is made and entered on this day <strong> {this.state.employee.date}</strong> at  {this.state.employee.location}</p>
+                            <p style={{ paddingLeft: 20, paddingRight: 20, textAlign: 'justify' }}>This Exit Agreement (<strong><em>“Agreement”</em></strong>) is made and entered on this day <strong> {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong> at  {this.state.employee.location}</p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
                             <p style={{ paddingLeft: 20, paddingRight: 20, textAlign: 'justify' }}><strong><u>BY AND BETWEEN</u></strong><strong>:</strong></p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
@@ -57,8 +70,8 @@ export class ExitLetter extends Component {
                             <p style={{ paddingLeft: 20, paddingRight: 20, textAlign: 'justify' }}><strong>WHEREAS</strong>:</p>
                             <ol type="A" style={{ textAlign: 'justify',paddingLeft: '75px' }}>
                                 <li style={{ textAlign: 'justify' }}>The Company is engaged <em>inter alia</em> in the business of providing Quality Assurance services in the fields of enterprise, technology and services.The Company is also engaged in providing staffing and specialized staff augmentation services to various third party customers across the globe.</li>
-                                <li style={{ textAlign: 'justify' }}>Based on an interview and various representation of the Exiting Employee, the Exiting Employee was offered the role of <strong>  {this.state.employee.designation} </strong>in the Company on <strong> {moment(this.state.employee.joiningDate).format('Do-MMMM-YYYY')}</strong>.</li>
-                                <li style={{ textAlign: 'justify' }}>The Exiting Employee has on <strong>{moment(this.state.employee.exitDate).format('Do-MMMM-YYYY')}</strong> tendered {this.props.empData.gender.gender2} resignation from the post of<strong> {this.state.employee.designation}</strong> to the Company.</li>
+                                <li style={{ textAlign: 'justify' }}>Based on an interview and various representation of the Exiting Employee, the Exiting Employee was offered the role of <strong>  {this.state.employee.designation} </strong>in the Company on <strong> {toJoiningDate.getDate()}<sup>{this.nth(toJoiningDate.getDate())}</sup>&nbsp;{moment(toJoiningDate).format('MMMM YYYY')}</strong>.</li>
+                                <li style={{ textAlign: 'justify' }}>The Exiting Employee has on <strong>{toExitDate.getDate()}<sup>{this.nth(toExitDate.getDate())}</sup>&nbsp;{moment(toExitDate).format('MMMM YYYY')}</strong> tendered {this.props.empData.gender.gender2} resignation from the post of<strong> {this.state.employee.designation}</strong> to the Company.</li>
                                 <li style={{ textAlign: 'justify' }}>The Company and the Exiting Employee, having agreed to the terms of acceptance of the resignation of the Exiting Employee and {this.props.empData.gender.gender2} exit from the Company are desirous of setting out the terms of {this.props.empData.gender.gender2} exit from the Company in writing.</li>
                             </ol>
                             <p style={{ textAlign: 'justify' }}><strong>&nbsp;</strong></p>
@@ -67,7 +80,7 @@ export class ExitLetter extends Component {
                             <p style={{ paddingLeft: 30, textAlign: 'justify' }}><strong>Date of Exit </strong></p>
 
                             <ol style={{ textAlign: 'justify' }} type='a'>
-                                <li style={{ textAlign: 'justify' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Company hereby accepts the resignation of the Exiting Employee with effect from {moment(this.state.employee.exitDate).format('Do-MMMM-YYYY')} and the Exiting Employee agrees that {this.props.empData.gender.gender2} last working day with the Company shall be {moment(this.state.employee.exitDate).format('Do-MMMM-YYYY')}.</li>
+                                <li style={{ textAlign: 'justify' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Company hereby accepts the resignation of the Exiting Employee with effect from {toExitDate.getDate()}<sup>{this.nth(toExitDate.getDate())}</sup>&nbsp;{moment(toExitDate).format('MMMM YYYY')} and the Exiting Employee agrees that {this.props.empData.gender.gender2} last working day with the Company shall be {toExitDate.getDate()}<sup>{this.nth(toExitDate.getDate())}</sup>&nbsp;{moment(toExitDate).format('MMMM YYYY')}.</li>
                             </ol>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
@@ -113,7 +126,7 @@ export class ExitLetter extends Component {
                                             <p style={{ paddingLeft: 10 }}>Provident Fund Dues</p>
                                         </td>
                                         <td style={{ width: '400px', textAlign: 'left' }}>
-                                            <p style={{ paddingLeft: 10 }}>PF contribution till {moment(this.state.employee.exitDate).format('Do-MMMM-YYYY')}</p>
+                                            <p style={{ paddingLeft: 10 }}>PF contribution till {toExitDate.getDate()}<sup>{this.nth(toExitDate.getDate())}</sup>&nbsp;{moment(toExitDate).format('MMMM YYYY')}</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -137,7 +150,7 @@ export class ExitLetter extends Component {
                                             <p style={{ paddingLeft: 10 }}>Salary</p>
                                         </td>
                                         <td style={{ width: '400px' , textAlign: 'left'}}>
-                                            <p style={{ paddingLeft: 10 }}>Till {moment(this.state.employee.exitDate).format('Do-MMMM-YYYY')}</p>
+                                            <p style={{ paddingLeft: 10 }}>Till {toExitDate.getDate()}<sup>{this.nth(toExitDate.getDate())}</sup>&nbsp;{moment(toExitDate).format('MMMM YYYY')}</p>
                                         </td>
                                     </tr>
                                 </tbody>

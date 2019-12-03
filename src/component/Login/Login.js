@@ -19,7 +19,7 @@ export class Login extends Component {
     homepage = (event) => {
         event.preventDefault();
 
-        if(this.state.email==="hr@testyantra.com" && this.state.password==="qwerty" ){
+        if(this.state.email==="hr@testyantra.com" && this.state.password==="testyantrahr" ){
         
         console.log("data========", this.state)
 

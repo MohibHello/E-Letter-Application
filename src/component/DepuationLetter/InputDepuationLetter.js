@@ -17,7 +17,6 @@ export class InputDepuationLetter extends Component {
             reportingDate: '',
             reportingTime: '',
             date: '',
-            CIN: '',
 
             // validation variable
             showEmployeeName: '',
@@ -26,7 +25,6 @@ export class InputDepuationLetter extends Component {
             showClientLocation: '',
             showReportingDate: '',
             showReportingTime: '',
-            showCIN: '',
             showInvalidDate:''
 
 
@@ -64,11 +62,6 @@ export class InputDepuationLetter extends Component {
             showReportingTime: false
         })
     }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
-        })
-    }
 
     hideInvalidDate = () => {
         this.setState({
@@ -96,7 +89,7 @@ export class InputDepuationLetter extends Component {
       }
 
         let today = new Date();
-        let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+        let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
             date:  currentdate
         })
@@ -108,16 +101,14 @@ export class InputDepuationLetter extends Component {
                 let clientName = (document.getElementById("clientName").value).trim();
                 let clientLocation = (document.getElementById("clientLocation").value).trim();
                 let contactPerson = (document.getElementById("contactPerson").value).trim();
-                let reportingDate = (document.getElementById("reportingDate").value).trim();
+                let reportingDate = (document.getElementById("reportingDate").value)
                 let reportingTime = (document.getElementById("reportingTime").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
-                let selectedDate =moment(new Date(reportingDate)).format('DD-MM-YYYY');
-                let TodaysDate = moment(new Date()).format('DD-MM-YYYY');
+                let selectedDate =new Date(reportingDate).setHours(23);
+                let TodaysDate = new Date();
+      
+                 console.log("selected date =",selectedDate)
+                 console.log("TodaysDate date =",TodaysDate)
 
-
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
                 if (reportingTime === "") {
                     that.setState({ showReportingTime: true })
                 }
@@ -138,7 +129,10 @@ export class InputDepuationLetter extends Component {
                     that.setState({ showEmployeeName: true })
                 }
 
-                if(selectedDate<TodaysDate){
+                console.log("dateeeeeeeeeeeee",)
+                
+                 let diff=selectedDate-TodaysDate
+                 if(diff<0){
                     that.setState({
                         showInvalidDate:"true"
                     })
@@ -146,7 +140,7 @@ export class InputDepuationLetter extends Component {
                    return false;
               }     
 
-                if (CIN != "" && reportingTime != "" && reportingDate != "" && contactPerson != "" && clientLocation !== "" && clientName != "" && employeeName != '') {
+                if (reportingTime != "" && reportingDate != "" && contactPerson != "" && clientLocation !== "" && clientName != "" && employeeName != '') {
                     console.log("True return")
                     return true;
 
@@ -188,7 +182,7 @@ export class InputDepuationLetter extends Component {
                                                     }} />
                                                 </div>
                                             </div>
-                                            {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill Employee Name field * </div> : null}
+                                            {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid p-0">Please fill Employee Name field * </div> : null}
                                             <div class="row">
                                                 <div class="col-12">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideClientName} type="text" label="Client Name" title="Client Name" name="clientName" id="clientName" onChange={(event) => {
@@ -198,7 +192,7 @@ export class InputDepuationLetter extends Component {
                                                     }} />
                                                 </div>
                                             </div>
-                                            {this.state.showClientName ? <div id="errordiv" className="container-fluid">Please fill Client Name field * </div> : null}
+                                            {this.state.showClientName ? <div id="errordiv" className="container-fluid p-0">Please fill Client Name field * </div> : null}
                                             <div className="row">
                                                 <div class="col-6">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideClientLocation} type="text" label="Client Location" title="Client Name" name="clientLocation" id="clientLocation" onChange={(event) => {
@@ -218,10 +212,10 @@ export class InputDepuationLetter extends Component {
 
                                             <div className="row">
                                                 <div className="col-6">
-                                                    {this.state.showClientLocation ? <div id="errordiv" className="container-fluid">Please fill out Client Location field * </div> : null}
+                                                    {this.state.showClientLocation ? <div id="errordiv" className="container-fluid p-0">Please fill out Client Location field * </div> : null}
                                                 </div>
                                                 <div className="col-6">
-                                                    {this.state.showcontactPerson ? <div id="errordiv" className="container-fluid">Please fill out Contact Person field * </div> : null}
+                                                    {this.state.showcontactPerson ? <div id="errordiv" className="container-fluid p-0">Please fill out Contact Person field * </div> : null}
                                                 </div>
                                             </div>
 
@@ -251,16 +245,6 @@ export class InputDepuationLetter extends Component {
                                                     {this.state.showReportingTime ? <div id="errordiv" className="container-fluid">Please fill out Reporting Time field * </div> : null}
                                                 </div>
                                             </div>
-                                            <div className="row">
-                                                <div className="col-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                            </div>
-                                            {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill CIN field * </div> : null}
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn id='generate' type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>

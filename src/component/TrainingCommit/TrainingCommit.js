@@ -3,7 +3,6 @@ import Home from '../home';
 import '../CommonStyle.css'
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import '../CommonStyle.css'
  class TrainingCommit extends Component {
 
     constructor(props) {
@@ -25,10 +24,26 @@ import '../CommonStyle.css'
          console.log("data hr form  state ",this.state.employee);
     
       }
-
+      
+      nth = (d) => {
+        if (d > 3 && d < 21)
+          return 'th';
+        switch (d % 10) {
+          case 1: return "st";
+          case 2: return "nd";
+          case 3: return "rd";
+          default: return "th";
+        }
+      }
 
 
     render() {
+
+        let toDate=new Date();
+        let toJoiningDate=new Date(this.state.employee.joiningDate);
+        let toTraningStart=new Date(this.state.employee.trainingStartDate);
+        let toTraningEnd=new Date(this.state.employee.trainingEndDate);
+
         if (this.props.empData == 0) {
             this.props.history.push("/cards")
         }
@@ -39,27 +54,28 @@ import '../CommonStyle.css'
                 <div className="card" id="pageA4">
                     <div className="card-body">
                         <div>
-                            <p style={{ float: 'right' }}>CIN:  {this.state.employee.CIN}</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>&nbsp;</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>Date:  {this.state.employee.date}</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>To,</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>The Management,</strong>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>&nbsp;Subject: Training&nbsp; </strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>&nbsp;</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>I am <strong> {this.state.employee.employeeName} </strong>working in Test Yantra Software Solutions Pvt Ltd or Qspiders or Jspiders (u/o) Test Yantra Software Solutions Pvt Ltd as <strong> {this.state.employee.designation}</strong> from <strong>{moment(this.state.employee.trainingStartDate).format('Do-MMMM-YYYY')}.</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>I am willing to undergo training in<strong>  {this.state.employee.courseName}</strong>. I would request you to permit me to take the course at Qspiders / JSpiders. Below is the details of Course and period of Training.</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>Course Name</strong>: <strong> {this.state.employee.courseName}</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>Training Start Date</strong>: <strong>{moment(this.state.employee.trainingStartDate).format('Do-MMMM-YYYY')}</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>Training End Date:  {moment(this.state.employee.trainingEndDate).format('Do-MMMM-YYYY')}</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>SPOC</strong></p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>Location:</strong>  {this.state.employee.branchName},  {this.state.employee.branchLocation}</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify', paddingLeft: 30 }}>I hereby promise and accept that</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}><strong>&nbsp;</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}><strong>Date:  {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0  }}><strong>To,</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0  }}><strong>The Management,</strong>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}><strong>&nbsp;Subject: Training&nbsp; </strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}><strong>&nbsp;</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>I am <strong> {this.state.employee.employeeName} </strong>working in Test Yantra Software Solutions Pvt Ltd or Qspiders or Jspiders (u/o) Test Yantra Software Solutions Pvt Ltd as <strong> {this.state.employee.designation}</strong> from <strong>{toJoiningDate.getDate()}<sup>{this.nth(toJoiningDate.getDate())}</sup>&nbsp;{moment(toJoiningDate).format('MMMM YYYY')}.</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>I am willing to undergo training in<strong>  {this.state.employee.courseName}</strong>. I would request you to permit me to take the course at Qspiders / JSpiders. Below is the details of Course and period of Training.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0   }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0  }}><strong>Course Name</strong>: <strong> {this.state.employee.courseName}</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0   }}><strong>Training Start Date</strong>: <strong>{toTraningStart.getDate()}<sup>{this.nth(toTraningStart.getDate())}</sup>&nbsp;{moment(toTraningStart).format('MMMM YYYY')}</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0   }}><strong>Training End Date:  {toTraningEnd.getDate()}<sup>{this.nth(toTraningEnd.getDate())}</sup>&nbsp;{moment(toTraningEnd).format('MMMM YYYY')}</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0   }}><strong>SPOC</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0   }}><strong>Location:</strong>  {this.state.employee.branchName},  {this.state.employee.branchLocation}</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>I hereby promise and accept that</p>
                             <p style={{ textAlign: 'justify' }}>&nbsp;</p>
                             <ol style={{ textAlign: 'justify' }}>
                                 <ol>
@@ -78,22 +94,22 @@ import '../CommonStyle.css'
                 <div className="card" id="AFourPage">
                     <div className="card-body" >
                         <div>
-                            <p style={{ textAlign: 'justify' }}>This Agreement constitutes the entire understanding between the parties and supersedes any and all prior or contemporaneous understandings and agreements, whether oral or written, between the parties with respect to the subject matter hereof.</p>
-                            <p style={{ textAlign: 'justify' }}>This Agreement can only be modified by a written amendment signed by the party against whom enforcement of such modification is sought.</p>
-                            <p style={{ textAlign: 'justify' }}>I agree that I have not shared the data accumulated with any organization or anybody in past and will not share in future.</p>
-                            <p style={{ textAlign: 'justify' }}>If Test Yantra Software Solutions Pvt Ltd or its units Qspiders or Jspiders figures out that I have misused data as mentioned above, Test Yantra Software Solutions Pvt Ltd and u/o Test Yantra Software Solutions Pvt Ltd hold legal rights to file a case against me and to take legal action.</p>
-                            <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify' }}>I hereby agree to abide by the same in its true spirit and meaning.</p>
-                            <p style={{ textAlign: 'justify' }}><strong>IN WITNESS WHEREOF</strong>, the parties hereto have executed this Agreement as of the date first above written.</p>
-                            <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify' }}>Thanking you,</p>
-                            <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-                            <p style={{ textAlign: 'justify' }}>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-                            <p style={{ textAlign: 'justify' }}>Signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature:</p>
-                            <p style={{ textAlign: 'justify' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                            <p style={{ textAlign: 'justify' }}>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for <strong>Test Yantra Software Solutions</strong></p>
-                            <p style={{ textAlign: 'justify' }}>Designation:</p>
-                            <p style={{ textAlign: 'justify' }}>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>This Agreement constitutes the entire understanding between the parties and supersedes any and all prior or contemporaneous understandings and agreements, whether oral or written, between the parties with respect to the subject matter hereof.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }}>This Agreement can only be modified by a written amendment signed by the party against whom enforcement of such modification is sought.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>I agree that I have not shared the data accumulated with any organization or anybody in past and will not share in future.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>If Test Yantra Software Solutions Pvt Ltd or its units Qspiders or Jspiders figures out that I have misused data as mentioned above, Test Yantra Software Solutions Pvt Ltd and u/o Test Yantra Software Solutions Pvt Ltd hold legal rights to file a case against me and to take legal action.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>I hereby agree to abide by the same in its true spirit and meaning.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}><strong>IN WITNESS WHEREOF</strong>, the parties hereto have executed this Agreement as of the date first above written.</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>Thanking you,</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>Signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature:</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for <strong>Test Yantra Software Solutions</strong></p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>Designation:</p>
+                            <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                         </div>
                     </div>
                 </div>

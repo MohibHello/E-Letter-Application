@@ -58,12 +58,16 @@ export class InputHRLetter extends Component {
                   default: return "th";
                 }
               }
-        
+                  
                 let today = new Date();
-                let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+                let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
                 this.setState({
-                    date:  currentdate
+                    date:  today
                 })
+
+                var d = new Date();
+                 console.log("Date =",d.setMonth(d.getMonth() +7))
+                
                 console.log("dattetaetaetaet ",this.state)
                 if (this.state.salute === "Ms." || this.state.salute === "Mrs.") {
                     this.setState({
@@ -81,8 +85,9 @@ export class InputHRLetter extends Component {
                  let designation = (document.getElementById("designation").value).trim();
                  let employeeId = (document.getElementById("employeeId").value).trim();
                  let employeeName = (document.getElementById("employeeName").value).trim();
-                 let selectedDate =moment(new Date(joiningDate)).format('DD-MM-YYYY') ;
-                 let now = moment(new Date()).format('DD-MM-YYYY') 
+                 let selectedDate =new Date(joiningDate)
+                 let now = new Date()
+                 
                  console.log("Inside Validation", CIN, joiningDate, employeeName,designation,employeeId);
  
                  if (CIN === "") {

@@ -20,14 +20,26 @@ export class OfferLetter extends Component {
             this.setState({
                 employee: this.props.empData,
             })
-             
-            
-        }
     
+        }
 
-
+        nth = (d) => {
+            if (d > 3 && d < 21)
+              return 'th';
+            switch (d % 10) {
+              case 1: return "st";
+              case 2: return "nd";
+              case 3: return "rd";
+              default: return "th";
+            }
+          }
 
     render() {
+ 
+        let toDate=new Date()
+        let toReportingDate=new Date(this.state.employee.reportingDate)
+
+
         if (this.props.empData == 0) {
             this.props.history.push("/cards")
         }
@@ -38,9 +50,8 @@ export class OfferLetter extends Component {
                 <div className="card" id="pageA4">
                     <div className="card-body">
                         <div>
-                        <p style={{float:'right'}}>CIN:  {this.state.employee.CIN}</p>
                             <p style={{ paddingLeft: 30 }}>&nbsp;</p>
-                            <p style={{ textAlign: 'left', paddingLeft: 30 }}><strong> {this.state.employee.date}</strong></p>
+                            <p style={{ textAlign: 'left', paddingLeft: 30 }}><strong> {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
                             <p style={{ paddingLeft: 30 }}>&nbsp;</p>
                             <p style={{ textAlign: 'left', paddingLeft: 30 }}>&nbsp;</p>
                             <p style={{ textAlign: 'left', paddingLeft: 30 }}><strong>Dear  {this.state.employee.employeeName},</strong></p>
@@ -99,7 +110,7 @@ export class OfferLetter extends Component {
                                         <td >&nbsp;<strong style={{ width: 150,fontWeight: 'bold' }}>{this.state.employee.salaryOnBench}</strong></td>
                                     </tr>
                                     <tr >
-                                        <td ><strong style={{fontWeight: 'bold'}}>After Deployment</strong></td>
+                                        <td style={{width:300}}><strong style={{fontWeight: 'bold',marginLeft:'-110px'}}>After Deployment</strong></td>
                                         <td >&nbsp;<strong style={{fontWeight: 'bold'}}>{this.state.employee.salaryAfterDeployment}</strong></td>
                                     </tr>
                                 </tbody>
@@ -115,7 +126,7 @@ export class OfferLetter extends Component {
                             <p style={{ paddingLeft: 30, textAlign: 'left' }}><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p>
                             <p style={{ paddingLeft: 30, textAlign: 'left' }}><strong>Authorized Signatory </strong></p>
                             <p style={{ paddingLeft: 30, textAlign: 'left' }}>&nbsp;</p>
-                            <p style={{ paddingLeft: 30, textAlign: 'left' }}>I agree to accept the conditional offer and employment on the above-mentioned terms and conditions. I’ll report for duty on <strong>{moment(this.state.employee.reportingDate).format('Do-MMMM-YYYY')}</strong></p>
+                            <p style={{ paddingLeft: 30, textAlign: 'left' }}>I agree to accept the conditional offer and employment on the above-mentioned terms and conditions. I’ll report for duty on <strong>{toReportingDate.getDate()}<sup>{this.nth(toReportingDate.getDate())}</sup>&nbsp;{moment(toReportingDate).format('MMMM YYYY')}</strong></p>
                             <p style={{ paddingLeft: 30, textAlign: 'left' }}><strong>&nbsp;</strong></p>
                             <p style={{ paddingLeft: 30, textAlign: 'left' }}><strong>&nbsp;</strong></p>
                             <p style={{ paddingLeft: 30, textAlign: 'left' }}><strong>Employee Signature</strong></p>

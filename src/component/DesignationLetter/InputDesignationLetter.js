@@ -13,13 +13,11 @@ export class InputDesignationLetter extends Component {
             employeeId:'',
             newDesignation: '',
             date: '',
-            CIN: '',
 
             // validation variable
             showEmployeeName: '',
             showEmployeeId:'',
             showNewDesignation: '',
-            showCIN: '',
 
 
 
@@ -41,11 +39,6 @@ export class InputDesignationLetter extends Component {
             showNewDesignation: false
         })
     }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
-        })
-    }
 
     componentDidMount() {
 
@@ -65,7 +58,7 @@ export class InputDesignationLetter extends Component {
       }
 
         let today = new Date();
-        let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+        let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
         this.setState({
             date:  currentdate
         })
@@ -76,12 +69,7 @@ export class InputDesignationLetter extends Component {
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let employeeId = (document.getElementById("employeeId").value).trim();
                 let newDesignation = (document.getElementById("newDesignation").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
                
-
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
                 if (newDesignation === "") {
                     that.setState({ showNewDesignation: true })
                 }
@@ -92,7 +80,7 @@ export class InputDesignationLetter extends Component {
                     that.setState({ showEmployeeName: true })
                 }
 
-                if (CIN != "" && newDesignation != "" && employeeId != "" && employeeName != "") {
+                if (newDesignation != "" && employeeId != "" && employeeName != "") {
                     console.log("True return")
                     return true;
 
@@ -125,7 +113,7 @@ export class InputDesignationLetter extends Component {
                             <div className="col-auto container mt-5 pb-5">
                                 <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
                                     <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center blue-text font-bold ">Designation Letter</h3>
+                                        <h3 className="text-center blue-text font-bold ">Designation Change Letter</h3>
                                     </div>
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
@@ -168,18 +156,6 @@ export class InputDesignationLetter extends Component {
                                                 </div>
                                             </div>
                                             {this.state.showNewDesignation ? <div id="errordiv" className="container-fluid p-0">Please fill out Designation field * </div> : null}
-                                            <div className="row">
-                                                <div className="col-12">
-
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN}   type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-
-                                                </div>
-                                            </div>
-                                            {this.state.showCIN ? <div id="errordiv" className="container-fluid p-0">Please fill out CIN field * </div> : null}
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>

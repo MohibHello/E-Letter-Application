@@ -14,47 +14,49 @@ export class InputCertificateLetter extends Component {
             companyLocation: '',
             certificateType: '',
             date: '',
-            CIN: '',
 
             //validation variable
 
             showEmployeeName: '',
             showCompanyLocation: '',
             showCertificateType: '',
-            showCIN: '',
 
         }
     }
 
     componentDidMount() {
         debugger;
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-
-        const nth = (d) => {
-            if (d > 3 && d < 21) return 'th';
-            switch (d % 10) {
-                case 1: return "st";
-                case 2: return "nd";
-                case 3: return "rd";
-                default: return "th";
-            }
-        }
-
-        let today = new Date();
-        let currentdate = today.getDate() + nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
-        this.setState({
-            date: currentdate
-        })
+      
 
 
         let that = this;
         $(document).ready(function () {
             $('#generate').click(function (e) {
                 debugger;
-                let CIN = (document.getElementById("CIN").value).trim();
+
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+    
+    
+            const nth = (d) => {
+                if (d > 3 && d < 21) return 'th';
+                switch (d % 10) {
+                    case 1: return "st";
+                    case 2: return "nd";
+                    case 3: return "rd";
+                    default: return "th";
+                }
+            }
+    
+            let today = new Date();
+            let currentdate = today.getDate() + nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
+            that.setState({
+                date: currentdate
+            })
+
+
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let certificateType = (document.getElementById("certificateType").value).trim();
@@ -62,9 +64,7 @@ export class InputCertificateLetter extends Component {
                 console.log('certificateType = ', certificateType)
 
 
-                if (CIN === "") {
-                    that.setState({ showCIN: true })
-                }
+
                 if (companyLocation === "") {
                     that.setState({ showCompanyLocation: true })
                 }
@@ -77,10 +77,9 @@ export class InputCertificateLetter extends Component {
                     that.setState({ showEmployeeName: true })
                 }
 
-                if (CIN != "" && companyLocation != "" && certificateType != "Select an Option" && employeeName !== "") {
+                if (companyLocation != "" && certificateType != "Select an Option" && employeeName !== "") {
                     console.log("True return")
                     return true;
-
                 }
                 else {
                     return false;
@@ -93,11 +92,6 @@ export class InputCertificateLetter extends Component {
     hideEmployeeName = () => {
         this.setState({
             showEmployeeName: false
-        })
-    }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
         })
     }
     hideCompanyLocation = () => {
@@ -161,14 +155,7 @@ export class InputCertificateLetter extends Component {
                                                 </div>
                                             </div>
                                             <div className="row">
-                                                <div className="col-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-                                                </div>
-                                                <div class="col-md-6" style={{ paddingTop: '25px' }}>
+                                                <div class="col-md-6" style={{ paddingTop: '10px',paddingBottom:'25px' }}>
                                                     <select onClick={this.hideCertificateType} class="browser-default custom-select" autocomplete="off" label="Certificate Type" name="certificateType" title="Certificate Type" id="certificateType" onChange={(event) => {
                                                         this.setState({
                                                             certificateType: event.target.value
@@ -178,17 +165,9 @@ export class InputCertificateLetter extends Component {
                                                         <option value="Primary">Primary Certificate</option>
                                                         <option value="Secondary">Secondary Certificate</option>
                                                     </select>
-
-
-
                                                 </div>
                                             </div>
                                             <div className="row" style={{ padding: 0 }}>
-                                                <div className="col-6 p-0" >
-                                                    {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
-
-
-                                                </div>
                                                 <div className="col-6 p-0" style={{ width: 0 }}>
                                                     {this.state.showCertificateType ? <div id="errordiv" className="container-fluid">Please fill out certificate Type field * </div> : null}
                                                 </div>

@@ -23,12 +23,8 @@ import InputOfferLetter from './component/OfferLetters/InputOfferLetter';
 import OfferLetter from './component/OfferLetters/OfferLetter';
 import InputRelivingLetter from './component/RelivingLetter/InputRelivingLetter';
 import RelivingLetter from './component/RelivingLetter/RelivingLetter';
-
-
-
 import InputExitLetter from './component/ExitLetter/InputExitLetter';
 import ExitLetter from './component/ExitLetter/ExitLetter';
-import Test1 from './component/IncrementLetter/test';
 import Login from './component/Login/Login';
 
 import { TrainingLetter } from './component/TrainingLetter/TrainingLetter';
@@ -36,6 +32,13 @@ import { TrainingLetter } from './component/TrainingLetter/TrainingLetter';
 import TrainingCommit from './component/TrainingCommit/TrainingCommit';
 import { InputTrainingCommitLetter } from './component/TrainingCommit/InputTrainingCommit';
 import { InputTrainingLetter } from './component/TrainingLetter/InputTrainingLetter';
+import { InternshipLetter } from './component/InternshipLetter/InternshipLetter';
+import { InputIntershipLetter } from './component/InternshipLetter/InputIntershipLetter';
+import Dropdown from './component/dropdown';
+import { InputOffer2Letter } from './component/Offer Letter2/InputOffer2';
+import Offer2 from './component/Offer Letter2/OfferLetter2';
+import Intent from './component/LetterOfIntent/Intent';
+import InputIntentLetter from './component/LetterOfIntent/InputIntentLetter';
 
 export class App extends Component{
           constructor(props){
@@ -78,8 +81,7 @@ export class App extends Component{
       <Route exact path='/' component={Login}></Route>
 
       <Route exact path='/cards' component={Cards}></Route>
-
-     
+      <Route exact path='/drop' component={Dropdown}></Route>
      
       <Route exact path='/hr'  render={() => { return <InputHRLetter clicked={this.employee.bind()} /> }}></Route>
       <Route exact path='/hrLetter'  render={() => { return <HRLetter empData={this.state.emp} /> }}></Route>
@@ -99,8 +101,8 @@ export class App extends Component{
       <Route exact path='/InputIncrementLetter' render={() => { return <InputIncrementLetter clicked={this.employee.bind()} /> }}></Route>
       <Route exact path='/IncrementLetter'  render={() => { return <IncrementLetter empData={this.state.emp} /> }}></Route>
 
-      <Route exact path='/InputOfferLetter'  render={() => { return <InputOfferLetter clicked={this.employee.bind()} /> }} ></Route>
-      <Route exact path='/OfferLetter' render={() => { return <OfferLetter empData={this.state.emp} /> }}></Route>
+      {/* <Route exact path='/InputOfferLetter'  render={() => { return <InputOfferLetter clicked={this.employee.bind()} /> }} ></Route>
+      <Route exact path='/OfferLetter' render={() => { return <OfferLetter empData={this.state.emp} /> }}></Route> */}
    
       <Route exact path='/InputRelivingLetter'  render={() => { return <InputRelivingLetter clicked={this.employee.bind()} /> }} ></Route>
       <Route exact path='/RelivingLetter' render={() => { return <RelivingLetter empData={this.state.emp} /> }}></Route>
@@ -114,8 +116,16 @@ export class App extends Component{
       <Route exact path='/InputExitLetter' render={() => { return <InputExitLetter clicked={this.employee.bind()} /> }} ></Route>
       <Route exact path='/ExitLetter'  render={() => { return <ExitLetter empData={this.state.emp} /> }} ></Route>
 
+      <Route exact path='/InputInternship' render={() => { return <InputIntershipLetter  history={this.props.history} clicked={this.employee.bind()} /> }} ></Route>
+      <Route exact path='/IntershipLetter'  render={() => { return <InternshipLetter  history={this.props.history} empData={this.state.emp} /> }} ></Route>
 
+      <Route exact path='/InputOfferLetter2' render={() => { return <InputOffer2Letter  history={this.props.history} clicked={this.employee.bind()} /> }} ></Route>
+      <Route exact path='/Offerletter2'  render={() => { return <Offer2  history={this.props.history} empData={this.state.emp} /> }} ></Route>
+
+      <Route exact path='/InputIntentLetter' render={() => { return <InputIntentLetter  history={this.props.history} clicked={this.employee.bind()} /> }} ></Route>
+      <Route exact path='/IntentLetter'  render={() => { return <Intent  history={this.props.history} empData={this.state.emp} /> }} ></Route>
       
+
 
       <Route exact path='/test' component={Test}></Route>
     </div>

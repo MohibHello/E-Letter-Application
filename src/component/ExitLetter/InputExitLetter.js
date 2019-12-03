@@ -17,7 +17,6 @@ export class InputExitLetter extends Component {
             joiningDate: '',
             exitDate: '',
             date: '',
-            CIN: '',
             gender: {
                 gender1: 'He',
                 gender2: 'his',
@@ -28,8 +27,9 @@ export class InputExitLetter extends Component {
             showDesignation: '',
             showJoiningDate: '',
             showExitDate: '',
-            showCIN: '',
-            showCompanyLocation: ''
+            showCompanyLocation: '',
+            showinvalidDate:'',
+            showJoinInvalid:''
         }
     }
 
@@ -54,7 +54,7 @@ export class InputExitLetter extends Component {
               }
         
                 let today = new Date();
-                let currentdate = today.getDate()+nth(today.getDate()) + '-' + monthNames[today.getMonth()] + '-' + today.getFullYear();
+                let currentdate = today.getDate()+nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
                 this.setState({
                     date:  currentdate
                 })
@@ -76,15 +76,12 @@ export class InputExitLetter extends Component {
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
-                let CIN = (document.getElementById("CIN").value).trim();
                 let ExitDate = (document.getElementById("exitDate").value).trim();
                 let JoiningDate = (document.getElementById("joiningDate").value).trim();
-                let selectedJoiningDate = moment(new Date(JoiningDate)).format('DD-MM-YYYY') ;
-                let selectedExitDate =moment(ExitDate).format('DD-MM-YYYY')  
+                let selectedJoiningDate = new Date(JoiningDate);
+                let selectedExitDate =new Date(ExitDate)
+                let now=new Date();
 
-                if (CIN === "") {
-                    this.setState({ showCIN: true })
-                }
                 if (designation === "") {
                     this.setState({ showDesignation: true })
                 }
@@ -102,23 +99,24 @@ export class InputExitLetter extends Component {
                     this.setState({ showJoiningDate: true })
                 }
 
+                if(selectedJoiningDate>now){
+                    this.setState({ showJoinInvalid: true })
+                    return false;
+                }
+
                 if(selectedExitDate<selectedJoiningDate){
                     that.setState({
                        showinvalidDate:true
                     }) 
-
                    return false;
               } 
-
-                if (CIN != "" && designation != "" && companyLocation != "" && employeeName != "" && ExitDate != "" && JoiningDate != '') {
+                if (designation != "" && companyLocation != "" && employeeName != "" && ExitDate != "" && JoiningDate != '') {
                     console.log("True return")
                     return true;
-
                 }
                 else {
                     return false;
                 }
-
             });
         });
     }
@@ -130,11 +128,6 @@ export class InputExitLetter extends Component {
     hideExitDate = () => {
         this.setState({
             showExitDate: false
-        })
-    }
-    hideCIN = () => {
-        this.setState({
-            showCIN: false
         })
     }
     hideshowJoiningDate = () => {
@@ -155,6 +148,12 @@ export class InputExitLetter extends Component {
     hideInvalidDate=()=>{
         this.setState({
             showinvalidDate:false
+        })
+    }
+
+    hideInvalidJoin=()=>{
+        this.setState({
+            showJoinInvalid:false
         })
     }
 
@@ -188,7 +187,7 @@ export class InputExitLetter extends Component {
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
                                             <div class="row">
-                                                <div className="col-md-3" style={{ paddingTop: '25px' }}>
+                                                <div className="col-md-3" style={{ paddingTop: '25px'}}>
                                                     <select class="browser-default custom-select" autocomplete="off"  name="salutation" title="salutation" id="salutation" onChange={(event) => {
                                                         this.setState({
                                                             salute: event.target.value
@@ -206,7 +205,6 @@ export class InputExitLetter extends Component {
                                                         })
                                                     }} />
                                                 </div>
-
                                             </div>
                                             <div className="row" style={{ padding: 0 }}>
                                                 <div className="col-3 p-0" >
@@ -217,10 +215,10 @@ export class InputExitLetter extends Component {
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off"  type="date" onClick={this.hideshowJoiningDate}  onKeyPress={this.hideshowJoiningDate} label="Joining Date" title="Joining Date" name="JoiningDate" id="joiningDate" onChange={(event) => {
+                                                    <MDBInput autocomplete="off"  type="date" onClick={()=>{this.hideshowJoiningDate();this.hideInvalidJoin()}}  onKeyPress={()=>{this.hideshowJoiningDate();this.hideInvalidJoin()}} label="Joined Date" title="Joining Date" name="JoiningDate" id="joiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
-                                                        });this.hideshowJoiningDate();
+                                                        });this.hideshowJoiningDate();this.hideInvalidJoin();
                                                     }} />
                                                 </div>
                                                 <div class="col-md-6">
@@ -234,12 +232,12 @@ export class InputExitLetter extends Component {
                                             <div className="row" style={{padding:0}}>
                                                <div className="col-6 p-0" >
                                                {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out Joining date field * </div> : null}
-                                           
+                                               {this.state.showJoinInvalid ? <div id="errordiv" className="container-fluid">Joined Date must be equal or less than today's Date * </div> : null}
                                            
                                                </div>
                                                <div className="col-6 p-0" style={{width:0}}>
                                                {this.state.showExitDate ? <div id="errordiv" className="container-fluid">Please fill out Exit Date field * </div> : null}
-                                               {this.state.showinvalidDate ? <div id="errordiv" className="container-fluid">Exit Date greater or equal to Joining Date * </div> : null}
+                                               {this.state.showinvalidDate ? <div id="errordiv" className="container-fluid">Exit Date must be greater or equal to Joining Date * </div> : null}
                                                </div>
                                            </div>
                                             <div class="row">
@@ -249,7 +247,6 @@ export class InputExitLetter extends Component {
                                                             designation: event.target.value
                                                         })
                                                     }} />
-
                                                 </div>
                                                 <div class="col-md-6">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideCompanyLocation} label="Company Location" className="w-100" name="commpanyLocation" title="Company Location" id="companyLocation" onChange={(event) => {
@@ -262,25 +259,11 @@ export class InputExitLetter extends Component {
                                             <div className="row" style={{padding:0}}>
                                                <div className="col-6 p-0" >
                                                {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Designation field * </div> : null}
-                                           
-                                           
                                                </div>
                                                <div className="col-6 p-0" style={{width:0}}>
                                                {this.state.showCompanyLocation ? <div id="errordiv" className="container-fluid">Please fill out Company Location field * </div> : null}
                                                </div>
                                            </div>
-                                            <div className="row">
-                                                <div className="col-12">
-
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideCIN} type="text" label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                        this.setState({
-                                                            CIN: event.target.value
-                                                        })
-                                                    }} />
-
-                                                </div>
-                                            </div>
-                                            {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>
