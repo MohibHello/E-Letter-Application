@@ -11,6 +11,8 @@ export class InputTrainingCommitLetter extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            salute: 'Mr.',
+            companyLocation: '',
             employeeName: '',
             designation: '',
             joiningDate: '',
@@ -20,10 +22,15 @@ export class InputTrainingCommitLetter extends Component {
             branchName: '',
             branchLocation: '',
             date: '',
-
+            gender: {
+                gender1: 'He',
+                gender2: 'his',
+                gender3: 'him'
+            },
 
               // validation variable
               showEmployeeName: '',
+              showCompanyLocation: '',
               showdDesignation: '',
               showJoiningDate: '',
               showCourseName: '',
@@ -65,12 +72,25 @@ export class InputTrainingCommitLetter extends Component {
                 this.setState({
                     date:  currentdate
                 })
-        
+
+                if (that.state.salute === "Ms." || that.state.salute === "Mrs.") {
+                    that.setState({
+                        ...that.state,
+                        gender: {
+                            gender1: 'She',
+                            gender2: 'her',
+                            gender3: 'her'
+                        }
+                    })
+                }
+
+
                 console.log("dattetaetaetaet ",this.state)
 
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
                 let joiningDate = (document.getElementById("joiningDate").value).trim();
+                let companyLocation = (document.getElementById("companyLocation").value).trim();
                 let courseName = (document.getElementById("courseName").value).trim();
                 let branchName = (document.getElementById("branchName").value).trim();
                 let branchLocation=(document.getElementById("branchLocation").value).trim();
@@ -83,10 +103,13 @@ export class InputTrainingCommitLetter extends Component {
                 if (designation === "") {
                     this.setState({ showDesignation: true })
                 }
+
                 if (employeeName === "") {
                     this.setState({ showEmployeeName: true })
                 }
-
+                if (companyLocation === "") {
+                    that.setState({ showCompanyLocation: true })
+                }
                 if (joiningDate === "") {
                     this.setState({ showJoiningDate: true })
                 }
@@ -131,7 +154,11 @@ export class InputTrainingCommitLetter extends Component {
         });
     }
 
-
+hideCompanyLocation = () => {
+        this.setState({
+            showCompanyLocation: false
+        })
+    }
 
     hideEmployeeName = () => {
         this.setState({
@@ -209,14 +236,25 @@ export class InputTrainingCommitLetter extends Component {
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                            <div className="col-2" style={{ paddingTop: '25px' }}>
+                                                    <select class="browser-default custom-select" style={{width:'62px'}} autocomplete="off"  name="salutation" title="salutation" id="salutation" onChange={(event) => {
+                                                        this.setState({
+                                                            salute: event.target.value
+                                                        })
+                                                    }}>
+                                                        <option selected value="Mr.">Mr.</option>
+                                                        <option value="Ms.">Ms.</option>
+                                                        <option value="Mrs.">Mrs.</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-5">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
                                                         this.setState({
                                                             employeeName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-5">
                                                     <MDBInput autocomplete="off" onClick={this.hideJoiningDate} onKeyPress={this.hideJoiningDate} type="date" label="Joining Date" title="Joining Date" name="JoiningDate" id="joiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
@@ -226,30 +264,40 @@ export class InputTrainingCommitLetter extends Component {
                                             </div>
 
                                             <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
+                                                <div className="col-2"></div>
+                                               <div className="col-5 p-0" >
                                                {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
                                            
                                            
                                                </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
+                                               <div className="col-5 p-0" style={{width:0}}>
                                                {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out Joining Date field * </div> : null}
                                                </div>
                                            </div>
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-6">
                                                     <MDBInput autocomplete="off" onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="designation" onChange={(event) => {
                                                         this.setState({
                                                             designation: event.target.value
                                                         })
                                                     }} />
                                                 </div>
-                                               
+                                                <div className="col-6">
+                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCompanyLocation} label="Company Location" className="w-100" name="companyLocation" title="Company Location" id="companyLocation" onChange={(event) => {
+                                                        this.setState({
+                                                            companyLocation: event.target.value
+                                                        })
+                                                    }} />
+                                                </div>
                                             </div>
-
-                                            <div className="row p-0" >
-                                               {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
-                                               </div>
-
+                                            <div className="row" style={{ padding: 0 }}>
+                                                <div className="col-6 p-0" >
+                                                    {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Designation field * </div> : null}
+                                                </div>
+                                                <div className="col-6 p-0" style={{ width: 0 }}>
+                                                {this.state.showCompanyLocation ? <div id="errordiv" className="container-fluid">Please fill out Company Location field * </div> : null}
+                                                </div>
+                                            </div>
 
 
                                             <div class="row">

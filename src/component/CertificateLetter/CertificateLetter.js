@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Home from '../home';
 import '../CommonStyle.css'
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment'
+import html2pdf from 'html2pdf.js'
 
 export class CertificateLetter extends Component {
 
@@ -14,6 +16,11 @@ export class CertificateLetter extends Component {
     }
   }
 
+  print=()=>{
+    let element = document.getElementById('AFourPage');
+html2pdf(element);
+
+}
   componentDidMount() {
 
     this.setState({
@@ -71,7 +78,7 @@ export class CertificateLetter extends Component {
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
               </div>
 
-
+              <MDBBtn color="secondary" onClick={this.print}>Print</MDBBtn>
             </div>
           </div>
         </div>

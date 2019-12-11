@@ -88,18 +88,13 @@ export default class Cards extends Component {
                             <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Reliving Letter</h6></div>
                         </div></Link>
 
+                 
+
                     <Link to='/InputTrainingLetter'>
 
                         <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
-                            <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto' }} src={training} className="card-img-top" alt="..." />
-                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Training Letter</h6></div>
-                        </div></Link>
-
-                    <Link to='/InputTrainingCommitLetter'>
-
-                        <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
                             <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto' }} src={TrainingCommit} className="card-img-top" alt="..." />
-                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Training Commitment Letter</h6></div>
+                            <div style={{ color: '#343A40' }}><h6 className="font-weight-bold">Training Letter</h6></div>
                         </div></Link>
 
                     <Link to='/InputExitLetter'>

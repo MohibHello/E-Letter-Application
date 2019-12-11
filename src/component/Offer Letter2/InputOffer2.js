@@ -237,11 +237,11 @@ export class InputOffer2Letter extends Component {
 
 
                                             <div className="row" style={{ padding: 0 }}>
-                                                <div className="col-6 p-0" >
-                                                    {this.state.showName ? <div id="errordiv" className="container-fluid">Please fill out Employee Name field * </div> : null}
+                                                <div className="offset-2 col-5 p-0" >
+                                                    {this.state.showName ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
 
                                                 </div>
-                                                <div className="col-6 p-0" style={{ width: 0 }}>
+                                                <div className="col-5 p-0" style={{ width: 0 }}>
                                                     {this.state.showFatherName ? <div id="errordiv" className="container-fluid">Please fill out Father Name field * </div> : null}
 
                                                 </div>
