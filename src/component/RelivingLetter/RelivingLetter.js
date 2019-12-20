@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Home from '../home';
 import moment from 'moment';
 import '../CommonStyle.css'
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG';
 import { thisExpression } from '@babel/types';
 import { withRouter } from 'react-router-dom';
 
@@ -12,6 +14,8 @@ export class RelivingLetter extends Component {
 
         this.state = {
             employee: [],
+            waterMark:false
+            
 
         }
     }
@@ -51,9 +55,25 @@ export class RelivingLetter extends Component {
         if (this.props.empData) {
             return (
                 <div>
-                    <Home buttonShow={true} />
-                    <div className="card" id="pageA4">
+                    <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} />
+                    <div className="card" id="AFourFirstPage">
                         <div className="card-body"> 
+
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+ 
+                         {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>:null}
+
+                       
                             <div>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
@@ -61,10 +81,10 @@ export class RelivingLetter extends Component {
                                 <p style={{ textAlign: 'center', paddingLeft: 30 }}><strong>EXPERIENCE CERTIFICATE</strong></p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>&nbsp;</strong></p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}><strong>&nbsp;</strong></p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 30, margin: 0 }}><strong>Date: {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 30, margin: 0 }}><strong>Emp ID:  {this.state.employee.employeeId}</strong></p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30, margin: 0 }}><strong>Date:{(toDate.getDate())}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).add().format('MMMM YYYY')}</strong></p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30, margin: 0 }}><strong>Emp ID: {this.state.employee.employeeId}</strong></p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>This is to inform that <strong>{this.state.employee.salute}</strong> <strong> {this.state.employee.employeeName}, </strong>was working with us from <strong> {toJoiningDate.getDate()}<sup>{this.nth(toJoiningDate.getDate())}</sup>&nbsp;{moment(toJoiningDate).format('MMMM YYYY')} </strong> to <strong> {(toReleiving.getDate())}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}.</strong> {this.props.empData.gender.gender1} was relieved from {this.props.empData.gender.gender2} responsibilities on <strong> {(toReleiving.getDate())}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}</strong> as <strong>  {this.state.employee.designation} </strong>During {this.props.empData.gender.gender2} stay, {this.props.empData.gender.gender2} character and conduct was good. During {this.props.empData.gender.gender3} tenure, {this.props.empData.gender.gender1} was hardworking and a good team member. We wish {this.props.empData.gender.gender3} success in all {this.props.empData.gender.gender2} future endeavors.</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 30 }}>This is to inform that <strong>{this.state.employee.salute}</strong> <strong> {this.state.employee.employeeName}, </strong>was working with us from <strong> {toJoiningDate.getDate()}<sup>{this.nth(toJoiningDate.getDate())}</sup>&nbsp;{moment(toJoiningDate).format('MMMM YYYY')} </strong> to <strong> {moment(toReleiving).subtract(1, "days").format('DD')}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}.</strong> {this.props.empData.gender.gender1} was relieved from {this.props.empData.gender.gender2} responsibilities on <strong> {(toReleiving.getDate())}<sup>{this.nth(toReleiving.getDate())}</sup>&nbsp;{moment(toReleiving).format('MMMM YYYY')}</strong> as <strong>  {this.state.employee.designation} </strong>During {this.props.empData.gender.gender2} stay, {this.props.empData.gender.gender2} character and conduct was good. During {this.props.empData.gender.gender3} tenure, {this.props.empData.gender.gender1} was hardworking and a good team member. We wish {this.props.empData.gender.gender3} success in all {this.props.empData.gender.gender2} future endeavors.</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>For Test Yantra Software Solutions (India) Pvt Ltd</p>
@@ -80,6 +100,19 @@ export class RelivingLetter extends Component {
 
                     <div className="card" id="AFourPage">
                         <div className="card-body">
+
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                        {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>:null}
                             <div>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
@@ -105,6 +138,12 @@ export class RelivingLetter extends Component {
 
                         </div>
                     </div>
+                    {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </footer>:null}
                 </div>
 
             )

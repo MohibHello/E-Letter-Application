@@ -1,19 +1,20 @@
-p , td,span,li{
-    font-size: 20px;
+p , td,strong,span,li{
+    font-size: 22px;
   
 }
 
 #pageA4{
-    background: white;
+background: white;
     display: block;
     margin: 0 auto;
     width:31cm;
-    height: 43.85cm;
-    padding-left: 35mm;
-    padding-right:35mm;
+    height: 43.80cm;
+    padding-left: 25mm;
+    padding-right:25mm;
     padding-top:25mm;
-    padding-bottom:25mm;
-    font-family: calibri !important;
+    padding-bottom:15mm;
+    font-family: Calibri !important;
+    top:1px
   
 }
 #AFourPage{
@@ -21,22 +22,34 @@ p , td,span,li{
     display: block;
     margin: 0 auto;
     width:31cm;
-    height: 43cm;
-    padding-left: 35mm;
-    padding-right:35mm;
+    height: 40.28cm;
+    padding-left: 25mm;
+    padding-right:25mm;
     padding-top:25mm;
     padding-bottom:15mm;
     font-family: Calibri !important;
   
 }
-
+#AFourFirstPage{
+    background: white;
+    display: block;
+    margin: 0 auto;
+    width:31cm;
+    height: 43.86cm;
+    padding-left: 25mm;
+    padding-right:25mm;
+    padding-top:25mm;
+    padding-bottom:15mm;
+    font-family: Calibri !important;
+    /* top:1px */
+}
 body {
     margin-top: 0px;margin-left: 0px;
 }
 
 @Page {
     size:auto;
-    margin: 0mm;
+  margin: 0mm;
     font-family: Calibri !important;
     font-size: 13;
 }
@@ -53,5 +66,109 @@ body {
 
 strong {
     font-weight: bold !important;
-    font-size: 18px;
 }
+
+
+#qwerty div p {
+    font-size: 20px !important;
+}
+#qwerty div ol li {
+    font-size: 20px !important;
+}
+
+
+
+.waterMark {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 28%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .md-form input[type=text]:focus {
+
+    box-shadow: 0 1px 0  black !important;
+    
+    border-bottom: 1px solid black !important;
+
+    color: black;
+    
+    }
+
+
+    .md-form input[type=number]:focus {
+
+        box-shadow: 0 1px 0  black !important;
+        
+        border-bottom: 1px solid black !important;
+    
+        color: black;
+        
+        }
+    .md-form input[type='text']:focus:not([readonly]) + label {
+        color:black !important;
+      
+            
+      }
+      .md-form input[type='date']:focus:not([readonly]) + label {
+        color:black !important;
+      
+  
+      }
+      .md-form input[type='time']:focus:not([readonly]) + label {
+        color:black !important;
+            
+            
+    }
+
+    .md-form input[type='number']:focus:not([readonly]) + label {
+        color:black !important;
+      
+  
+      }
+
+      .md-form input[type=date]:focus {
+
+        box-shadow: 0 1px 0  black !important;
+        
+        border-bottom: 1px solid black !important;
+    
+        color: black;
+        
+        }
+
+        .md-form input[type=time]:focus {
+
+            box-shadow: 0 1px 0  black !important;
+            
+            border-bottom: 1px solid black !important;
+        
+            color: black;
+            
+            }
+    
+
+        .dropdown-content li:hover, .dropdown-content li.active {
+
+            background-color:black;
+        
+        }
+       .header{
+           /*  top: 0px; */
+            position: sticky;
+            /* left: 279px;         
+ */            right: 0;
+            left: 0;
+            z-index: 1;
+            width:2px;
+          }
+          .footer{
+            
+            right: 0;
+            left: 152px;
+            bottom: 0px;
+            position:fixed;
+            text-align: center;
+          }

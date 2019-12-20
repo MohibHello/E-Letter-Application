@@ -3,12 +3,16 @@ import Home from '../home';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import '../CommonStyle.css'
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG';
+import TyHeaderSpace from '../Assests/tyheaderspace.png';
 export class IncrementLetter extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            employee: []
+            employee: [],
+            waterMark:false
         }
     }
 
@@ -49,10 +53,39 @@ export class IncrementLetter extends Component {
         if (this.props.empData) {
             return (
                 <div>
-                    <Home buttonShow={true} />
-                    <div className="card" id="AFourPage">
+                  {  <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})} /> }
+                  <div>
+                 {/* <div className="header">
+               
+               <img  style={{width: '1160px',
+   height: '98px'}} src={TyHeader}></img>
+
+             </div> */}
+
+
+
+             </div>
+                    <div className="card" id="AFourFirstPage">
                         <div className="card-body">
 
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                     
+                        {this.state.employee.withWaterMark?<div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+                     
+                            <br></br>
+                            <br></br>
+                            <br></br>     
                             <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                             <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                             <p style={{ textAlign: 'justify', paddingLeft: 20 }}><strong>&nbsp;{toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
@@ -77,12 +110,29 @@ export class IncrementLetter extends Component {
                             <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p>
                             <p style={{ textAlign: 'justify', paddingLeft: 20 }}><strong>&nbsp;</strong></p>
                         </div>
+                      
                     </div>
 
                     <div className="card" id="AFourPage" >
                         <div className="card-body">
-                        <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
-                        <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
+
+                        {this.state.employee.withWaterMark?<div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+               
+                      
+               {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+             <br></br>
+             <br></br>
+             <br></br>
                         <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                             <div style={{ padding: 0 }} className="mt-5">
                                 <table style={{ width: 800, marginLeft: 'auto', marginRight: 'auto', heigth: 160 }} border="1px">
@@ -225,6 +275,12 @@ export class IncrementLetter extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </footer>:null}
                 </div>
             )
         } else {

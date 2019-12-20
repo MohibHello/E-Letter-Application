@@ -18,6 +18,8 @@ export class InputHRLetter extends Component {
             date: '',
             CIN: '',
             designation: '',
+            withWaterMark:false,
+            withHeader:false,
             gender : {
                 gender1:'He',
                 gender2:'him',
@@ -80,7 +82,7 @@ export class InputHRLetter extends Component {
                     })
                  }
 
-                 let CIN = (document.getElementById("CIN").value).trim();
+               
                  let joiningDate = (document.getElementById("joiningDate").value).trim();
                  let designation = (document.getElementById("designation").value).trim();
                  let employeeId = (document.getElementById("employeeId").value).trim();
@@ -88,11 +90,9 @@ export class InputHRLetter extends Component {
                  let selectedDate =new Date(joiningDate)
                  let now = new Date()
                  
-                 console.log("Inside Validation", CIN, joiningDate, employeeName,designation,employeeId);
+                 console.log("Inside Validation", joiningDate, employeeName,designation,employeeId);
  
-                 if (CIN === "") {
-                     this.setState({ showCIN: true })
-                 }
+                
                  if (joiningDate === "") {
                      this.setState({ showJoiningDate: true })
                  }
@@ -106,16 +106,16 @@ export class InputHRLetter extends Component {
                      this.setState({ showEmployeeName: true })
                  }
 
-                 if(selectedDate<now){
+              /*    if(selectedDate<now){
                     that.setState({
                        validDate:"true"
                     }) 
 
                    return false;
-              } 
+              }  */
 
                    
-                 if (CIN != "" && joiningDate != "" && designation != "" && employeeId != "" && employeeName !== "") {
+                 if ( joiningDate != "" && designation != "" && employeeId != "" && employeeName !== "") {
                     
                      console.log("True return")
                      return true;
@@ -160,10 +160,55 @@ export class InputHRLetter extends Component {
 
     }
 
+     onCheckHandler=(event)=>{
+         debugger;
+
+          console.log("Checkbox value ==",event.target.value)
+        if(event.target.value=='false'){
+            this.setState({
+                withWaterMark:true
+            })
+            console.log("if  ==",this.state.withWaterMark)
+        }
+        else{
+            debugger;
+            this.setState({
+                withWaterMark: false
+            })
+            console.log("else  ==",this.state.withWaterMark)
+
+        }
+     }
+
+     onChangeHeader=(event)=>{
+
+        debugger;
+
+        console.log("Checkbox value ==",event.target.value)
+      if(event.target.value=='false'){
+          this.setState({
+              withHeader:true
+          })
+          console.log("if  ==",this.state.withHeader)
+      }
+      else{
+          debugger;
+          this.setState({
+              withHeader: false
+          })
+          console.log("else  ==",this.state.withHeader)
+
+      }
+
+
+     }
+
 
     pass = (event) => {
         event.preventDefault();
         console.log("data========", this.state)
+         
+        
 
         this.props.clicked(this.state)
        this.props.history.push('/hrLetter')
@@ -173,14 +218,14 @@ export class InputHRLetter extends Component {
     render() {
         return (
             <div>
-                <Home buttonShow={false}/>
+                <Home buttonShow={false} />
                 <div >
                     <div className="container-fluid mt-5">
                         <div className="row">
                             <div className="col-auto container mt-5 pb-5">
                                 <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
                                     <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center blue-text font-bold ">HR Letter</h3>
+                                        <h3 className="text-center black-text font-bold ">HR Letter</h3>
                                     </div>
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
@@ -242,34 +287,50 @@ export class InputHRLetter extends Component {
                                            </div>
 
                                             <div className="row">
-                                                <div className="col-6">
+                                                <div className="col-12">
                                                     <MDBInput autocomplete="off"  type="date" onKeyPress={()=>{this.hideJoiningDate();this.hideInvaliddate()}}  onClick={()=>{this.hideJoiningDate();this.hideInvaliddate()}} label="Joining Date" title="Joining Date" name="Joining Date" id="joiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
                                                         });this.hideJoiningDate();this.hideInvaliddate();
                                                     }} />
                                                 </div>
-                                                <div className="col-6">
-                                                   
-                                                   <MDBInput autocomplete="off"   type="text" onKeyPress={this.hideCIN}  label="CIN" title="CIN" name="CIN" id="CIN" onChange={(event) => {
-                                                       this.setState({
-                                                           CIN: event.target.value
-                                                       })
-                                                   }} />
-                                           </div>
+                                               
                                             </div>
                                             <div className="row" style={{padding:0}}>
-                                                   <div className="col-6 p-0">
+                                                   <div className="col-12 p-0">
                                                    {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out JoiningDate field * </div> : null}
-                                                   {this.state.validDate ? <div id="errordiv" className="container-fluid">Joining Date must be greater or equal to today's date* </div> : null}
+                                               
                                                    </div>
-                                                   <div className="col-6 p-0">
-                                                   {this.state.showCIN ? <div id="errordiv" className="container-fluid">Please fill out CIN field * </div> : null}
-                                                   </div>
+                                                  
                                             </div>
-                                           
+
+
+                                            <div className="row">
+                                                <div className="col-6">
+                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
+  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
+                                                       this.onChangeHeader(event)
+                                                    }} id="withLetterHead" />
+  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
+</div>
+
+                                                </div>
+                                                <div className="col-6">
+                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
+  <input type="checkbox" className="custom-control-input" id="withWatermark" value={this.state.withWaterMark} onChange={(event) => {
+
+                                                              this.onCheckHandler(event)
+                                                       
+                                                    }} />
+  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
+</div>
+
+                                                    </div>
+                                            </div>
+                                    
                                             <div className=" input-group w-50 container-fluid">
-                                                <MDBBtn type="submit" id="generate" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
+                                                <MDBBtn outline type="submit" id="generate" outline className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
+
                                             </div>
                                         </form>
                                     </div>
@@ -279,6 +340,14 @@ export class InputHRLetter extends Component {
                         </div>
                     </div>
                 </div>
+
+               
+
+
+   
+
+
+
             </div>
         )
     }

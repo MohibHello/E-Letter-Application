@@ -52,6 +52,11 @@ export class TrainingLetter extends Component {
                     <Home buttonShow={true} />
                     <div className="card" id="AFourPage">
                         <div className="card-body">
+                        <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
                             <div>
                                 <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
                                 <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>

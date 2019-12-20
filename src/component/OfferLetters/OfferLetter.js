@@ -49,6 +49,11 @@ export class OfferLetter extends Component {
                 <Home buttonShow={true}/>
                 <div className="card" id="pageA4">
                     <div className="card-body">
+                    <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif'}}>TY</span>ANTRA</span>
+                </div>
                         <div>
                             <p style={{ paddingLeft: 30 }}>&nbsp;</p>
                             <p style={{ textAlign: 'left', paddingLeft: 30 }}><strong> {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
@@ -78,6 +83,11 @@ export class OfferLetter extends Component {
 
                 <div className="card" id="pageA4">
                     <div className="card-body">
+                    <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
                         <div>
                             <p style={{ textAlign: 'justify', paddingLeft: 30 }}>Information pertaining to the Company’s operations shall remain secret and safeguarded by you. On joining the Company, a formal agreement to effect non-disclosure of confidential information and intellectual property etc., shall be executed by you.&nbsp; You will also keep us duly informed if you are bound by any confidentiality agreement with your previous employers, in which case you shall keep us indemnified against any breach thereof by you.</p>
                             <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>
@@ -99,6 +109,11 @@ export class OfferLetter extends Component {
 
                 <div className="card" id="AFourPage">
                     <div className="card-body">
+                    <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
                         <div>
                             <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;At any given point of time, during your contract tenure, if the performance is found unsatisfactory, the company has all the rights to terminate from the service immediately without any prior notification. Based on your performance and the Company requirements, we will either extend your contract further, or may convert to fulltime Employment, else the contract period would end.&nbsp; This would be mutually discussed and in written communication prior to 7 days’ notice.</p>
                             <p style={{ textAlign: 'justify', paddingLeft: 30 }}>&nbsp;</p>

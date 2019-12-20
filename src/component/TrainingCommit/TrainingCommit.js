@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Home from '../home';
 import '../CommonStyle.css'
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
  class TrainingCommit extends Component {
@@ -9,7 +11,8 @@ import moment from 'moment';
         super(props);
           
         this.state={
-           employee:[ ]
+           employee:[ ],
+           waterMark:false,
         }
     
       }
@@ -50,9 +53,25 @@ import moment from 'moment';
         if (this.props.empData) {
         return (
             <div>
-                <Home buttonShow={true}/>
-                <div className="card" id="AFourPage">
+                <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})}/>
+                <div className="card" id="AFourFirstPage">
                         <div className="card-body">
+
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                            
+             {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                             <div>
                                 <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
                                 <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
@@ -77,8 +96,23 @@ import moment from 'moment';
                     </div>
 
                 
-                <div className="card" id="pageA4">
+                <div className="card" id="AFourFirstPage">
                     <div className="card-body">
+
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+                        
+             {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
                             <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}><strong>&nbsp;</strong></p>
                             <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>&nbsp;</p>
@@ -119,6 +153,21 @@ import moment from 'moment';
 
                 <div className="card" id="AFourPage">
                     <div className="card-body" >
+
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+                        
+             {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
                             <p>&nbsp;</p>
                             <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20  }}>This Agreement constitutes the entire understanding between the parties and supersedes any and all prior or contemporaneous understandings and agreements, whether oral or written, between the parties with respect to the subject matter hereof.</p>
@@ -140,6 +189,12 @@ import moment from 'moment';
                         </div>
                     </div>
                 </div>
+                {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </footer>:null}
             </div>
 
         )

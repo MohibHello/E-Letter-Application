@@ -22,6 +22,8 @@ export class InputOffer2Letter extends Component {
             salary: '',
             date: '',
             salute:'S/o',
+            withWaterMark:false,
+            withHeader:false,
 
             // validation variable
             showName: '',
@@ -130,6 +132,52 @@ export class InputOffer2Letter extends Component {
         });
 
     }
+
+    onCheckHandler=(event)=>{
+        debugger;
+
+         console.log("Checkbox value ==",event.target.value)
+       if(event.target.value=='false'){
+           this.setState({
+               withWaterMark:true
+           })
+           console.log("if  ==",this.state.withWaterMark)
+       }
+       else{
+           debugger;
+           this.setState({
+               withWaterMark: false
+           })
+           console.log("else  ==",this.state.withWaterMark)
+
+       }
+    }
+
+    onChangeHeader=(event)=>{
+
+        debugger;
+
+        console.log("Checkbox value ==",event.target.value)
+      if(event.target.value=='false'){
+          this.setState({
+              withHeader:true
+          })
+          console.log("if  ==",this.state.withHeader)
+      }
+      else{
+          debugger;
+          this.setState({
+              withHeader: false
+          })
+          console.log("else  ==",this.state.withHeader)
+
+      }
+
+
+     }
+
+
+
     pass = (event) => {
         event.preventDefault();
         console.log("data========", this.state)
@@ -200,7 +248,7 @@ export class InputOffer2Letter extends Component {
                             <div className="col-auto container mt-5 pb-5">
                                 <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
                                     <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center blue-text font-bold ">Offer Letter</h3>
+                                        <h3 className="text-center black-text font-bold ">Offer Letter</h3>
                                     </div>
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
@@ -335,11 +383,31 @@ export class InputOffer2Letter extends Component {
                                                 </div>
                                             </div>
 
+                                            <div className="row">
+                                                <div className="col-6">
+                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
+  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
+                                                      this.onChangeHeader(event)
+                                                    }} id="withLetterHead" />
+  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
+</div>
+
+                                                </div>
+                                                <div className="col-6">
+                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
+  <input type="checkbox" className="custom-control-input" value={this.state.withWaterMark} id="withWatermark"  onChange={(event) => {
+                                                       this.onCheckHandler(event);
+                                                    }} />
+  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
+</div>
+
+                                                    </div>
+                                            </div>
 
 
 
                                             <div className=" input-group w-50 container-fluid">
-                                                <MDBBtn type="submit" id="genrate" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
+                                                <MDBBtn outline type="submit" id="genrate" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>
                                         </form>
                                     </div>

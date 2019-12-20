@@ -5,6 +5,9 @@ import { MDBBtn } from "mdbreact";
 
 import '../Login/Login.css'
 import SimpleNavBar from '../Navbar/SimpleNavBar';
+import data from '../data.json'
+
+
 
 export class Login extends Component {
 
@@ -12,23 +15,41 @@ export class Login extends Component {
         super(props);
         this.state = {
             email:'',
-            password:''
+            password:'',
+            json:data
         }
+        
     }
+
+
+
 
     homepage = (event) => {
         event.preventDefault();
 
-        if(this.state.email==="hr@testyantra.com" && this.state.password==="testyantrahr" ){
-        
-        console.log("data========", this.state)
+        console.log(this.state.json);
+        console.log(this.state.json.users[0].name)
+        console.log(this.state.json.users[0].password)
+        console.log(data.users.length);
+        let bol=false;
+        for (let index = 0; index < data.users.length; index++) {
+            debugger
+            
+            if(this.state.email==this.state.json.users[index].name && this.state.password==this.state.json.users[index].password ){
+                bol=true;
+                console.log("data========", this.state)
+               // this.props.clicked(this.state)
+               localStorage.setItem('email',this.state.json.users[index].name)
+                this.props.history.push('/cards')
+                break;
+                }
+            
 
-       // this.props.clicked(this.state)
-        this.props.history.push('/cards')
-        } else{
-
-            alert("invalid cridentials");
         }
+        if(bol==false){
+        alert("invalid cridentials");
+        }
+      
     }
 
     render() {
@@ -41,7 +62,7 @@ export class Login extends Component {
                             <div className="col-auto container-container-fluid mt-5 pb-5">
                                 <div style={{width:'400px'}} className="card m-auto shadow-lg mt-5">
                                     <div class="card-header" style={{ borderRadius: '0px !important',background:'white' }} >
-                                        <h3 className="text-center blue-text font-bold ">Login</h3>
+                                        <h3 className="text-center black-text font-bold ">Login</h3>
                                     </div>
                                     <div className="card-body ">
                                        <form onSubmit={this.homepage}>
@@ -56,7 +77,7 @@ export class Login extends Component {
                                                             password: event.target.value
                                                         })
                                                     }}/>
-                                    <MDBBtn style={{float:'right'}} color="primary" type="submit">Login</MDBBtn>
+                                    <MDBBtn outline style={{float:'right'}} color="primary" type="submit">Login</MDBBtn>
 
                                     </form>
                                     </div>

@@ -4,83 +4,126 @@ import Test from '../IncrementLetter/test';
 import '../CommonStyle.css'
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
-
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG'
 export class HRLetter extends Component {
 
   constructor(props) {
     super(props);
-      
-    this.state={
-       employee:[]
+
+    this.state = {
+      employee: [],
+      waterMark: false
+
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
     this.setState({
       employee: this.props.empData,
     })
-  console.log("DDDDDDDDDDDDDDDDDDd",this.props.empData)
-    
-   
-     console.log("data hr form  state ",this.state.employee);
-     
+    console.log("DDDDDDDDDDDDDDDDDDd", this.props.empData)
+
+    let showValue = JSON.parse(window.localStorage.getItem('beans'))
+
+
+    console.log("data hr form  state ", this.state.employee);
+
 
   }
 
-  nth=(d)=> {
+  nth = (d) => {
     if (d > 3 && d < 21) return 'th';
     switch (d % 10) {
-      case 1:  return "st";
-      case 2:  return "nd";
-      case 3:  return "rd";
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
       default: return "th";
     }
   }
 
   render() {
 
-    let joiningDate=new Date(this.state.employee.joiningDate);
 
-    console.log("joining DAte render",joiningDate)
+    let joiningDate = new Date(this.state.employee.joiningDate);
+
+    console.log("joining DAte render", joiningDate)
+    console.log("WaterMark =", this.props.showWaterMark)
 
     if (this.props.empData == 0) {
       this.props.history.push("/cards")
-  }
-  let toDayDate=new Date()
-    if(this.props.empData){
-    return (
-      <div>
-        <Home  buttonShow={true}/>
-        <div className="card" id="AFourPage">
-          <div className="card-body">
-            <div>
-            <p style={{float:'right'}}>CIN: {this.state.employee.CIN}</p>
-              <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-              <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-              <p style={{ textAlign: 'left',paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span ><strong>Date: {toDayDate.getDate()}<sup>{this.nth(toDayDate.getDate())}</sup>&nbsp;{moment(toDayDate).format('MMMM YYYY')}</strong></span></p>
-              <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
-              <p style={{ textAlign: 'center' }} align="CENTER"><span ><span style={{ fontSize: 'large' }}><strong>TO WHOMSOEVER IT MAY CONCERN</strong></span></span></p>
-              <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
-              <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span ><strong>Sub: Information as per HR Records</strong></span></p>
-              <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
-    <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to inform that </span><span ><strong>{this.state.employee.salute} {this.state.employee.employeeName} </strong></span><span >(Employee ID: {this.state.employee.employeeId}) is an employee of Test Yantra Software Solutions (India) Pvt Ltd from </span><span ><strong>{joiningDate.getDate()}<sup>{this.nth(joiningDate.getDate())}</sup>&nbsp;{moment(this.state.employee.joiningDate).format('MMMM YYYY')}</strong></span><span > to till Date. {this.props.empData.gender.gender1} is designated as {this.state.employee.designation}. </span></p>
-              <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY">&nbsp;</p>
-              <p lang="en-IN" style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
-              <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >For Test Yantra Software Solutions (India) Pvt Ltd</span></p>
-              <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
-              <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}><span ><strong>Authorized Signatory</strong></span></p>
-              <p>&nbsp;</p>
+    }
+    let toDayDate = new Date()
+    if (this.props.empData) {
+      return (
+        <div>
+          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />}
+          <div className="card" id="AFourPage">
+            <div className="card-body">
+
+
+
+              <div>
+
+                {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-115px' }}>
+
+                  <img style={{
+                    width: '1160px',
+                    height: '95px'
+                  }} src={TyHeader}></img>
+
+                </header> : null}
+
+
+                {console.log("watermark------------------", this.props.waterMark)}
+                <p style={{ float: 'right' }}></p>
+                <p style={{ textAlign: 'justify' }}>&nbsp;</p>
+                <p style={{ textAlign: 'justify' }}>&nbsp;</p>
+                <p style={{ textAlign: 'left', paddingLeft: 30, paddingRight: 30, marginTop: 150 }} align="JUSTIFY"><span ><strong>Date: {toDayDate.getDate()}<sup>{this.nth(toDayDate.getDate())}</sup>&nbsp;{moment(toDayDate).format('MMMM YYYY')}</strong></span></p>
+                <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
+                <p style={{ textAlign: 'center' }} align="CENTER"><span ><span style={{ fontSize: 'large' }}><strong>TO WHOMSOEVER IT MAY CONCERN</strong></span></span></p>
+                <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span ><strong>Sub: Information as per HR Records</strong></span></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to inform that </span><span ><strong>{this.state.employee.salute} {this.state.employee.employeeName} </strong></span><span >(Employee ID: {this.state.employee.employeeId}) is an employee of Test Yantra Software Solutions (India) Pvt Ltd from </span><span ><strong>{joiningDate.getDate()}<sup>{this.nth(joiningDate.getDate())}</sup>&nbsp;{moment(this.state.employee.joiningDate).format('MMMM YYYY')}</strong></span><span > to till Date. {this.props.empData.gender.gender1} is designated as {this.state.employee.designation}. </span></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY">&nbsp;</p>
+                {this.state.employee.withWaterMark ? <div className="waterMark">
+                  <span style={{
+                    color: '#263248', fontSize: '91px',
+                    fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                  }}>TES<span style={{
+                    color: '#F8981C', fontSize: '91px',
+                    fontFamily: 'sans-serif', fontWeight: "600"
+                  }}>TY</span>ANTRA</span>
+                </div> : null}
+                <p lang="en-IN" style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
+                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >For Test Yantra Software Solutions (India) Pvt Ltd</span></p>
+                <br />
+                <br />
+                <br />
+                <p style={{ textAlign: 'justify', paddingLeft: 20, margin: 0 }}><strong>Authorized Signatory</strong></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong  >(Human Resources)</strong></span></p>
+              </div>
+
             </div>
           </div>
+          {this.state.employee.withHeader ? <footer className="footer" style={{ marginLeft: '-141px', marginTop: '-115px' }}>
+
+            <img style={{
+              width: '1160px',
+              height: '95px'
+            }} src={TyFooter}></img>
+
+          </footer> : null}
+
         </div>
-      </div>
-    )
-  } else {
-    return (
+      )
+    } else {
+      return (
         <h1></h1>)
+    }
   }
-}
 }
 
 export default withRouter(HRLetter)

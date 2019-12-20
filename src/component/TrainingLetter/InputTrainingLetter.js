@@ -180,7 +180,7 @@ export class InputTrainingLetter extends Component {
                             <div className="col-auto container mt-5 pb-5">
                                 <div style={{ width: '500px' }} className="card m-auto shadow-lg mt-5">
                                     <div class="card-header" style={{ borderRadius: '0px !important', background: 'white' }} >
-                                        <h3 className="text-center blue-text font-bold ">Training Letter</h3>
+                                        <h3 className="text-center black-text font-bold ">Training Letter</h3>
                                     </div>
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
@@ -296,7 +296,7 @@ export class InputTrainingLetter extends Component {
 
 
                                             <div style={{ width: '50%' }} className=" input-group  container-fluid">
-                                                <MDBBtn id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
+                                                <MDBBtn outline id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>
                                             </div>
                                         </form>
                                     </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import '../CommonStyle.css'
 import './offer.css'
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG';
 import Home from '../home';
 
 export class Offer2 extends Component {
@@ -11,6 +13,7 @@ export class Offer2 extends Component {
 
         this.state = {
             employee: '',
+            waterMark:false,
         }
     }
 
@@ -48,12 +51,27 @@ export class Offer2 extends Component {
 
         console.log("wawda")
         return (
-            <div>
-                  <Home buttonShow={true}/>
-                <div class="card" id="pageA4">
+            <div id="qwerty">
+                  <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} />
+                <div class="card" id="AFourFirstPage">
                     <div class="card-body">
+
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
                         <div>
                             <br />
+                            <br/>
+                            <br/>
                             <p style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}>Date: {SysDate.getDate()}<sup>{this.nth(SysDate.getDate())}</sup>&nbsp;{moment(SysDate).format('MMMM YYYY')} </p>
                             <br />
                             <br />
@@ -61,6 +79,7 @@ export class Offer2 extends Component {
                             <br/>
                             <p style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}><strong>{this.state.employee.name}</strong><strong>,</strong></p>
                             <br />
+                            <p></p>
                             <br />
                             <p style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}>Dear &nbsp;<strong>&nbsp;</strong><strong>{this.state.employee.name}</strong><strong>,</strong></p>
                             <br />
@@ -71,7 +90,7 @@ export class Offer2 extends Component {
                                 <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>Your cost to company (CTC) shall be as per the below Schedule.</li>
                                 <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>The terms and conditions of your employment will be governed as per the employment agreement (Agreement) annexed as Annexure 1.</li>
                                 <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>You are required to carefully go through the terms and conditions of this offer letter and Annexure 1 as your employment in the Company shall be strictly governed by these documents.</li>
-                                <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>If you agree to the terms and conditions of employment, please sign a copy of this letter as a token of your acceptance and return the signed copy to the Company on&nbsp;or before <strong> {SysDate.getDate()}<sup>{this.nth(SysDate.getDate())}</sup>&nbsp;{moment(SysDate).format('MMMM YYYY')}</strong>. Please sign on all pages. Upon signing, the terms and conditions of the employment agreement shall become binding on you.</li>
+                                <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>If you agree to the terms and conditions of employment, please sign a copy of this letter as a token of your acceptance and return the signed copy to the Company on&nbsp;or before <strong> {toOfferValidity.getDate()}<sup>{this.nth(toOfferValidity.getDate())}</sup>&nbsp;{moment(toOfferValidity).format('MMMM YYYY')}</strong>. Please sign on all pages. Upon signing, the terms and conditions of the employment agreement shall become binding on you.</li>
                                 <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>The Company’s obligations shall commence on the date of your joining which shall be on or before <strong> {toOfferValidity.getDate()}<sup>{this.nth(toOfferValidity.getDate())}</sup>&nbsp;{moment(toOfferValidity).format('MMMM YYYY')}</strong>.</li>
                                 <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>This offer is valid till <strong>{toOfferValidity.getDate()}<sup>{this.nth(toOfferValidity.getDate())}</sup>&nbsp;{moment(toOfferValidity).format('MMMM YYYY')} </strong>and if you fail to accept the terms of the offer, the Company shall have the right to withdraw the offer without giving you any further notice.</li>
                                 <li style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'justify' }}>We are confident that you will enjoy being a part of the Company as much as we shall cherish our association with you.</li>
@@ -107,9 +126,23 @@ export class Offer2 extends Component {
                     </div>
                 </div>
 
-                <div class="card" id="pageA4">
+                <div class="card" id="AFourFirstPage">
                     <div class="card-body">
                         <div className="card-body">
+
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-134px',marginTop: '-132px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                        {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
                             <div><p />
                                 <h4 className="western" align="CENTER"><strong>Schedule</strong></h4>
                                 <p className="western" align="CENTER">Cost to Company details</p>
@@ -268,7 +301,24 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+ 
+                      
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
+                            <br/>
+                            <br/>
                             <p style={{ textAlign: 'center' }}><strong>SALARY COMPENSATION AND BENEFITS</strong></p>
                             <p style={{ textAlign: 'justify' }}><strong>&nbsp;</strong></p>
                             <p style={{ textAlign: 'justify' }}>An employee of Test Yantra is eligible for all statutory compensation and benefits. This is as per the <strong>COMPENSATION AND BENEFIT</strong> Policy of Test Yantra Software Solutions. Employee is requested to follow the guidelines and process as per the Policy, which will be shared at the time of Joining.</p>
@@ -304,11 +354,26 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
+                            <br/>
                             <p style={{ textAlign: 'center' }}><u>Annexure 1</u></p>
                             <p style={{ textAlign: 'center' }}><u>EMPLOYMENT Agreement</u></p>
                             <br />
-                            <p style={{ textAlign: 'justify' }}>This Employment Agreement (the “Agreement”) is made and executed on this <strong>{toOfferValidity.getDate()}<sup>{this.nth(toOfferValidity.getDate())}</sup>&nbsp;{moment(toOfferValidity).format('MMMM YYYY')}</strong>&nbsp;at Bengaluru.</p>
+                            <p style={{ textAlign: 'justify' }}>This Employment Agreement (the “Agreement”) is made and executed on this <strong>{SysDate.getDate()}<sup>{this.nth(SysDate.getDate())}</sup>&nbsp;{moment(SysDate).format('MMMM YYYY')}</strong>&nbsp;at Bengaluru.</p>
                             <p style={{ textAlign: 'justify' }}><u>BY:</u></p>
                             <br />
                             <p style={{ textAlign: 'justify' }}><strong>M/S TEST YANTRA SOFTWARE SOLUTIONS (INDIA) PVT. LTD</strong>., a company incorporated under the Companies Act, 1956, having its registered office at # 50, Brigade MLR, 2<sup>nd</sup> floor, Vani Vilas Road, Basavanagudi Bangalore 560004 represented by its Human Resource (hereinafter may be referred to as the “Company”, which expression shall, unless repugnant to the context or meaning thereof, be deemed to include its successors and permitted assigns) of the ONE PART;</p>
@@ -349,7 +414,22 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
+                            <br/>
+                            <br/>
                             <ol start={2} style={{ paddingLeft: 70 }}>
                                 <li style={{ textAlign: 'justify' }}>The Employee shall report on <strong>{toOfferValidity.getDate()}<sup>{this.nth(toOfferValidity.getDate())}</sup>&nbsp;{moment(toOfferValidity).format('MMMM YYYY')}</strong>. The obligations of the Company towards the Employee shall commence only on and after the date of joining. However, the Employee’s obligations under the Agreement shall commence on the date of execution of the Agreement.</li>
 
@@ -385,6 +465,21 @@ export class Offer2 extends Component {
 
                 <div class="card" id="pageA4">
                     <div class="card-body">
+
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
 
                         <div>
                             <br />
@@ -428,6 +523,20 @@ export class Offer2 extends Component {
 
                 <div class="card" id="pageA4">
                     <div class="card-body">
+
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
                         <div>
                             <br />
                             <br />
@@ -479,7 +588,23 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
                         <div>
+                            <br/>
+                            <br/>
+                            <br/>
                             <ol style={{ paddingLeft: 70 }} start={2}>
                                 <p style={{ textAlign: 'justify' }}> business partners, clientele, trade secrets, marketing strategies and any other information concerning the Company which is not in the public domain constitutes ‘Confidential Information’ belonging to the Company under this Agreement and he shall not, during the continuance of this Agreement or for a period of two (2) years after the termination of this Agreement, reveal Confidential Information to any person, firm, corporation, or entity. Should the Employee reveal or threaten to reveal such Confidential Information to any person, firm, corporation, or entity contrary to the provisions of this Agreement during the subsistence of this Agreement, the Company shall be entitled to take disciplinary action against the Employee including dismissal of the Employee and the Company may file suit for damages. Should the Employee reveal or threaten to reveal such Confidential Information to any person, firm, corporation, or entity contrary to the provisions of this Agreement after termination of this Agreement but within 2 year from the date termination of this Agreement, the Company shall be entitled to claim damages from the Employee.</p>
 
@@ -523,7 +648,22 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
+                            <br/>
+                            <br/>
                             <ol style={{ paddingLeft: 70 }} start={1}>
                                 <li style={{ textAlign: 'justify' }}>The Parties agree that during the term of this Agreement, the Employee shall not, under any circumstances, be permitted to work for any other company or firm or person, either whole time or part time, to own, or in any way be associated with any company or firm or proprietorship concern as advisor, director or partner, whether paid or not, for his services, without prior written permission from the Company.</li>
 
@@ -569,10 +709,26 @@ export class Offer2 extends Component {
                     </div>
                 </div>
 
-                <div class="card" id="AFourPage">
+                <div class="card" id="pageA4">
                     <div class="card-body">
 
+                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+                     
+                    {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                         <div>
+                            <br/>
+                            <br/>
                             <ol style={{ textAlign: 'justify', paddingLeft: 70 }} start={3}>
                                 <p style={{ textAlign: 'justify' }}> is incorrect/ false, or if the Employee has suppressed any material information, the Company shall have the option of terminating this Agreement forthwith without any prior notice or salary in lieu of such notice to the Employee.</p>
                                 <li style={{ textAlign: 'justify' }}>This Agreement shall supersede any prior agreements/ understandings between the Company and the Employee. Any amendment/ alteration to this Agreement shall be in writing and shall be signed by both the parties.</li>
@@ -624,6 +780,12 @@ export class Offer2 extends Component {
                         </div>
                     </div>
                 </div>
+                {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </footer>:null}
             </div >
         )
     }

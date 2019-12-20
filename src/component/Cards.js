@@ -90,7 +90,7 @@ export default class Cards extends Component {
 
                  
 
-                    <Link to='/InputTrainingLetter'>
+                    <Link to='/InputTrainingCommitLetter'>
 
                         <div className="card HomeCard" style={{ width: '12rem', cursor: "pointer", margin: '20px', height: 180 }}>
                             <img style={{ width: '120px', marginLeft: 'auto', marginRight: 'auto' }} src={TrainingCommit} className="card-img-top" alt="..." />

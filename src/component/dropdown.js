@@ -3,6 +3,7 @@ import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from
 import { MDBBtn } from "mdbreact";
 import { BrowserRouter as Router, Route, withRouter, Link } from 'react-router-dom'
 import '../component/dropdown.css'
+import '../component/home.css'
 export default class Dropdown extends Component {
     render() {
         return (
@@ -11,35 +12,37 @@ export default class Dropdown extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="dropdown">
-                            <button  className="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                E-Letter
+                            <button  className="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="ty-logo">E</span><span className="dropdown"> Letter</span>
                           </button>
                             <ul className="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
                                 <li className="dropdown-submenu">
                                     <a className="dropdown-item"  href="#">On Board</a>
                                     <ul className="dropdown-menu">
-                                        <li className="dropdown-item"><a tabIndex={-1} href="#">Internship Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Offer Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Confirmation Letter</a></li>
+                                        <li className="dropdown-item"><Link  tabIndex={-1} to="/InputInternship">Internship Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputOfferLetter" >Offer Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/inputConfirmation">Confirmation Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/hr">Hr Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputIntentLetter">Intent Letter</Link></li>
                                     </ul>
                                 </li>
                                 <li className="dropdown-divider" />
                                 <li className="dropdown-submenu">
                                     <a className="dropdown-item" tabIndex={-1} href="#">Carrier</a>
                                     <ul className="dropdown-menu">
-                                        <li className="dropdown-item"><a tabIndex={-1} href="#">Certificate Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Deputation Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Designation Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Increment Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Training Letter</a></li>
+                                        <li className="dropdown-item"><Link tabIndex={-1} to="/InputcertificateLetter">Certificate Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputDepuationLetter">Deputation Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputDesignationLetter">Designation Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputIncrementLetter">Increment Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputTrainingLetter">Training Letter</Link></li>
                                     </ul>
                                 </li>
                                 <li className="dropdown-divider" />
                                 <li className="dropdown-submenu">
-                                    <a className="dropdown-item" tabIndex={-1} href="#">Relieve</a>
+                                    <a className="dropdown-item" tabIndex={-1} to="#">Relieve</a>
                                     <ul className="dropdown-menu">
-                                        <li className="dropdown-item"><a tabIndex={-1} href="#">Relieving Letter</a></li>
-                                        <li className="dropdown-item"><a href="#">Exit</a></li>
+                                        <li className="dropdown-item"><Link tabIndex={-1} to="/InputRelivingLetter">Relieving Letter</Link></li>
+                                        <li className="dropdown-item"><Link to="/InputExitLetter">Exit</Link></li>
                                     </ul>
                                 </li>
                             </ul>

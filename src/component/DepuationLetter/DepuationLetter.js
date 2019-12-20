@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Home from '../home';
 import '../CommonStyle.css'
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG'
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 
@@ -9,7 +11,8 @@ export class DepuationLetter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employee: []
+      employee: [],
+      waterMark:false
     }
   }
 
@@ -43,9 +46,24 @@ export class DepuationLetter extends Component {
     if (this.props.empData) {
       return (
         <div>
-          <Home buttonShow={true} />
+          <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})}  />
+
           <div className="card" id="AFourPage">
             <div className="card-body">
+
+            {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+            {this.state.employee.withWaterMark?<div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+            :null}
+
               <div>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
@@ -53,8 +71,7 @@ export class DepuationLetter extends Component {
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}><strong>Date:&nbsp; {toDate.getDate()}<sup>{this.nth(toDate.getDate())}</sup>&nbsp;{moment(toDate).format('MMMM YYYY')}</strong></p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>To, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 10,margin:0 }}><strong> {this.state.employee.employeeName},</strong></p>
-                <p style={{ textAlign: 'justify', paddingLeft: 20,margin:0 }}><strong>{this.state.employee.employeeId},</strong></p>
+                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 10 }}><strong> {this.state.employee.employeeName},</strong></p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingTop: 20 }}>Dear <strong>{this.state.employee.employeeName}</strong><strong>,</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>&nbsp;</p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20 }}>As a part of our services to client, please be informed that you are deputed to work at <strong>{this.state.employee.clientName}, </strong>
@@ -74,6 +91,13 @@ export class DepuationLetter extends Component {
               </div>
             </div>
           </div>
+          {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </footer>:null}
+     
         </div>
 
       )

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Home from '../home'
+import TyHeader from '../Assests/TYHeader.PNG';
+import TyFooter from '../Assests/TYFooter.PNG';
 import { BrowserRouter as Router, Route, withRouter, Link } from 'react-router-dom'
 
 
@@ -11,6 +13,7 @@ export  class Intent extends Component {
 
         this.state = {
             employee: [],
+            waterMark:false,
         }
     }
 
@@ -58,10 +61,27 @@ export  class Intent extends Component {
 
 
                 <div>
-                    <Home buttonShow={true} />
+                    <Home buttonShow={true}  showWatermark={(data)=>this.setState({waterMark:data})} />
 
-                    <div class="card" id="pageA4">
+                    <div class="card" id="AFourFirstPage">
                         <div class="card-body">
+
+
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+ 
+
+                        {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
                         <p style={{ textAlign: 'justify',margin:0 }}>&nbsp;</p>
                         <p style={{ textAlign: 'justify',margin:0 }}>&nbsp;</p>
                         <p style={{ textAlign: 'justify',margin:0 }}>&nbsp;</p>
@@ -111,7 +131,23 @@ export  class Intent extends Component {
                     <div class="card" id="AFourPage">
                         <div class="card-body">
 
+                            
+                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+               
+               <img  style={{width: '1160px',
+   height: '95px'}} src={TyHeader}></img>
+
+             </header>:null}
+
+                        {this.state.employee.withWaterMark? <div  className="waterMark">
+                <span style={{color:'#263248',fontSize: '91px',
+    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
+    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
+                </div>
+:null}
+
                             <div>
+                                <br/>
                                 <p style={{ textAlign: 'justify',margin:0 }}>Please take the time to carefully review our Letter of Intent. This letter, along with the enclosed annexures, outlines the obligations of both <strong>Test Yantra </strong>and yourself with respect to your training program terms &amp; conditions.</p>
                                 <p>&nbsp;</p>
                                 <p style={{ textAlign: 'justify',margin:0 }}>Kindly complete and return the signed copy of your Letter of intent so that reference checks can be completed. A few original documents (or officially certified copies) must be mandatorily provided either before the commencement of your training, or no later than the morning of your first day.</p>
@@ -125,7 +161,7 @@ export  class Intent extends Component {
                                 <table style={{ width: 300, height: 92,textAlign:'left' }} border="1px">
                                     <tbody>
                                         <tr style={{ height: 55 }}>
-                                            <td style={{ width: '200px', height: 55,background:'#00B0F0' }}><strong>During training -<br /> 3 smonths </strong></td>
+                                            <td style={{ width: '200px', height: 55,background:'#00B0F0' }}><strong>During training -<br /> 3 months </strong></td>
                                             <td style={{ width: '100px', height: 55}}><strong>NO Salary</strong></td>
                                         </tr>
                                         <tr style={{ height: 26 }}>
@@ -232,6 +268,12 @@ export  class Intent extends Component {
                         </div>
 
                     </div>
+                    {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
+               
+               <img style={{width: '1160px',
+   height: '95px'}} src={TyFooter}></img>
+
+             </footer>:null}
 
                 </div>
 

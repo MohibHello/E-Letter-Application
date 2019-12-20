@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../IncrementLetter/test.css';
+
 import { BrowserRouter as Router, Route, withRouter,Link } from 'react-router-dom'
 export default class Test1  extends Component {
   render() {
