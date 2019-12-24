@@ -13,20 +13,20 @@ export class DesignationLetter extends Component {
 
         this.state = {
             employee: [],
-            waterMark:false
+            waterMark: false
         }
     }
 
     nth = (d) => {
         if (d > 3 && d < 21)
-          return 'th';
+            return 'th';
         switch (d % 10) {
-          case 1: return "st";
-          case 2: return "nd";
-          case 3: return "rd";
-          default: return "th";
+            case 1: return "st";
+            case 2: return "nd";
+            case 3: return "rd";
+            default: return "th";
         }
-      }
+    }
 
     componentDidMount() {
 
@@ -38,7 +38,7 @@ export class DesignationLetter extends Component {
 
     render() {
 
-        let toDate=new Date();
+        let toDate = new Date();
 
         if (this.props.empData == 0) {
             this.props.history.push("/cards")
@@ -46,25 +46,28 @@ export class DesignationLetter extends Component {
         if (this.props.empData) {
             return (
                 <div>
-                    <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} />
-                    <div className="card" id="AFourPage">
-                        <div className="card-body">
+                    <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />
+                    <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
+                        <div className="card-body pb-0 mt-5">
 
-                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                            {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+                                <img className="tyHeader" src={TyHeader}></img>
 
-                        
-                        {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>:null}
-                        
-                       
+                            </header> : null}
+
+
+                            {this.state.employee.withWaterMark ? <div className="waterMark">
+                                <span style={{
+                                    color: '#263248', fontSize: '91px',
+                                    fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                                }}>TES<span style={{
+                                    color: '#F8981C', fontSize: '91px',
+                                    fontFamily: 'sans-serif', fontWeight: "600"
+                                }}>TY</span>ANTRA</span>
+                            </div> : null}
+
+
                             <div>
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }}>&nbsp;</p>
                                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 }}>&nbsp;</p>
@@ -86,19 +89,19 @@ export class DesignationLetter extends Component {
                                 <br />
                                 <br />
                                 <br />
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20,margin:0,fontWeight:'bolder' }}>Authorized Signatory</p>
-                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20 ,fontWeight:'bolder'}}>(Human Resources)</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, margin: 0, fontWeight: 'bolder' }}>Authorized Signatory</p>
+                                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}>(Human Resources)</p>
                             </div>
 
                         </div>
-                    </div>
-                    {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
-               
-               <img style={{width: '1160px',
-   height: '95px'}} src={TyFooter}></img>
+                        {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '506px' }}>
 
-             </footer>:null}
-     
+                            <img className="tyfooter" style={{ marginLeft: '48px' }} src={TyFooter}></img>
+
+                        </div> : null}
+
+                    </div>
+
                 </div>
 
             )

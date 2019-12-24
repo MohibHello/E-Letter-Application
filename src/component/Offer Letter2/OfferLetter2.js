@@ -13,7 +13,7 @@ export class Offer2 extends Component {
 
         this.state = {
             employee: '',
-            waterMark:false,
+            waterMark: false,
         }
     }
 
@@ -52,31 +52,35 @@ export class Offer2 extends Component {
         console.log("wawda")
         return (
             <div id="qwerty">
-                  <Home buttonShow={true} showWatermark={(data)=>this.setState({waterMark:data})} />
-                <div class="card" id="AFourFirstPage">
-                    <div class="card-body">
+                <Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />
+                <div class="card" style={{ marginTop: '100px' }} id="AFourPage">
+                    <div class="card-body pb-0">
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
+                            <img className="tyHeader" src={TyHeader}></img>
+
+                        </div> : null}
                
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
-
-             </header>:null}
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
                         <div>
                             <br />
-                            <br/>
+                            <br />
+                            <br />
                             <br/>
                             <p style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}>Date: {SysDate.getDate()}<sup>{this.nth(SysDate.getDate())}</sup>&nbsp;{moment(SysDate).format('MMMM YYYY')} </p>
                             <br />
                             <br />
                             <p style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}>To,</p>
-                            <br/>
+                            <br />
                             <p style={{ paddingLeft: 10, paddingRight: 10, textAlign: 'left' }}><strong>{this.state.employee.name}</strong><strong>,</strong></p>
                             <br />
                             <p></p>
@@ -118,31 +122,39 @@ export class Offer2 extends Component {
                                     </tr>
                                 </tbody>
                             </table>
-
+                            <br/>
 
                         </div>
+                        {/* {this.state.employee.withHeader ? <div style={{ marginLeft: '-141px', marginTop: '36px' }}>
 
+                            <img className="tyfooter" src={TyFooter}></img>
+
+                        </div> : null} */}
 
                     </div>
+
                 </div>
 
-                <div class="card" id="AFourFirstPage">
+                <div class="card" style={{ marginTop: '100px' }} id="AFourPage">
                     <div class="card-body">
                         <div className="card-body">
 
-                        {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-134px',marginTop: '-132px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                            {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+                                <img className="tyHeader" src={TyHeader}></img>
 
-                        {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                            </div> : null}
+
+                            {this.state.employee.withWaterMark ? <div className="waterMark">
+                                <span style={{
+                                    color: '#263248', fontSize: '91px',
+                                    fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                                }}>TES<span style={{
+                                    color: '#F8981C', fontSize: '91px',
+                                    fontFamily: 'sans-serif', fontWeight: "600"
+                                }}>TY</span>ANTRA</span>
+                            </div>
+                                : null}
                             <div><p />
                                 <h4 className="western" align="CENTER"><strong>Schedule</strong></h4>
                                 <p className="western" align="CENTER">Cost to Company details</p>
@@ -157,20 +169,20 @@ export class Offer2 extends Component {
                                         </td>
                                     </tr>
                                     <tr style={{}}>
-                                        <td style={{ width: '300px', textAlign: 'left' ,fontFamily:'sans-serif'}}>&nbsp;<strong style={{ fontSize: 'large' }}>NAME:</strong></td>
-                                        <td style={{textAlign:'left', width: '300px', wordBreak: 'break-all',fontFamily:'sans-serif',fontSize: 'large' }}>&nbsp;{this.state.employee.name}</td>
+                                        <td style={{ width: '300px', textAlign: 'left', fontFamily: 'sans-serif' }}>&nbsp;<strong style={{ fontSize: 'large' }}>NAME:</strong></td>
+                                        <td style={{ textAlign: 'left', width: '300px', wordBreak: 'break-all', fontFamily: 'sans-serif', fontSize: 'large' }}>&nbsp;{this.state.employee.name}</td>
                                     </tr>
                                     <tr style={{}}>
-                                        <td style={{ width: '300px', textAlign: 'left',fontFamily:'sans-serif' }}>&nbsp;<strong style={{ fontSize: 'large' }}>DESIGNATION:</strong></td>
-                                        <td style={{ width: '300px', textAlign:'left', wordBreak: 'break-all',fontSize: 'large' }}>&nbsp;{this.state.employee.designation}</td>
+                                        <td style={{ width: '300px', textAlign: 'left', fontFamily: 'sans-serif' }}>&nbsp;<strong style={{ fontSize: 'large' }}>DESIGNATION:</strong></td>
+                                        <td style={{ width: '300px', textAlign: 'left', wordBreak: 'break-all', fontSize: 'large' }}>&nbsp;{this.state.employee.designation}</td>
                                     </tr>
                                     <tr style={{}}>
-                                        <td style={{ width: '300px', textAlign: 'left',fontFamily:'sans-serif' }}>&nbsp;<strong style={{ fontSize: 'large' }}>LOCATION:</strong></td>
-                                        <td style={{textAlign:'left', width: '300px', wordBreak: 'break-all',fontSize: 'large' }}>&nbsp;{this.state.employee.companyLocation}</td>
+                                        <td style={{ width: '300px', textAlign: 'left', fontFamily: 'sans-serif' }}>&nbsp;<strong style={{ fontSize: 'large' }}>LOCATION:</strong></td>
+                                        <td style={{ textAlign: 'left', width: '300px', wordBreak: 'break-all', fontSize: 'large' }}>&nbsp;{this.state.employee.companyLocation}</td>
                                     </tr>
                                     <tr style={{}}>
-                                        <td style={{ width: '300px', textAlign: 'left' ,fontFamily:'sans-serif'}}>&nbsp;<strong style={{ fontSize: 'large' }}>COMPANY/BUSINESS UNIT:</strong></td>
-                                        <td style={{textAlign:'left', width: '300px', wordBreak: 'break-all',fontFamily:'sans-serif',fontSize: 'large' }}>&nbsp;Test Yantra Software Solutions </td>
+                                        <td style={{ width: '300px', textAlign: 'left', fontFamily: 'sans-serif' }}>&nbsp;<strong style={{ fontSize: 'large' }}>COMPANY/BUSINESS UNIT:</strong></td>
+                                        <td style={{ textAlign: 'left', width: '300px', wordBreak: 'break-all', fontFamily: 'sans-serif', fontSize: 'large' }}>&nbsp;Test Yantra Software Solutions </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -187,32 +199,32 @@ export class Offer2 extends Component {
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}><strong>&nbsp;Yearly&nbsp;&nbsp;</strong></td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>Basic Salary ( Basic + DA )</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>Basic Salary ( Basic + DA )</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>House Rent Allowance</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>House Rent Allowance</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>Conveyance Allowance</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>Conveyance Allowance</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>&nbsp;LTA</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>&nbsp;LTA</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>&nbsp;Food&nbsp;Allowance</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>&nbsp;Food&nbsp;Allowance</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>Other&nbsp;Allowance</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>Other&nbsp;Allowance</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: '150px', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
@@ -230,17 +242,17 @@ export class Offer2 extends Component {
                                             <td style={{ textAlign: 'center' }} colSpan={3}><strong>Deductions</strong></td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>EPF Employee</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>EPF Employee</td>
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}><strong>&nbsp;</strong></td>
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}><strong>&nbsp;&nbsp;</strong></td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left' ,fontSize: 'large'}}>Professional Tax</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>Professional Tax</td>
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}>&nbsp;</td>
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}>&nbsp;</td>
                                         </tr>
                                         <tr style={{}}>
-                                            <td style={{ width: 300, textAlign: 'left' ,fontSize: 'large'}}>Medical Insurance</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>Medical Insurance</td>
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}>&nbsp;</td>
                                             <td style={{ width: '150px', textAlign: 'right', wordBreak: 'break-all' }}>&nbsp;</td>
                                         </tr>
@@ -258,20 +270,20 @@ export class Offer2 extends Component {
                                 <table style={{ width: 800, height: 250, marginLeft: 'auto', marginRight: 'auto', fontFamily: 'sans-serif' }} border={1}>
                                     <tbody>
                                         <tr>
-                                            <td style={{ textAlign: 'center' ,fontSize: 'large'}} colSpan={3}><strong>Benefits&nbsp;</strong></td>
+                                            <td style={{ textAlign: 'center', fontSize: 'large' }} colSpan={3}><strong>Benefits&nbsp;</strong></td>
                                         </tr>
                                         <tr>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large'}}>&nbsp;EPF Employer</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>&nbsp;EPF Employer</td>
                                             <td style={{ width: 150, textAlign: 'left', wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: 125, wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>&nbsp;Gratuity</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>&nbsp;Gratuity</td>
                                             <td style={{ width: 150, wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: 150, wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td style={{ width: 300, textAlign: 'left',fontSize: 'large' }}>&nbsp;Group Medical Insurance and Personal<br />Accident Cover Policy - Premium</td>
+                                            <td style={{ width: 300, textAlign: 'left', fontSize: 'large' }}>&nbsp;Group Medical Insurance and Personal<br />Accident Cover Policy - Premium</td>
                                             <td style={{ width: 150, wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                             <td style={{ width: 150, wordBreak: 'break-all', textAlign: 'right' }}>&nbsp;</td>
                                         </tr>
@@ -301,24 +313,26 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
- 
-                      
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                            <img className="tyHeader" src={TyHeader}></img>
+
+                        </div> : null}
+
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
 
                         <div>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             <p style={{ textAlign: 'center' }}><strong>SALARY COMPENSATION AND BENEFITS</strong></p>
                             <p style={{ textAlign: 'justify' }}><strong>&nbsp;</strong></p>
                             <p style={{ textAlign: 'justify' }}>An employee of Test Yantra is eligible for all statutory compensation and benefits. This is as per the <strong>COMPENSATION AND BENEFIT</strong> Policy of Test Yantra Software Solutions. Employee is requested to follow the guidelines and process as per the Policy, which will be shared at the time of Joining.</p>
@@ -354,22 +368,25 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+                            <img className="tyHeader" src={TyHeader}></img>
 
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                        </div> : null}
+
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
 
                         <div>
-                            <br/>
+                            <br />
                             <p style={{ textAlign: 'center' }}><u>Annexure 1</u></p>
                             <p style={{ textAlign: 'center' }}><u>EMPLOYMENT Agreement</u></p>
                             <br />
@@ -414,22 +431,25 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                            <img className="tyHeader" src={TyHeader}></img>
+
+                        </div> : null}
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
 
                         <div>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             <ol start={2} style={{ paddingLeft: 70 }}>
                                 <li style={{ textAlign: 'justify' }}>The Employee shall report on <strong>{toOfferValidity.getDate()}<sup>{this.nth(toOfferValidity.getDate())}</sup>&nbsp;{moment(toOfferValidity).format('MMMM YYYY')}</strong>. The obligations of the Company towards the Employee shall commence only on and after the date of joining. However, the Employee’s obligations under the Agreement shall commence on the date of execution of the Agreement.</li>
 
@@ -466,20 +486,23 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+                            <img className="tyHeader" src={TyHeader}></img>
+
+                        </div> : null}
 
 
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
 
                         <div>
                             <br />
@@ -524,19 +547,22 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+                            <img className="tyHeader" src={TyHeader}></img>
 
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                        </div> : null}
+
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
                         <div>
                             <br />
                             <br />
@@ -588,23 +614,26 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
+                            <img className="tyHeader" src={TyHeader}></img>
 
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                        </div> : null}
+
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
                         <div>
-                            <br/>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
+                            <br />
                             <ol style={{ paddingLeft: 70 }} start={2}>
                                 <p style={{ textAlign: 'justify' }}> business partners, clientele, trade secrets, marketing strategies and any other information concerning the Company which is not in the public domain constitutes ‘Confidential Information’ belonging to the Company under this Agreement and he shall not, during the continuance of this Agreement or for a period of two (2) years after the termination of this Agreement, reveal Confidential Information to any person, firm, corporation, or entity. Should the Employee reveal or threaten to reveal such Confidential Information to any person, firm, corporation, or entity contrary to the provisions of this Agreement during the subsistence of this Agreement, the Company shall be entitled to take disciplinary action against the Employee including dismissal of the Employee and the Company may file suit for damages. Should the Employee reveal or threaten to reveal such Confidential Information to any person, firm, corporation, or entity contrary to the provisions of this Agreement after termination of this Agreement but within 2 year from the date termination of this Agreement, the Company shall be entitled to claim damages from the Employee.</p>
 
@@ -648,22 +677,25 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                            <img className="tyHeader" src={TyHeader}></img>
+
+                        </div> : null}
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
 
                         <div>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             <ol style={{ paddingLeft: 70 }} start={1}>
                                 <li style={{ textAlign: 'justify' }}>The Parties agree that during the term of this Agreement, the Employee shall not, under any circumstances, be permitted to work for any other company or firm or person, either whole time or part time, to own, or in any way be associated with any company or firm or proprietorship concern as advisor, director or partner, whether paid or not, for his services, without prior written permission from the Company.</li>
 
@@ -712,23 +744,26 @@ export class Offer2 extends Component {
                 <div class="card" id="pageA4">
                     <div class="card-body">
 
-                    {this.state.employee.withHeader?  <header className="header" style={{marginLeft: '-115px',marginTop: '-115px'}}>
-               
-               <img  style={{width: '1160px',
-   height: '95px'}} src={TyHeader}></img>
+                        {this.state.employee.withHeader ? <div className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-             </header>:null}
-                     
-                    {this.state.employee.withWaterMark? <div  className="waterMark">
-                <span style={{color:'#263248',fontSize: '91px',
-    fontFamily: 'sans-serif',position: 'absolute',opacity: '0.3',zIndex:'0'}}>TES<span style={{color: '#F8981C',fontSize: '91px',
-    fontFamily: 'sans-serif',fontWeight: "600"}}>TY</span>ANTRA</span>
-                </div>
-:null}
+                            <img className="tyHeader" src={TyHeader}></img>
+
+                        </div> : null}
+
+                        {this.state.employee.withWaterMark ? <div className="waterMark">
+                            <span style={{
+                                color: '#263248', fontSize: '91px',
+                                fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                            }}>TES<span style={{
+                                color: '#F8981C', fontSize: '91px',
+                                fontFamily: 'sans-serif', fontWeight: "600"
+                            }}>TY</span>ANTRA</span>
+                        </div>
+                            : null}
 
                         <div>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                             <ol style={{ textAlign: 'justify', paddingLeft: 70 }} start={3}>
                                 <p style={{ textAlign: 'justify' }}> is incorrect/ false, or if the Employee has suppressed any material information, the Company shall have the option of terminating this Agreement forthwith without any prior notice or salary in lieu of such notice to the Employee.</p>
                                 <li style={{ textAlign: 'justify' }}>This Agreement shall supersede any prior agreements/ understandings between the Company and the Employee. Any amendment/ alteration to this Agreement shall be in writing and shall be signed by both the parties.</li>
@@ -739,7 +774,7 @@ export class Offer2 extends Component {
                                 <li><u>DISPUTE RESOLUTION AND GOVERNING LAW:</u></li>
                             </ol>
 
-                            <ol style={{ textAlign: 'justify',paddingLeft:70 }}>
+                            <ol style={{ textAlign: 'justify', paddingLeft: 70 }}>
                                 <li>In the event of any dispute between the parties, such dispute shall be referred to the sole arbitrator appointed by the Company. The place of arbitration shall be in Bengaluru. The award passed by the Arbitrator shall be final and binding on the parties.</li>
 
                                 <br />
@@ -750,12 +785,12 @@ export class Offer2 extends Component {
                             <ol style={{ textAlign: 'justify' }} start={10}>
                                 <li>Notice: Any notice and other communications provided for in this Agreement shall be in writing and shall be first transmitted by email and then confirmed by Speed Post, in the manner as elected by the Party giving such notice to the following addresses:</li>
                             </ol>
-                           <div style={{paddingLeft:120}}>
-                           <p style={{ textAlign: 'justify',margin:0 }}>(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the case of notices to the Company:</p>
-                            <p style={{ textAlign: 'justify',margin:0 }}>Address: 50, Brigade MLR, Vani Vilas Road, Basavanagudi, Bangalore 560004</p>
-                            <p style={{ textAlign: 'justify',margin:0 }}>Attention&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HR Department</p>
-                            <p style={{ textAlign: 'justify',margin:0 }}>E-mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr@testyantra.com</p>
-                           </div>
+                            <div style={{ paddingLeft: 120 }}>
+                                <p style={{ textAlign: 'justify', margin: 0 }}>(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the case of notices to the Company:</p>
+                                <p style={{ textAlign: 'justify', margin: 0 }}>Address: 50, Brigade MLR, Vani Vilas Road, Basavanagudi, Bangalore 560004</p>
+                                <p style={{ textAlign: 'justify', margin: 0 }}>Attention&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HR Department</p>
+                                <p style={{ textAlign: 'justify', margin: 0 }}>E-mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr@testyantra.com</p>
+                            </div>
                             <p style={{ textAlign: 'justify' }}>All notices shall be deemed to have been validly given on (a) the Business Day immediately after the date of transmission with confirmed answer back, if transmitted by facsimile/electronic transmission, or (b) the Business Day of receipt, if transmitted by courier or registered airmail.</p>
                             <br />
                             <p style={{ textAlign: 'justify' }}>Any Party may, from time to time, change its address or representative for receipt of notices provided for in this Agreement by giving to the other Party not less than 30 days prior written notice.</p>
@@ -764,28 +799,27 @@ export class Offer2 extends Component {
 
 
                             <div>
-                                <p className="western" style={{ float: 'left',textAlign:'left', width: 500 }} >M/s Test Yantra Software Solutions (India) Pvt. Ltd, represented by its authorised signatory</p>
-                                <p className="western" style={{ float: 'left',textAlign:'left', width: 300 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Employee</p></div>
+                                <p className="western" style={{ float: 'left', textAlign: 'left', width: 500 }} >M/s Test Yantra Software Solutions (India) Pvt. Ltd, represented by its authorised signatory</p>
+                                <p className="western" style={{ float: 'left', textAlign: 'left', width: 300 }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Employee</p></div>
                             <p className="western">&nbsp;</p>
                             <br />
                             <br />
                             <br />
-                            <div><strong className="western" style={{ float: 'left', width: 400, fontSize: 'medium',textAlign:'left' }}>_________________________________</strong><strong style={{ float: 'right', width: 300, fontSize: 'medium' }}>_______________________________</strong></div>
+                            <div><strong className="western" style={{ float: 'left', width: 400, fontSize: 'medium', textAlign: 'left' }}>_________________________________</strong><strong style={{ float: 'right', width: 300, fontSize: 'medium' }}>_______________________________</strong></div>
                             <br />
                             <br />
                             <div>
-                                <p className="western" style={{ float: 'left', width: 300 ,textAlign:'left',margin:0}}>Authorised Signatory&nbsp;&nbsp;&nbsp;</p > <p style={{ float: 'right', width: 390 }}> Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                               <br/> <p className="western" style={{ width: 200 ,textAlign:'left',margin:0}}>(Human Resources)&nbsp;&nbsp;&nbsp;</p >
+                                <p className="western" style={{ float: 'left', width: 300, textAlign: 'left', margin: 0 }}>Authorised Signatory&nbsp;&nbsp;&nbsp;</p > <p style={{ float: 'right', width: 390 }}> Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                <br /> <p className="western" style={{ width: 200, textAlign: 'left', margin: 0 }}>(Human Resources)&nbsp;&nbsp;&nbsp;</p >
                             </div>
                         </div>
                     </div>
                 </div>
-                {this.state.employee.withHeader?<footer className="footer" style={{marginLeft: '-141px',marginTop: '-115px'}}>
-               
-               <img style={{width: '1160px',
-   height: '95px'}} src={TyFooter}></img>
+                {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '200px' }}>
 
-             </footer>:null}
+                    <img className="tyfooter" src={TyFooter}></img>
+
+                </div> : null}
             </div >
         )
     }

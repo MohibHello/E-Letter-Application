@@ -368,7 +368,7 @@ export class MailComponent extends Component {
                     if (response.data.statusCode === 201) {
                         alert("suceess")
                         this.setState({ items: [], items2: [] })
-
+                        this.setState({value:""})
                         this.toggle()
                     } else if (response.data.statusCode === 401) {
                     }

@@ -11,7 +11,7 @@ import "./NavBar.css"
 
 
 
-class SimpleNavBar extends Component {
+class NavBar extends Component {
 
   constructor(props) {
     super(props);
@@ -175,4 +175,4 @@ class SimpleNavBar extends Component {
     }
 }
 
-export default withRouter(SimpleNavBar)
+export default withRouter(NavBar)

@@ -31,7 +31,7 @@ export class InputCertificateLetter extends Component {
     }
 
     componentDidMount() {
-        debugger;
+
 
 
 

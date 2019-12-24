@@ -3,26 +3,34 @@ p , td,strong,span,li{
   
 }
 
+.tyHeader {
+    width: 1171px;
+    height: 95px;
+    margin-top: -62px;
+    margin-left: 1px;
+}
+
 #pageA4{
 background: white;
     display: block;
     margin: 0 auto;
     width:31cm;
-    height: 43.80cm;
+    height: 43.5cm;
     padding-left: 25mm;
     padding-right:25mm;
     padding-top:25mm;
     padding-bottom:15mm;
     font-family: Calibri !important;
     top:1px
-  
 }
+
+
 #AFourPage{
     background: white;
     display: block;
     margin: 0 auto;
     width:31cm;
-    height: 40.28cm;
+    height: 43.5cm;
     padding-left: 25mm;
     padding-right:25mm;
     padding-top:25mm;
@@ -49,7 +57,11 @@ body {
 
 @Page {
     size:auto;
-  margin: 0mm;
+  margin-top: -8.2%;
+  margin-bottom: 0mm;
+  margin-left: 0mm;
+  margin-right: 0mm;
+
     font-family: Calibri !important;
     font-size: 13;
 }
@@ -81,7 +93,7 @@ strong {
 .waterMark {
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 48%;
     left: 28%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -169,6 +181,14 @@ strong {
             right: 0;
             left: 152px;
             bottom: 0px;
-            position:fixed;
             text-align: center;
           }
+
+          
+.tyfooter {
+    width: 1170px;
+    height: 100px;
+    margin-left: 28px;
+}
+
+

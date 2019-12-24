@@ -59,19 +59,16 @@ export class HRLetter extends Component {
       return (
         <div>
           {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />}
-          <div className="card" id="AFourPage">
-            <div className="card-body">
+          <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
+            <div className="card-body pb-0 mt-5">
 
 
 
               <div>
 
-                {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-115px' }}>
+                {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
 
-                  <img style={{
-                    width: '1160px',
-                    height: '95px'
-                  }} src={TyHeader}></img>
+                  <img className="tyHeader" src={TyHeader}></img>
 
                 </header> : null}
 
@@ -104,18 +101,30 @@ export class HRLetter extends Component {
                 <br />
                 <p style={{ textAlign: 'justify', paddingLeft: 20, margin: 0 }}><strong>Authorized Signatory</strong></p>
                 <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong  >(Human Resources)</strong></span></p>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br/>
+                <br/>
               </div>
 
+
+              {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '200px' }}>
+
+                <img className="tyfooter" src={TyFooter}></img>
+
+              </div> : null}
             </div>
           </div>
-          {this.state.employee.withHeader ? <footer className="footer" style={{ marginLeft: '-141px', marginTop: '-115px' }}>
 
-            <img style={{
-              width: '1160px',
-              height: '95px'
-            }} src={TyFooter}></img>
-
-          </footer> : null}
 
         </div>
       )
