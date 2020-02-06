@@ -15,13 +15,17 @@ background: white;
     display: block;
     margin: 0 auto;
     width:31cm;
-    height: 43.5cm;
+    height: 41.5cm;
     padding-left: 25mm;
     padding-right:25mm;
     padding-top:25mm;
     padding-bottom:15mm;
     font-family: Calibri !important;
     top:1px
+}
+.k-pdf-export strong {
+  font-weight: bold !important; 
+  font-weight: 600;
 }
 
 
@@ -36,6 +40,7 @@ background: white;
     padding-top:25mm;
     padding-bottom:15mm;
     font-family: Calibri !important;
+    position: relative;
   
 }
 #AFourFirstPage{
@@ -43,7 +48,7 @@ background: white;
     display: block;
     margin: 0 auto;
     width:31cm;
-    height: 43.86cm;
+    height: 42.5cm;
     padding-left: 25mm;
     padding-right:25mm;
     padding-top:25mm;
@@ -51,13 +56,18 @@ background: white;
     font-family: Calibri !important;
     /* top:1px */
 }
+
+
+
 body {
     margin-top: 0px;margin-left: 0px;
+    font-family: Calibri !important;
 }
 
 @Page {
     size:auto;
-  margin-top: -8.2%;
+  /* margin-top: -8.3%; */
+  margin-top: 0;
   margin-bottom: 0mm;
   margin-left: 0mm;
   margin-right: 0mm;
@@ -192,3 +202,59 @@ strong {
 }
 
 
+.headerimg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.footerimg {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+}
+
+.main {
+    margin-top: 0;
+}
+
+@media print{
+    .main {
+        margin-top: -8.3%;
+        color:black;
+    }
+    }
+
+    .foo {
+        counter-reset: foo;
+      }
+      .foo li {
+        list-style-type: none;
+      }
+      .foo li::before {
+        counter-increment: foo;
+        content: "1." counter(foo) " ";
+        margin-right: 20px;
+      }
+
+      .order {
+        list-style-type: none;
+      }
+      .orderspan {
+        margin-right: 20px;
+        font-size: 20px;
+      } 
+
+      .md-form label {
+       
+        font-size: 18px !important;
+        color: black !important;
+      }
+
+
+      .trStyle
+      {
+        border:1px solid black;
+      }

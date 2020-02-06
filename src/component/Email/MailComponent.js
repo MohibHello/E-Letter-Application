@@ -6,24 +6,42 @@ import '../CommonStyle.css'
 import $ from 'jquery'
 import Handlebars from 'handlebars'
 import './mail.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export class MailComponent extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
+
+        // Default mailid for HR
+        let value;
+        console.log(window.location.href)
+        let url = window.location.href
+        if (url.endsWith("hrLetter")) {
+            value = "hr@testyantra.com"
+        }
+        else {
+            value = localStorage.getItem("email")
+        }
+
+        //
+
         this.state = {
-            from: localStorage.getItem("email"),
+            from: value,
             content: '',
             subject: '',
             attachment: null,
             modal: false,
+            checkMail: false,
+            //checkHR:false,
 
             items: [],
             value: "",
             error: null,
 
-            
+
             items2: [],
             value2: "",
             error2: null,
@@ -35,6 +53,33 @@ export class MailComponent extends Component {
             showSubject: false,
             showContent: false,
             showAttach: false
+        }
+    }
+
+    notifySuccess = () => {
+        toast.success("Email sent successfully", {
+          position: toast.POSITION.TOP_CENTER
+        });
+    }
+
+    notifyFailure = () => {
+        toast.error("Exception at server side", {
+            position: toast.POSITION.TOP_CENTER
+          });
+    }
+
+
+
+
+
+    // Default content for HR mail
+    componentDidMount() {
+
+        let valueEmail = this.state.from;
+        if (valueEmail === "hr@testyantra.com") {
+            this.setState({
+                checkMail: true
+            })
         }
     }
 
@@ -172,11 +217,11 @@ export class MailComponent extends Component {
                 });
             }
         }
- 
+
     };
 
     handleChange2 = evt => {
-        
+
         this.setState({
             value2: evt.target.value,
             error2: null
@@ -253,12 +298,17 @@ export class MailComponent extends Component {
     toggle = () => {
         this.setState({
             modal: !this.state.modal,
-            showTos: false,
-            showFrom: false,
-            showSubject: false,
-            showContent: false,
-            showAttach: false
+              showTos:'',
+             showFrom: '',
+             showSubject: '',
+             showContent:'',
+             showAttach: '',
+             item:'',
+             item2:'',
+             content:'' 
+
         });
+
     }
     onChangeHandler = (event) => {
         this.setState({
@@ -282,7 +332,7 @@ export class MailComponent extends Component {
         let tosArray = this.state.items
         let ccsArray = this.state.items2
 
-        console.log("tos",tosArray, "    ","cc", ccsArray)
+        console.log("tos", tosArray, "    ", "cc", ccsArray)
 
 
         if (!attachment) {
@@ -320,15 +370,16 @@ export class MailComponent extends Component {
 
 
 
-
-
-
-
     sendEmail = (e) => {
         e.preventDefault()
         console.log(this.state.items);
         console.log(this.state.items2);
-        console.log(this.state.items2.push(localStorage.getItem('email')))
+
+
+        if (!this.state.items2.includes(localStorage.getItem('email'))) {
+            this.state.items2.push(localStorage.getItem('email'))
+        }
+        //console.log()
         console.log(this.state.items2)
         if (this.validate() == true) {
             debugger;
@@ -344,7 +395,7 @@ export class MailComponent extends Component {
             console.log("state", this.state)
             console.log("file", this.state.attachment)
 
-            
+
 
             const headers = {
                 'Content-Type': 'application/json',
@@ -357,7 +408,7 @@ export class MailComponent extends Component {
 
             console.log("header info --", headers)
             Axios.post(
-                'http://10.10.14.31:8081/send-email2', data,
+                'http://localhost:8081/send-email2', data,
 
                 { headers: headers }
             )
@@ -366,15 +417,15 @@ export class MailComponent extends Component {
                     console.log(" details" + this.state.email)
                     console.log(response.data.content)
                     if (response.data.statusCode === 201) {
-                        alert("suceess")
+                        this.notifySuccess();
                         this.setState({ items: [], items2: [] })
-                        this.setState({value:""})
+                        this.setState({ value: "" })
                         this.toggle()
                     } else if (response.data.statusCode === 401) {
                     }
                 }).catch((error) => {
                     console.log(error);
-                    alert("Exception at server side")
+                    this.notifyFailure()
                 })
         }
     }
@@ -419,6 +470,9 @@ export class MailComponent extends Component {
 
 
 
+    
+
+
 
 
 
@@ -430,12 +484,12 @@ export class MailComponent extends Component {
     render() {
         return (
             <div >
+                <ToastContainer autoClose={4000} pauseOnHover={false} pauseOnFocusLoss={false}/>
                 <MDBContainer>
                     <MDBBtn onClick={this.toggle}>Send Mail</MDBBtn>
                     <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
                         <MDBModalHeader toggle={this.toggle}>Send Mail</MDBModalHeader>
                         <MDBModalBody>
-
 
                             <form class="form-horizontal" onSubmit={(event) => { this.sendEmail(event) }} role="form">
                                 <div class="form-group">
@@ -444,11 +498,11 @@ export class MailComponent extends Component {
                                         <div className="col-2">
                                             <label class="col-md-3" class="control-label">From:</label>
                                         </div >
-                                        <div className="col-10">
+                                        <div className="col-10 mb-3">
                                             <input value={this.state.from} id="from" type="email" class="input" placeholder="From" onChange={(event) => {
                                                 this.setState({
                                                     from: event.target.value
-                                                }); this.hideFrom() 
+                                                }); this.hideFrom()
                                             }} disabled />
                                         </div>
                                     </div>
@@ -458,7 +512,7 @@ export class MailComponent extends Component {
                                         <div className="col-2">
                                             <label class="col-md-3" class="control-label">To:</label>
                                         </div >
-                                        <div className="col-10">
+                                        <div className="col-10  mb-3">
                                             <input id="to" type="email"
                                                 className={"input " + (this.state.error && " has-error")}
                                                 value={this.state.value}
@@ -489,30 +543,30 @@ export class MailComponent extends Component {
 
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="row form-group">
-                                    <div className="col-2">
-                                        <label class="col-md-3" class="control-label">Cc:</label>
-                                    </div >
-                                    <div className="col-10">
 
-                                        <input id="cc" type="email"
-                                            className={"input " + (this.state.error2 && " has-error")}
+                                    <div className="row form-group">
+                                        <div className="col-2">
+                                            <label class="col-md-3" class="control-label">Cc:</label>
+                                        </div >
+                                        <div className="col-10 mb-3">
 
-                                            placeholder="Type or paste email addresses and press `Enter`..."
-                                            onKeyDown={this.handleKeyDown2}
-                                            onChange={(event) => {
-                                                this.handleChange2(event); this.hideCcs()
-                                            }}
-                                            onPaste={this.handlePaste2}
-                                            onBlur={this.handleBlur2}
-                                            autoComplete="off"
-                                        />
-                                        {/* {this.state.showCCs ? <div id="errordiv"  style={{marginTop:'3px',paddingLeft:'0px' ,marginBottom:'-12px' }} className="container-fluid">Please fill out CC field * </div> : null} */}
-                                        {this.state.error2 && <p className="error">{this.state.error2}</p>}
+                                            <input id="cc" type="email"
+                                                className={"input " + (this.state.error2 && " has-error")}
 
-                                        {this.state.items2.map(item => (
+                                                placeholder="Type or paste email addresses and press `Enter`..."
+                                                onKeyDown={this.handleKeyDown2}
+                                                onChange={(event) => {
+                                                    this.handleChange2(event); this.hideCcs()
+                                                }}
+                                                onPaste={this.handlePaste2}
+                                                onBlur={this.handleBlur2}
+                                                autoComplete="off"
+                                            />
+                                            {/* {this.state.showCCs ? <div id="errordiv"  style={{marginTop:'3px',paddingLeft:'0px' ,marginBottom:'-12px' }} className="container-fluid">Please fill out CC field * </div> : null} */}
+                                            {this.state.error2 && <p className="error">{this.state.error2}</p>}
+
+                                            {this.state.items2.map(item => (
                                                 <div className="tag-item" key={item}>
                                                     {item}
                                                     <button
@@ -524,85 +578,74 @@ export class MailComponent extends Component {
             </button>
                                                 </div>
                                             ))}
-
-
-
-                                        {/* {this.state.items2.map((item, index) => {
-
-                                            if (index === 0) {
-                                              }  else {
-                                                return <div className="tag-item" key={item}>
-                                                    {item}
-                                                    <button
-                                                        type="button"
-                                                        className="button"
-                                                        onClick={() => this.handleDelete2(item)}
-                                                    >
-                                                        &times;
-                                                     </button>
-                                                </div>
-                                            }
-                                        })
-                                    } */}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="row form-group">
-                                    <div class="col-2" > <label class="control-label">Subject:</label></div>
+                                    <div class="row form-group">
+                                        <div class="col-2" > <label class="control-label">Subject:</label></div>
 
-                                    <div class="col-10">
-                                        <input id="subject" class=" form-control" class="input" type="text" placeholder="Subject" onChange={(event) => {
-                                            this.setState({
-                                                subject: event.target.value
-                                            }); this.hideSubject()
-                                        }} />
+                                        <div class="col-10 mb-3">
+                                            <input id="subject" class=" form-control" class="input" type="text" placeholder="Subject" onChange={(event) => {
+                                                this.setState({
+                                                    subject: event.target.value
+                                                }); this.hideSubject()
+                                            }} />
+                                        </div>
                                     </div>
-                                </div>
-                                {this.state.showSubject ? <div id="errordiv" style={{ marginTop: '-10px', paddingLeft: '85px' }} className="container-fluid">Please fill out Subject field * </div> : null}
-                                <div class="form-group">
-                                    <div className="row form-group">
-                                        <div className="col-2">
-                                            <label htmlFor="exampleFormControlTextarea1" >
-                                                Content:
+                                    {this.state.showSubject ? <div id="errordiv" style={{ marginTop: '-10px', paddingLeft: '91px' }} className="container-fluid">Please fill out Subject field * </div> : null}
+                                  
+                                        <div className="row ">
+                                            <div className="col-2">
+                                                <label htmlFor="exampleFormControlTextarea1" >
+                                                    Content:
                                                   </label>
-                                        </div>
-                                        <div className="col-10">
-                                            <textarea id="content" placeholder="Content"
-                                                class="input" style={{ height: 100 }}
+                                            </div>
+                                            <div className="col-10">
+                                                <textarea id="content" placeholder="Content"
+                                                    class="input" style={{ height: 100 }}
+                                                    value={this.state.content}
+                                                    rows="5" onChange={(event) => {
+                                                        if (this.state.checkMail) {
+                                                            this.setState({
+                                                                content: "HR Default content"
+                                                            });
+                                                        } else {
+                                                            this.setState({
+                                                                content: event.target.value
+                                                            });
+                                                        } /* this.hideContent() */
+                                                    }
+                                                    }
 
-                                                rows="5" onChange={(event) => {
-                                                    this.setState({
-                                                        content: event.target.value
-                                                    }); this.hideContent()
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {this.state.showContent ? <div id="errordiv" style={{ marginTop: '-15px', paddingLeft: '85px' }} className="container-fluid">Please fill out Content field * </div> : null}
-                                <div class="row pl-2 mb-3">
-                                    <label class="col-3" class="control-label">Attachment:</label>
-                                    <div class="col-9">
-                                        <div class="input-group" style={{ width: '383px', marginLeft: '-9px' }}>
-                                            <div class="custom-file">
-                                                <input name="input2[]" type="file" class="custom-file-input" multiple data-show-upload="true" data-show-caption="true" id="myInput" aria-describedby="myInput" onBlur={this.fileName}
-
-                                                    onChange={(event) => {
-                                                        this.onChangeHandler(event); this.hideAttachment()
-                                                    }}
                                                 />
-                                                <label class="custom-file-label text-left" for="myInput">Choose file</label>
+                                    {this.state.showContent ? <div id="errordiv" style={{ marginTop: '-5px', paddingLeft: '0px' }} className="container-fluid">Please fill out Content field * </div> : null}
+                                            </div>
+                                        </div>
+                                   
+
+                                    <div class="row pl-2 mb-3">
+                                        <label class="col-3" class="control-label">Attachment:</label>
+                                        <div class="col-9">
+                                            <div class="input-group" style={{ width: '112%', marginLeft: '-9px' }}>
+                                                <div class="custom-file">
+                                                    <input name="input2[]" type="file" class="custom-file-input" multiple data-show-upload="true" data-show-caption="true" id="myInput" aria-describedby="myInput" onBlur={this.fileName}
+
+                                                        onChange={(event) => {
+                                                            this.onChangeHandler(event); this.hideAttachment()
+                                                        }}
+                                                    />
+                                                    <label class="custom-file-label text-left" for="myInput">Choose file</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                {this.state.showAttach ? <div id="errordiv" style={{ marginTop: '-12px', paddingLeft: '85px' }} className="container-fluid">Please add attachment * </div> : null}
-                                <MDBModalFooter>
-                                    <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
+                                    {this.state.showAttach ? <div id="errordiv" style={{ marginTop: '-12px', paddingLeft: '90px' }} className="container-fluid">Please add attachment * </div> : null}
+                                    <MDBModalFooter>
+                                        <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
 
-                                    <MDBBtn type="submit" color="primary">Send</MDBBtn>
-                                </MDBModalFooter>
+                                        <MDBBtn type="submit" color="primary">Send</MDBBtn>
+                                    </MDBModalFooter>
+                                </div>
                             </form>
 
                         </MDBModalBody>

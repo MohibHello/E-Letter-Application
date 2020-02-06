@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-
 import { Button} from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import printer from './Assests/print.jpeg'
@@ -18,6 +17,8 @@ function Example(props) {
     const printPreview = () => {
 
         setShow(false);
+
+        
 
         setTimeout(() => {
             window.print();
@@ -49,7 +50,7 @@ function Example(props) {
         <div>
                         <div className="form-check form-check-inline col-md-1 ">
                             <input className="form-check-input" type="checkbox" checked={!value} id="inlineCheckbox1" onClick={CheckValue} />
-                            <label style={{whiteSpace: 'nowrap',fontWeight:'500'}} className="form-check-label" >Watermark Required</label>
+                            <label style={{whiteSpace: 'nowrap',fontWeight:'500'}} className="form-check-label" >LetterHead Required</label>
                         </div>
 
                     </div>

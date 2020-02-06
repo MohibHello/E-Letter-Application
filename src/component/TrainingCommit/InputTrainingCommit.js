@@ -23,57 +23,77 @@ export class InputTrainingCommitLetter extends Component {
             branchName: '',
             branchLocation: '',
             date: '',
-            withWaterMark:false,
-            withHeader:false,
+            withWaterMark: false,
+            withHeader: false,
             gender: {
                 gender1: 'He',
                 gender2: 'his',
                 gender3: 'him'
             },
 
-              // validation variable
-              showEmployeeName: '',
-              showCompanyLocation: '',
-              showdDesignation: '',
-              showJoiningDate: '',
-              showCourseName: '',
-              showTrainingStartDate: '',
-              showTrainingEndDate: '',
-              showBranchName: '',
-              showBranchLocation: '',
-              showInvalidDate:''
-  
+            // validation variable
+            showEmployeeName: '',
+            showCompanyLocation: '',
+            showdDesignation: '',
+            showJoiningDate: '',
+            showCourseName: '',
+            showTrainingStartDate: '',
+            showTrainingEndDate: '',
+            showBranchName: '',
+            showBranchLocation: '',
+            showInvalidDate: ''
+
 
         }
     }
 
-    
+
 
 
     componentDidMount() {
+        let editClick = localStorage.getItem("editClick");
+        if (editClick) {
+            this.setState({
+
+
+
+                employeeName: this.props.empData.employeeName,
+                employeeId: this.props.empData.employeeId,
+                designation: this.props.empData.designation,
+                joiningDate: this.props.empData.joiningDate,
+                courseName: this.props.empData.courseName,
+                companyLocation: this.props.empData.companyLocation,
+                trainingStartDate: this.props.empData.trainingStartDate,
+                trainingEndDate: this.props.empData.trainingEndDate,
+                branchName: this.props.empData.branchName,
+                branchLocation: this.props.empData.branchLocation,
+            })
+
+        }
+
         var that = this;
-        $(document).ready( ()=> {
-            $('#generate').click( (e) =>{
-                debugger
+        $(document).ready(() => {
+            $('#generate').click((e) => {
+
                 const monthNames = ["January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-              ];
-        
-        
-              const nth = (d)=> {
-                if (d > 3 && d < 21) return 'th';
-                switch (d % 10) {
-                  case 1:  return "st";
-                  case 2:  return "nd";
-                  case 3:  return "rd";
-                  default: return "th";
+                    "July", "August", "September", "October", "November", "December"
+                ];
+
+
+                const nth = (d) => {
+                    if (d > 3 && d < 21) return 'th';
+                    switch (d % 10) {
+                        case 1: return "st";
+                        case 2: return "nd";
+                        case 3: return "rd";
+                        default: return "th";
+                    }
                 }
-              }
-        
+
                 let today = new Date();
-                let currentdate = today.getDate()+nth(today.getDate()) + ' '  + monthNames[today.getMonth()] + ' ' + today.getFullYear();
+                let currentdate = today.getDate() + nth(today.getDate()) + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
                 this.setState({
-                    date:  currentdate
+                    date: currentdate
                 })
 
                 if (that.state.salute === "Ms." || that.state.salute === "Mrs.") {
@@ -88,7 +108,6 @@ export class InputTrainingCommitLetter extends Component {
                 }
 
 
-                console.log("dattetaetaetaet ",this.state)
 
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let designation = (document.getElementById("designation").value).trim();
@@ -96,13 +115,13 @@ export class InputTrainingCommitLetter extends Component {
                 let companyLocation = (document.getElementById("companyLocation").value).trim();
                 let courseName = (document.getElementById("courseName").value).trim();
                 let branchName = (document.getElementById("branchName").value).trim();
-                let branchLocation=(document.getElementById("branchLocation").value).trim();
-                let trainingStartDate= (document.getElementById("trainingStartDate").value).trim();
-                let trainingEndDate= (document.getElementById("trainingEndDate").value).trim();
-                let trainingStartDateSelected =new Date(trainingStartDate)
+                let branchLocation = (document.getElementById("branchLocation").value).trim();
+                let trainingStartDate = (document.getElementById("trainingStartDate").value).trim();
+                let trainingEndDate = (document.getElementById("trainingEndDate").value).trim();
+                let trainingStartDateSelected = new Date(trainingStartDate)
                 let trainingEndDateSelected = new Date(trainingEndDate)
 
-               
+
                 if (designation === "") {
                     this.setState({ showDesignation: true })
                 }
@@ -132,18 +151,17 @@ export class InputTrainingCommitLetter extends Component {
                     this.setState({ showTrainingEndDate: true })
                 }
 
-                if(trainingEndDateSelected<trainingStartDateSelected){
+                if (trainingEndDateSelected < trainingStartDateSelected) {
                     that.setState({
-                        showInvalidDate:"true"
+                        showInvalidDate: "true"
                     })
 
-                   return false;
-              }    
-               
-              
+                    return false;
+                }
 
-                if (designation != "" && employeeName != "" &&  joiningDate!="" && branchName!='' && branchLocation!="" && courseName!="" && trainingStartDate!="" && trainingEndDate!="" ) {
-                    console.log("True return")
+
+
+                if (designation != "" && employeeName != "" && joiningDate != "" && branchName != '' && branchLocation != "" && courseName != "" && trainingStartDate != "" && trainingEndDate != "") {
                     return true;
                 }
                 else {
@@ -158,50 +176,44 @@ export class InputTrainingCommitLetter extends Component {
     }
 
 
-    onCheckHandler=(event)=>{
-        debugger;
+    onCheckHandler = (event) => {
+        ;
 
-         console.log("Checkbox value ==",event.target.value)
-       if(event.target.value=='false'){
-           this.setState({
-               withWaterMark:true
-           })
-           console.log("if  ==",this.state.withWaterMark)
-       }
-       else{
-           debugger;
-           this.setState({
-               withWaterMark: false
-           })
-           console.log("else  ==",this.state.withWaterMark)
+        if (event.target.value == 'false') {
+            this.setState({
+                withWaterMark: true
+            })
+        }
+        else {
+            ;
+            this.setState({
+                withWaterMark: false
+            })
 
-       }
+        }
     }
 
-    onChangeHeader=(event)=>{
+    onChangeHeader = (event) => {
 
-        debugger;
+        ;
 
-        console.log("Checkbox value ==",event.target.value)
-      if(event.target.value=='false'){
-          this.setState({
-              withHeader:true
-          })
-          console.log("if  ==",this.state.withHeader)
-      }
-      else{
-          debugger;
-          this.setState({
-              withHeader: false
-          })
-          console.log("else  ==",this.state.withHeader)
+        if (event.target.value == 'false') {
+            this.setState({
+                withHeader: true
+            })
+        }
+        else {
+            ;
+            this.setState({
+                withHeader: false
+            })
 
-      }
+        }
 
 
-     }
+    }
 
-hideCompanyLocation = () => {
+    hideCompanyLocation = () => {
         this.setState({
             showCompanyLocation: false
         })
@@ -232,7 +244,7 @@ hideCompanyLocation = () => {
             showCourseName: false
         })
     }
-   
+
     hideBranchName = () => {
         this.setState({
             showBranchName: false
@@ -249,26 +261,30 @@ hideCompanyLocation = () => {
             showTrainingEndDate: false
         })
     }
-  
+
     hideInvalidDate = () => {
         this.setState({
             showInvalidDate: false
         })
     }
 
- 
+
 
 
     pass = (event) => {
         event.preventDefault();
-        console.log("data========", this.state)
 
         this.props.clicked(this.state)
         this.props.history.push('/TrainingCommit')
 
     }
 
+    //edit
+
+    //
+
     render() {
+
         return (
             <div>
                 <Home buttonShow={false} />
@@ -283,8 +299,8 @@ hideCompanyLocation = () => {
                                     <div className="card-body ">
                                         <form onSubmit={this.pass}>
                                             <div class="row">
-                                            <div className="col-2" style={{ paddingTop: '25px' }}>
-                                                    <select class="browser-default custom-select" style={{width:'62px'}} autocomplete="off"  name="salutation" title="salutation" id="salutation" onChange={(event) => {
+                                                <div className="col-2" style={{ paddingTop: '25px' }}>
+                                                    <select class="browser-default custom-select" value={this.state.salute} style={{ width: '62px' }} autocomplete="off" name="salutation" title="salutation" id="salutation" onChange={(event) => {
                                                         this.setState({
                                                             salute: event.target.value
                                                         })
@@ -294,43 +310,46 @@ hideCompanyLocation = () => {
                                                         <option value="Mrs.">Mrs.</option>
                                                     </select>
                                                 </div>
+
                                                 <div class="col-md-5">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.employeeName} onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
                                                         this.setState({
                                                             employeeName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
-                                                <div class="col-md-5">
-                                                    <MDBInput autocomplete="off" onClick={this.hideJoiningDate} onKeyPress={this.hideJoiningDate} type="date" label="Joining Date" title="Joining Date" name="JoiningDate" id="joiningDate" onChange={(event) => {
-                                                        this.setState({
-                                                            joiningDate: event.target.value
-                                                        });this.hideJoiningDate()
-                                                    }} />
-                                                </div>
-                                            </div>
-
-                                            <div className="row" style={{padding:0}}>
-                                                <div className="col-2"></div>
-                                               <div className="col-5 p-0" >
-                                               {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
-                                           
-                                           
-                                               </div>
-                                               <div className="col-5 p-0" style={{width:0}}>
-                                               {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out Joining Date field * </div> : null}
-                                               </div>
-                                           </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="designation" onChange={(event) => {
+                                                <div class="col-5">
+                                                    <MDBInput autocomplete="off" value={this.state.designation} onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="designation" onChange={(event) => {
                                                         this.setState({
                                                             designation: event.target.value
                                                         })
                                                     }} />
                                                 </div>
+
+                                            </div>
+
+                                            <div className="row" style={{ padding: 0 }}>
+                                                <div className="col-2"></div>
+                                                <div className="col-5 p-0" >
+                                                    {this.state.showEmployeeName ? <div id="errordiv" className="container-fluid">Please fill out Name field * </div> : null}
+
+
+                                                </div>
+                                                <div className="col-5 p-0" >
+                                                    {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Designation field * </div> : null}
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <MDBInput autocomplete="off" value={this.state.joiningDate} onClick={this.hideJoiningDate} onKeyPress={this.hideJoiningDate} type="date" label="Joining Date" title="Joining Date" name="JoiningDate" id="joiningDate" onChange={(event) => {
+                                                        this.setState({
+                                                            joiningDate: event.target.value
+                                                        }); this.hideJoiningDate()
+                                                    }} />
+                                                </div>
                                                 <div className="col-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCompanyLocation} label="Company Location" className="w-100" name="companyLocation" title="Company Location" id="companyLocation" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.companyLocation} onKeyPress={this.hideCompanyLocation} label="Company Location" className="w-100" name="companyLocation" title="Company Location" id="companyLocation" onChange={(event) => {
                                                         this.setState({
                                                             companyLocation: event.target.value
                                                         })
@@ -338,100 +357,81 @@ hideCompanyLocation = () => {
                                                 </div>
                                             </div>
                                             <div className="row" style={{ padding: 0 }}>
-                                                <div className="col-6 p-0" >
-                                                    {this.state.showDesignation ? <div id="errordiv" className="container-fluid">Please fill out Designation field * </div> : null}
+                                                <div className="col-6 p-0" style={{ width: 0 }}>
+                                                    {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out Joining Date field * </div> : null}
                                                 </div>
                                                 <div className="col-6 p-0" style={{ width: 0 }}>
-                                                {this.state.showCompanyLocation ? <div id="errordiv" className="container-fluid">Please fill out Company Location field * </div> : null}
+                                                    {this.state.showCompanyLocation ? <div id="errordiv" className="container-fluid">Please fill out Company Location field * </div> : null}
                                                 </div>
                                             </div>
 
 
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onClick={this.hideTrainingStartDate} onKeyPress={this.hideTrainingStartDate} type="date" label="Traininng Start Date" title="Training Start Date" name="trainingStartDate" id="trainingStartDate" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.trainingStartDate} onClick={this.hideTrainingStartDate} onKeyPress={this.hideTrainingStartDate} type="date" label="Traininng Start Date" title="Training Start Date" name="trainingStartDate" id="trainingStartDate" onChange={(event) => {
                                                         this.setState({
                                                             trainingStartDate: event.target.value
-                                                        });this.hideTrainingStartDate();
+                                                        }); this.hideTrainingStartDate();
                                                     }} />
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onClick={()=>{this.hideTrainingEndDate();this.hideInvalidDate()}} onKeyPress={()=>{this.hideTrainingEndDate();this.hideInvalidDate()}} type="date" label="Training End Date" title="Training End Date" name="trainingStartDate" id="trainingEndDate" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.trainingEndDate} onClick={() => { this.hideTrainingEndDate(); this.hideInvalidDate() }} onKeyPress={() => { this.hideTrainingEndDate(); this.hideInvalidDate() }} type="date" label="Training End Date" title="Training End Date" name="trainingStartDate" id="trainingEndDate" onChange={(event) => {
                                                         this.setState({
                                                             trainingEndDate: event.target.value
-                                                        });this.hideTrainingEndDate();this.hideInvalidDate()
+                                                        }); this.hideTrainingEndDate(); this.hideInvalidDate()
                                                     }} />
                                                 </div>
                                             </div>
 
-                                            <div className="row" style={{padding:0}}>
-                                               <div className="col-6 p-0" >
-                                               {this.state.showTrainingStartDate ? <div id="errordiv" className="container-fluid">Please fill out Training Start Date field * </div> : null}
-                                               </div>
-                                               <div className="col-6 p-0" style={{width:0}}>
-                                               {this.state.showTrainingEndDate ? <div id="errordiv" className="container-fluid">Please fill out Training End Date field * </div> : null}
-                                               {this.state.showInvalidDate ? <div id="errordiv" className="container-fluid"> Training End Date greater than Start Date * </div> : null}
-                                               </div>
-                                           </div>
+                                            <div className="row" style={{ padding: 0 }}>
+                                                <div className="col-6 p-0" >
+                                                    {this.state.showTrainingStartDate ? <div id="errordiv" className="container-fluid">Please fill out Training Start Date field * </div> : null}
+                                                </div>
+                                                <div className="col-6 p-0" style={{ width: 0 }}>
+                                                    {this.state.showTrainingEndDate ? <div id="errordiv" className="container-fluid">Please fill out Training End Date field * </div> : null}
+                                                    {this.state.showInvalidDate ? <div id="errordiv" className="container-fluid"> Training End Date greater than Start Date * </div> : null}
+                                                </div>
+                                            </div>
                                             <div class="row">
-                                            <div class="col-md-4">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideCourseName} label="Course Name" name="courseName" id="courseName" title="Course Name" onChange={(event) => {
+                                                <div class="col-md-4">
+                                                    <MDBInput autocomplete="off" value={this.state.courseName} onKeyPress={this.hideCourseName} label="Course Name" name="courseName" id="courseName" title="Course Name" onChange={(event) => {
                                                         this.setState({
                                                             courseName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideBranchName} label="Branch Name" name="branchName" id="branchName" title="Branch Name" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.branchName} onKeyPress={this.hideBranchName} label="Branch Name" name="branchName" id="branchName" title="Branch Name" onChange={(event) => {
                                                         this.setState({
                                                             branchName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideBranchLocation} type="text" label="Branch Location" title="Branch Location" name="branchLocation" id="branchLocation" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.branchLocation} onKeyPress={this.hideBranchLocation} type="text" label="Branch Location" title="Branch Location" name="branchLocation" id="branchLocation" onChange={(event) => {
                                                         this.setState({
                                                             branchLocation: event.target.value
                                                         })
                                                     }} />
                                                 </div>
                                             </div>
-                                            <div className="row" style={{padding:0}}>
-                                            <div className="col-4 p-0" style={{width:0}}>
-                                               {this.state.showCourseName ? <div id="errordiv" className="container-fluid">Enter Course Name * </div> : null}
-                                               </div>
+                                            <div className="row" style={{ padding: 0 }}>
+                                                <div className="col-4 p-0" style={{ width: 0 }}>
+                                                    {this.state.showCourseName ? <div id="errordiv" className="container-fluid">Enter Course Name * </div> : null}
+                                                </div>
 
 
-                                               <div className="col-4 p-0" >
-                                               {this.state.showBranchName ? <div id="errordiv" className="container-fluid">Enter Branch Name * </div> : null}
-                                           
-                                           
-                                               </div>
-                                               <div className="col-4 p-0" style={{width:0}}>
-                                               {this.state.showBranchLocation? <div id="errordiv" className="container-fluid">Enter Branch Location * </div> : null}
-                                               </div>
-                                           </div>
+                                                <div className="col-4 p-0" >
+                                                    {this.state.showBranchName ? <div id="errordiv" className="container-fluid">Enter Branch Name * </div> : null}
 
-                                           <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                        this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
 
                                                 </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" className="custom-control-input" value={this.state.withWaterMark} id="withWatermark"  onChange={(event) => {
-                                                       this.onCheckHandler(event);
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
+                                                <div className="col-4 p-0" style={{ width: 0 }}>
+                                                    {this.state.showBranchLocation ? <div id="errordiv" className="container-fluid">Enter Branch Location * </div> : null}
+                                                </div>
                                             </div>
+
+
 
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn outline id="generate" type="submit" className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>

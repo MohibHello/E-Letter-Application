@@ -18,18 +18,34 @@ export class HRLetter extends Component {
     }
   }
 
+
   componentDidMount() {
 
-    this.setState({
-      employee: this.props.empData,
-    })
-    console.log("DDDDDDDDDDDDDDDDDDd", this.props.empData)
+        let emp=this.props.empData
+  
+        if( this.props.empData!==""&& typeof(this.props.empData.salute)==="undefined"  ){
+         emp.salute="Mr."
+        }
+        this.setState({
+          employee: emp,
+        })
+    
+        let showValue = JSON.parse(window.localStorage.getItem('beans'))
+    
+    
+    let that = this;
+    var mediaQueryList = window.matchMedia('print');
 
-    let showValue = JSON.parse(window.localStorage.getItem('beans'))
-
-
-    console.log("data hr form  state ", this.state.employee);
-
+    mediaQueryList.addListener(function (mql) {
+      if (mql.matches) {
+       
+      } else {
+      
+        that.setState({
+          pix: false
+        })
+      }
+    });
 
   }
 
@@ -43,13 +59,34 @@ export class HRLetter extends Component {
     }
   }
 
+
+  print = (data) => {
+   
+    if (this.state.employee.withHeader) {
+      this.setState({
+        pix: true
+      }, () => setTimeout(() => {
+        window.print()
+      }, 550)
+      )
+    } else {
+      window.print()
+    }
+
+  }
+
+  //edit
+  sendData() {
+    this.props.sendData(this.state.employee);
+    this.props.history.push('/hr');
+
+  }
+
   render() {
 
 
     let joiningDate = new Date(this.state.employee.joiningDate);
-
-    console.log("joining DAte render", joiningDate)
-    console.log("WaterMark =", this.props.showWaterMark)
+  
 
     if (this.props.empData == 0) {
       this.props.history.push("/cards")
@@ -58,73 +95,67 @@ export class HRLetter extends Component {
     if (this.props.empData) {
       return (
         <div>
-          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} />}
-          <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
-            <div className="card-body pb-0 mt-5">
+          {<Home buttonShow={true} showWatermark={(data) => this.setState({ waterMark: data })} sendData={() => this.sendData()} setHeader={(data) => this.print()} />}
+          <div className="main">
+            <div className="card" style={{ marginTop: '100px' }} id="AFourPage">
+              <div className="card-body pb-0">
+
+                <div>
+
+                  {this.state.waterMark ? <header className="headerimg" >
+
+                    <img style={{
+                      width: '1172px',
+                      height: '95px'
+                    }} src={TyHeader}></img>
+
+                  </header> : null}
 
 
+                  
+                  <p style={{ float: 'right' }}></p>
+                  <p style={{ textAlign: 'justify' }}>&nbsp;</p>
+                  <p style={{ textAlign: 'justify' }}>&nbsp;</p>
+                  <p style={{ textAlign: 'left', paddingLeft: 30, paddingRight: 30, marginTop: 150 }} align="JUSTIFY"><span ><strong>Date: {toDayDate.getDate()}<sup>{this.nth(toDayDate.getDate())}</sup>&nbsp;{moment(toDayDate).format('MMMM YYYY')}</strong></span></p>
+                  <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
+                  <p style={{ textAlign: 'center' }} align="CENTER"><span ><span style={{ fontSize: 'large' }}><strong>TO WHOMSOEVER IT MAY CONCERN</strong></span></span></p>
+                  <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
+                  <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span ><strong>Sub: Information as per HR Records</strong></span></p>
+                  <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
+                  <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >This is to inform that </span><span ><strong>{this.state.employee.salute} {this.state.employee.employeeName} </strong></span><span >(Employee ID: {this.state.employee.employeeId}) is an employee of Test Yantra Software Solutions (India) Pvt Ltd from </span><span ><strong>{joiningDate.getDate()}<sup>{this.nth(joiningDate.getDate())}</sup>&nbsp;{moment(this.state.employee.joiningDate).format('MMMM YYYY')}</strong></span><span > to till Date. {this.props.empData.gender.gender1} is designated as {this.state.employee.designation}. </span></p>
+                  <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY">&nbsp;</p>
+                  {this.state.waterMark ? <div className="waterMark">
+                    <span style={{
+                      color: '#263248', fontSize: '91px',
+                      fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
+                    }}>TES<span style={{
+                      color: '#F8981C', fontSize: '91px',
+                      fontFamily: 'sans-serif', fontWeight: "600"
+                    }}>TY</span>ANTRA</span>
+                  </div> : null}
+                  <p lang="en-IN" style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
+                  <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >Thanks & Regards,</span></p>
+                  <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >For <strong>Test Yantra Software Solutions (India) Pvt Ltd</strong></span></p>
+                  <br />
+                  <br />
+                  <br />
+                  <p style={{ textAlign: 'justify', paddingLeft: 20, margin: 0 }}><strong>Authorized Signatory</strong></p>
+                  
+                 
+                </div>
 
-              <div>
 
-                {this.state.employee.withHeader ? <header className="header" style={{ marginLeft: '-115px', marginTop: '-100px' }}>
+                {this.state.waterMark ? <div className="footerimg" >
 
-                  <img className="tyHeader" src={TyHeader}></img>
+                  <img style={{
+                    width: '1172px',
+                    height: '95px'
+                  }} src={TyFooter}></img>
 
-                </header> : null}
-
-
-                {console.log("watermark------------------", this.props.waterMark)}
-                <p style={{ float: 'right' }}></p>
-                <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-                <p style={{ textAlign: 'justify' }}>&nbsp;</p>
-                <p style={{ textAlign: 'left', paddingLeft: 30, paddingRight: 30, marginTop: 150 }} align="JUSTIFY"><span ><strong>Date: {toDayDate.getDate()}<sup>{this.nth(toDayDate.getDate())}</sup>&nbsp;{moment(toDayDate).format('MMMM YYYY')}</strong></span></p>
-                <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
-                <p style={{ textAlign: 'center' }} align="CENTER"><span ><span style={{ fontSize: 'large' }}><strong>TO WHOMSOEVER IT MAY CONCERN</strong></span></span></p>
-                <p style={{ textAlign: 'justify' }} align="CENTER">&nbsp;</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span ><strong>Sub: Information as per HR Records</strong></span></p>
-                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to inform that </span><span ><strong>{this.state.employee.salute} {this.state.employee.employeeName} </strong></span><span >(Employee ID: {this.state.employee.employeeId}) is an employee of Test Yantra Software Solutions (India) Pvt Ltd from </span><span ><strong>{joiningDate.getDate()}<sup>{this.nth(joiningDate.getDate())}</sup>&nbsp;{moment(this.state.employee.joiningDate).format('MMMM YYYY')}</strong></span><span > to till Date. {this.props.empData.gender.gender1} is designated as {this.state.employee.designation}. </span></p>
-                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY">&nbsp;</p>
-                {this.state.employee.withWaterMark ? <div className="waterMark">
-                  <span style={{
-                    color: '#263248', fontSize: '91px',
-                    fontFamily: 'sans-serif', position: 'absolute', opacity: '0.3', zIndex: '0'
-                  }}>TES<span style={{
-                    color: '#F8981C', fontSize: '91px',
-                    fontFamily: 'sans-serif', fontWeight: "600"
-                  }}>TY</span>ANTRA</span>
                 </div> : null}
-                <p lang="en-IN" style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }}>&nbsp;</p>
-                <p style={{ textAlign: 'justify', paddingLeft: 30, paddingRight: 30 }} align="JUSTIFY"><span >For Test Yantra Software Solutions (India) Pvt Ltd</span></p>
-                <br />
-                <br />
-                <br />
-                <p style={{ textAlign: 'justify', paddingLeft: 20, margin: 0 }}><strong>Authorized Signatory</strong></p>
-                <p style={{ textAlign: 'justify', paddingLeft: 20, paddingRight: 20, fontWeight: 'bolder' }}><span ><strong  >(Human Resources)</strong></span></p>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br/>
-                <br/>
               </div>
-
-
-              {this.state.employee.withHeader ? <div className="footer" style={{ marginLeft: '-141px', marginTop: '200px' }}>
-
-                <img className="tyfooter" src={TyFooter}></img>
-
-              </div> : null}
             </div>
           </div>
-
 
         </div>
       )

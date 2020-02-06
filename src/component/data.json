@@ -16,7 +16,7 @@
        },
        {
           "name":"hr@testyantra.com",
-          "password":"123"
+          "password":"hr@123"
        },
        {
           "name":"hr_ambika@testyantra.com",
@@ -25,7 +25,11 @@
        {
           "name":"hr_shwetha@testyantra.com",
           "password":"shwetha@123"
-       }
+       },
+       {
+         "name":"vidyasr262@gmail.com",
+         "password":"123"
+      }
 
     ]
  }

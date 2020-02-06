@@ -36,16 +36,30 @@ export class InputHRLetter extends Component {
             validDate:''
         }
     }
+   
     
     componentDidMount() {
+
+        let editClick=localStorage.getItem("editClick");
+            if(editClick)
+            {
+                this.setState({
+               
+                salute: this.props.empData.salute,
+                employeeName: this.props.empData.employeeName,
+                employeeId:this.props.empData.employeeId,
+                designation: this.props.empData.designation,
+                joiningDate: this.props.empData.joiningDate
+            })
+           
+        } 
 
         var that = this;
         $(document).ready( ()=> {
             $('#generate').click( (e) =>{
-                debugger
-                console.log("inside CDM")
-                debugger;
-        
+               
+           
+               
                 const monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
               ];
@@ -68,9 +82,7 @@ export class InputHRLetter extends Component {
                 })
 
                 var d = new Date();
-                 console.log("Date =",d.setMonth(d.getMonth() +7))
-                
-                console.log("dattetaetaetaet ",this.state)
+                 
                 if (this.state.salute === "Ms." || this.state.salute === "Mrs.") {
                     this.setState({
                         ...this.state,
@@ -90,7 +102,7 @@ export class InputHRLetter extends Component {
                  let selectedDate =new Date(joiningDate)
                  let now = new Date()
                  
-                 console.log("Inside Validation", joiningDate, employeeName,designation,employeeId);
+            
  
                 
                  if (joiningDate === "") {
@@ -106,18 +118,11 @@ export class InputHRLetter extends Component {
                      this.setState({ showEmployeeName: true })
                  }
 
-              /*    if(selectedDate<now){
-                    that.setState({
-                       validDate:"true"
-                    }) 
-
-                   return false;
-              }  */
-
+             
                    
                  if ( joiningDate != "" && designation != "" && employeeId != "" && employeeName !== "") {
                     
-                     console.log("True return")
+                  
                      return true;
                  }
                  else {
@@ -161,42 +166,41 @@ export class InputHRLetter extends Component {
     }
 
      onCheckHandler=(event)=>{
-         debugger;
-
-          console.log("Checkbox value ==",event.target.value)
+       
+         
         if(event.target.value=='false'){
             this.setState({
                 withWaterMark:true
             })
-            console.log("if  ==",this.state.withWaterMark)
+          
         }
         else{
-            debugger;
+            
             this.setState({
                 withWaterMark: false
             })
-            console.log("else  ==",this.state.withWaterMark)
+       
 
         }
      }
 
      onChangeHeader=(event)=>{
 
-        debugger;
+     
 
-        console.log("Checkbox value ==",event.target.value)
+      
       if(event.target.value=='false'){
           this.setState({
               withHeader:true
           })
-          console.log("if  ==",this.state.withHeader)
+        
       }
       else{
-          debugger;
+         
           this.setState({
               withHeader: false
           })
-          console.log("else  ==",this.state.withHeader)
+        
 
       }
 
@@ -206,8 +210,7 @@ export class InputHRLetter extends Component {
 
     pass = (event) => {
         event.preventDefault();
-        console.log("data========", this.state)
-         
+      
         
 
         this.props.clicked(this.state)
@@ -215,10 +218,13 @@ export class InputHRLetter extends Component {
 
     }
 
+    
+//
     render() {
+        
         return (
             <div>
-                <Home buttonShow={false} />
+                <Home buttonShow={false}  />
                 <div >
                     <div className="container-fluid mt-5">
                         <div className="row">
@@ -233,18 +239,20 @@ export class InputHRLetter extends Component {
                                             <div className="row">
 
                                             <div className="col-md-3" style={{ paddingTop: '25px' }}>
-                                                    <select class="browser-default custom-select" autocomplete="off"  name="salutation" title="salutation" id="salutation" onChange={(event) => {
+                                                    <select class="browser-default custom-select" autocomplete="off"   value={this.state.salute} name="salute" title="salutation" id="salutation" required onChange={(event) => {
                                                         this.setState({
                                                             salute: event.target.value
                                                         })
                                                     }}>
-                                                        <option selected value="Mr.">Mr.</option>
+                                                        <option value="Mr.">Mr.</option>
                                                         <option value="Ms.">Ms.</option>
                                                         <option value="Mrs.">Mrs.</option>
                                                     </select>
+                                                    
                                                 </div>
                                                 <div className="col-9">
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeName}  label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
+                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeName} 
+                                                    value={this.state.employeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
                                                         this.setState({
                                                             employeeName: event.target.value
                                                         })
@@ -262,14 +270,15 @@ export class InputHRLetter extends Component {
 
                                             <div className="row">
                                                 <div className="col-6">
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeId}  label="Employee Id" name="employeeId" id="employeeId" title="Employee Id" onChange={(event) => {
+                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeId}  value={this.state.employeeId} label="Employee Id" name="employeeId" id="employeeId" title="Employee Id" onChange={(event) => {
                                                         this.setState({
                                                             employeeId: event.target.value
                                                         })
                                                     }} />
                                                 </div>
                                                 <div className="col-6">
-                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideDesignation}  label="Designation" name="designation" id="designation" title="Designation" onChange={(event) => {
+                                                    <MDBInput autocomplete="off"  onKeyPress={this.hideDesignation} 
+                                                    value={this.state.designation} label="Designation" name="designation" id="designation" title="Designation" onChange={(event) => {
                                                         this.setState({
                                                             designation: event.target.value
                                                         })
@@ -288,7 +297,7 @@ export class InputHRLetter extends Component {
 
                                             <div className="row">
                                                 <div className="col-12">
-                                                    <MDBInput autocomplete="off"  type="date" onKeyPress={()=>{this.hideJoiningDate();this.hideInvaliddate()}}  onClick={()=>{this.hideJoiningDate();this.hideInvaliddate()}} label="Joining Date" title="Joining Date" name="Joining Date" id="joiningDate" onChange={(event) => {
+                                                    <MDBInput autocomplete="off"  type="date" value={this.state.joiningDate} onKeyPress={()=>{this.hideJoiningDate();this.hideInvaliddate()}}  onClick={()=>{this.hideJoiningDate();this.hideInvaliddate()}} label="Joining Date" title="Joining Date" name="Joining Date" id="joiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
                                                         });this.hideJoiningDate();this.hideInvaliddate();
@@ -305,28 +314,7 @@ export class InputHRLetter extends Component {
                                             </div>
 
 
-                                            <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                       this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
-
-                                                </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" className="custom-control-input" id="withWatermark" value={this.state.withWaterMark} onChange={(event) => {
-
-                                                              this.onCheckHandler(event)
-                                                       
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
-                                            </div>
+                                         
                                     
                                             <div className=" input-group w-50 container-fluid">
                                                 <MDBBtn outline type="submit" id="generate" outline className=" form-control-plaintext  justify-content-center text-center" color="primary">Generate</MDBBtn>

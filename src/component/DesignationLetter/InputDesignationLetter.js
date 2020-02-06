@@ -13,13 +13,14 @@ export class InputDesignationLetter extends Component {
             employeeId:'',
             newDesignation: '',
             date: '',
+            effdate:'',
             withWaterMark:false,
             withHeader:false,
             // validation variable
             showEmployeeName: '',
             showEmployeeId:'',
             showNewDesignation: '',
-
+            showEffdate:''
 
 
         }
@@ -28,19 +29,19 @@ export class InputDesignationLetter extends Component {
     onCheckHandler=(event)=>{
         debugger;
 
-         console.log("Checkbox value ==",event.target.value)
+      
        if(event.target.value=='false'){
            this.setState({
                withWaterMark:true
            })
-           console.log("if  ==",this.state.withWaterMark)
+       
        }
        else{
            debugger;
            this.setState({
                withWaterMark: false
            })
-           console.log("else  ==",this.state.withWaterMark)
+      
 
        }
     }
@@ -48,27 +49,30 @@ export class InputDesignationLetter extends Component {
 
     onChangeHeader=(event)=>{
 
-        debugger;
+      
 
-        console.log("Checkbox value ==",event.target.value)
       if(event.target.value=='false'){
           this.setState({
               withHeader:true
           })
-          console.log("if  ==",this.state.withHeader)
+      
       }
       else{
-          debugger;
+          
           this.setState({
               withHeader: false
           })
-          console.log("else  ==",this.state.withHeader)
+        
 
       }
 
 
      }
-
+     hideEffdate = () => {
+        this.setState({
+            showEffdate: false
+        })
+    }
 
 
     hideEmployeeName = () => {
@@ -88,6 +92,19 @@ export class InputDesignationLetter extends Component {
     }
 
     componentDidMount() {
+
+
+        let editClick=localStorage.getItem("editClick");
+            if(editClick)
+            {
+                this.setState({
+                    employeeName: this.props.empData.employeeName,
+                    employeeId:this.props.empData.employeeId,
+                    newDesignation: this.props.empData.newDesignation,
+                    effdate:this.props.empData.effdate
+            })
+           
+        }
 
         const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -116,7 +133,12 @@ export class InputDesignationLetter extends Component {
                 let employeeName = (document.getElementById("employeeName").value).trim();
                 let employeeId = (document.getElementById("employeeId").value).trim();
                 let newDesignation = (document.getElementById("newDesignation").value).trim();
-               
+                let effdate=(document.getElementById("effDate").value)
+
+                if(effdate === ""){
+                    that.setState({ showEffdate: true })
+                }
+
                 if (newDesignation === "") {
                     that.setState({ showNewDesignation: true })
                 }
@@ -127,8 +149,7 @@ export class InputDesignationLetter extends Component {
                     that.setState({ showEmployeeName: true })
                 }
 
-                if (newDesignation != "" && employeeId != "" && employeeName != "") {
-                    console.log("True return")
+                if (newDesignation != "" && employeeId != "" && employeeName != "" && effdate != "") {
                     return true;
 
                 }
@@ -143,14 +164,16 @@ export class InputDesignationLetter extends Component {
     }
     pass = (event) => {
         event.preventDefault();
-        console.log("data========", this.state)
-
          this.props.clicked(this.state)
         this.props.history.push('/DesignationLetter')
 
     }
 
+    //edit
+
+// 
     render() {
+       
         return (
             <div>
                 <Home buttonShow={false}/>
@@ -166,14 +189,14 @@ export class InputDesignationLetter extends Component {
                                         <form onSubmit={this.pass}>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName}   label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.employeeName} onKeyPress={this.hideEmployeeName}   label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
                                                         this.setState({
                                                             employeeName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
                                                 <div class="col-md-6">
-                                                <MDBInput autocomplete="off"  onKeyPress={this.hideEmployeeId}  label="Employee Id" className="w-100" name="employeeId" title="Employe Id" id="employeeId" onChange={(event) => {
+                                                <MDBInput autocomplete="off" value={this.state.employeeId} onKeyPress={this.hideEmployeeId}  label="Employee Id" className="w-100" name="employeeId" title="Employe Id" id="employeeId" onChange={(event) => {
                                                         this.setState({
                                                             employeeId: event.target.value
                                                         })
@@ -193,40 +216,41 @@ export class InputDesignationLetter extends Component {
                                           
 
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                <MDBInput autocomplete="off" onKeyPress={this.hideNewDesignation}   label="New Designation" type="text" name="newDesignation" id="newDesignation" title="New Designation" onChange={(event) => {
+                                                <div class="col-md-6">
+                                                <MDBInput autocomplete="off" value={this.state.newDesignation} onKeyPress={this.hideNewDesignation}   label="New Designation" type="text" name="newDesignation" id="newDesignation" title="New Designation" onChange={(event) => {
                                                         this.setState({
                                                             newDesignation: event.target.value
                                                         })
                                                     }} />
 
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <MDBInput autocomplete="off" value={this.state.effdate} onKeyPress={this.hideEffdate} onClick={this.hideEffdate} type="date" label="Effect Date" title="Effect Date" name="effDate" id="effDate" onChange={(event) => {
+                                                        this.setState({
+                                                            effdate: event.target.value
+                                                        }); this.hideEffdate();
+                                                    }} />
                                             </div>
-                                            {this.state.showNewDesignation ? <div id="errordiv" className="container-fluid p-0">Please fill out Designation field * </div> : null}
+
+                                            </div>
+
+                                            <div className="row" style={{padding:0}}>
+                                               <div className="col-6">
+                                               {this.state.showNewDesignation ? <div id="errordiv" className="container-fluid p-0">Please fill out Designation field * </div> : null}
+                                           
+                                           
+                                               </div>
+                                               <div className="col-6 p-0" style={{width:0}}>
+                                               {this.state.showEffdate ? <div id="errordiv" className="container-fluid">Please set Effect Date* </div> : null}
+                                               </div>
+                                           </div>
+
+
+                                           
 
                                           
                                            
-                                            <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                       this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
-
-                                                </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" className="custom-control-input"  value={this.state.withWaterMark} id="withWatermark"  onChange={(event) => {
-                                                       this.onCheckHandler(event)
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
-                                            </div>
- 
+                                          
 
 
                                             <div className=" input-group w-50 container-fluid">

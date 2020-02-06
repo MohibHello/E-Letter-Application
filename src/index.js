@@ -4,9 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import 'bootstrap-css-only/css/bootstrap.min.css';
+// import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-
 
 
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'

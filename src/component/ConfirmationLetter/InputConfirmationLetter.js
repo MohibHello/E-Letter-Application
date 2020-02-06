@@ -17,8 +17,8 @@ export class InputConfirmationLetter extends Component {
             joiningDate: '',
             probationEndDate: '',
             date: '',
-            withWaterMark:false,
-            withHeader:false,
+            withWaterMark: false,
+            withHeader: false,
             //validation variable
 
             showEmployeeName: '',
@@ -26,12 +26,26 @@ export class InputConfirmationLetter extends Component {
             showDesignation: '',
             showJoiningDate: '',
             showProbationEndDate: '',
-            showInvalidDate:''
+            showInvalidDate: ''
 
         }
     }
 
     componentDidMount() {
+        let editClick = localStorage.getItem("editClick");
+        if (editClick) {
+            this.setState({
+
+
+                salute: this.props.empData.salute,
+                employeeName: this.props.empData.employeeName,
+                employeeId: this.props.empData.employeeId,
+                designation: this.props.empData.designation,
+                joiningDate: this.props.empData.joiningDate
+            })
+
+        }
+
 
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
@@ -61,23 +75,19 @@ export class InputConfirmationLetter extends Component {
                 let designation = (document.getElementById("designation").value).trim();
                 let employeeId = (document.getElementById("employeeId").value).trim();
                 let employeeName = (document.getElementById("employeeName").value).trim();
-               // let ProbationEndDate = (document.getElementById("probationEndDate").value).trim()
 
-                 that.setState({
-                      probationEndDate:joiningDate
-                 })
 
-                console.log('probation date ===',that.state.probationEndDate)
+                that.setState({
+                    probationEndDate: joiningDate
+                })
 
-                console.log("Inside Validation", joiningDate, employeeName, designation, employeeId);
+
 
                 if (joiningDate === "") {
                     that.setState({ showJoiningDate: true })
                 }
 
-                /* if (ProbationEndDate === "") {
-                    that.setState({ showProbationEndDate: true })
-                } */
+
                 if (designation === "") {
                     that.setState({ showDesignation: true })
                 }
@@ -89,16 +99,9 @@ export class InputConfirmationLetter extends Component {
                     that.setState({ showEmployeeName: true })
                 }
 
-               /*  if(selectedProbationEndDate<selectedJoiningDate){
-                    that.setState({
-                        showInvalidDate:"true"
-                    })
 
-                   return false;
-              }      
- */
                 if (joiningDate != "" && designation != "" && employeeId != "" && employeeName !== "") {
-                    console.log("True return")
+
                     return true;
 
                 }
@@ -110,7 +113,7 @@ export class InputConfirmationLetter extends Component {
     }
     pass = (event) => {
         event.preventDefault();
-        console.log("data========", this.state)
+
 
         this.props.clicked(this.state)
         this.props.history.push('/confirmationLetter')
@@ -118,48 +121,48 @@ export class InputConfirmationLetter extends Component {
     }
 
 
-    onCheckHandler=(event)=>{
-        debugger;
+    onCheckHandler = (event) => {
 
-         console.log("Checkbox value ==",event.target.value)
-       if(event.target.value=='false'){
-           this.setState({
-               withWaterMark:true
-           })
-           console.log("if  ==",this.state.withWaterMark)
-       }
-       else{
-           debugger;
-           this.setState({
-               withWaterMark: false
-           })
-           console.log("else  ==",this.state.withWaterMark)
 
-       }
+
+        if (event.target.value == 'false') {
+            this.setState({
+                withWaterMark: true
+            })
+
+        }
+        else {
+
+            this.setState({
+                withWaterMark: false
+            })
+
+
+        }
     }
 
-    onChangeHeader=(event)=>{
-
-        debugger;
-
-        console.log("Checkbox value ==",event.target.value)
-      if(event.target.value=='false'){
-          this.setState({
-              withHeader:true
-          })
-          console.log("if  ==",this.state.withHeader)
-      }
-      else{
-          debugger;
-          this.setState({
-              withHeader: false
-          })
-          console.log("else  ==",this.state.withHeader)
-
-      }
+    onChangeHeader = (event) => {
 
 
-     }
+
+
+        if (event.target.value == 'false') {
+            this.setState({
+                withHeader: true
+            })
+
+        }
+        else {
+
+            this.setState({
+                withHeader: false
+            })
+
+
+        }
+
+
+    }
 
 
     hideEmployeeName = () => {
@@ -197,7 +200,9 @@ export class InputConfirmationLetter extends Component {
 
 
 
+
     render() {
+
         return (
             <div>
                 <Home buttonShow={false} />
@@ -213,14 +218,14 @@ export class InputConfirmationLetter extends Component {
                                         <form onSubmit={this.pass}>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.employeeName} onKeyPress={this.hideEmployeeName} label="Employee Name" className="w-100" name="employeeName" title="Employee Name" id="employeeName" onChange={(event) => {
                                                         this.setState({
                                                             employeeName: event.target.value
                                                         })
                                                     }} />
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideEmployeeId} label="Employee Id" className="w-100" name="employeeId" title="Employe Id" id="employeeId" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.employeeId} onKeyPress={this.hideEmployeeId} label="Employee Id" className="w-100" name="employeeId" title="Employe Id" id="employeeId" onChange={(event) => {
                                                         this.setState({
                                                             employeeId: event.target.value
                                                         })
@@ -235,61 +240,44 @@ export class InputConfirmationLetter extends Component {
                                                     {this.state.showEmployeeId ? <div id="errordiv" className="container-fluid">Please fill out ID field * </div> : null}
                                                 </div>
                                             </div>
+                                           
+
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideJoiningDate} onClick={this.hideJoiningDate} type="date" label="Joined Date" title="Joining Date" name="joiningDate" id="joiningDate" onChange={(event) => {
+                                                    <MDBInput autocomplete="off" value={this.state.designation} onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="designation" onChange={(event) => {
+                                                        this.setState({
+                                                            designation: event.target.value
+                                                        })
+                                                    }} />
+
+                                                </div>
+
+
+                                            </div>
+                                            <div className="row" style={{ padding: 0 }}>
+                                                <div className="col-12" >
+                                                    {this.state.showDesignation ? <div id="errordiv" className="container-fluid p-0">Please fill out Designation field * </div> : null}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <MDBInput autocomplete="off" value={this.state.joiningDate} onKeyPress={this.hideJoiningDate} onClick={this.hideJoiningDate} type="date" label="Joined Date" title="Joining Date" name="joiningDate" id="joiningDate" onChange={(event) => {
                                                         this.setState({
                                                             joiningDate: event.target.value
                                                         }); this.hideJoiningDate();
                                                     }} />
                                                 </div>
-                                               
+
                                             </div>
                                             <div className="row" style={{ padding: 0 }}>
-                                                <div className="col-6 p-0" >
+                                                <div className="col-12 p-0" >
                                                     {this.state.showJoiningDate ? <div id="errordiv" className="container-fluid">Please fill out JoiningDate field * </div> : null}
 
 
                                                 </div>
-                                                <div className="col-6 p-0" style={{ width: 0 }}>
-                                                  {/*   {this.state.showProbationEndDate ? <div id="errordiv" className="container-fluid">Please fill out ProbationEndDate field * </div> : null}
-                                                    {this.state.showInvalidDate ? <div id="errordiv" className="container-fluid">ProbationEndDate equal or greater than Today's date * </div> : null} */}
-                                                </div>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <MDBInput autocomplete="off" onKeyPress={this.hideDesignation} label="Designation" type="text" name="designation" id="designation" title="designation" onChange={(event) => {
-                                                        this.setState({
-                                                            designation: event.target.value
-                                                        })
-                                                    }} />
-                     
-                                                </div>
-
-
-                                            </div>
-                                            {this.state.showDesignation ? <div id="errordiv" className="container-fluid p-0">Please fill out Designation field * </div> : null}
-
-                                            <div className="row">
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withHeader} className="custom-control-input" onChange={(event) => {
-                                                       this.onChangeHeader(event)
-                                                    }} id="withLetterHead" />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withLetterHead">With Letter Head</label>
-</div>
-
-                                                </div>
-                                                <div className="col-6">
-                                                <div className="custom-control custom-checkbox custom-control-inline col-6">
-  <input type="checkbox" value={this.state.withWaterMark} className="custom-control-input" id="withWatermark"  onChange={(event) => {
-                                                          this.onCheckHandler(event)
-                                                    }} />
-  <label style={{whiteSpace: 'nowrap'}} className="custom-control-label" htmlFor="withWatermark">With WaterMark</label>
-</div>
-
-                                                    </div>
                                             </div>
 
 
